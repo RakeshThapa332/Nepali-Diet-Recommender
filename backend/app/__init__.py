@@ -16,6 +16,15 @@ def create_app():
     jwt.init_app(app)
     cors.init_app(app)
 
+    #Import models to SQLAlchemy
+    from app.models import (
+        User,
+        UserProfile,
+        Food,
+        MealPlan,
+        MealPlanItem
+    )
+
     @app.route("/")
     def home():
         return {
