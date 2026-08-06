@@ -1,6 +1,17 @@
 from typing import Tuple
 
 def calculate_bmi(weight_kg: float, height_cm: float) -> Tuple[float, str]:
+    """
+    Calculate BMI and return the BMI value along with its category.
+
+    Args:
+        weight_kg(float): Weight in kilograms.
+        height_cm(float): Height in centimeters.
+
+    Returns:
+        Tuple[float,str]: (BMI, BMI category)
+    """
+    
     if weight_kg <= 0:
         raise ValueError("Weight must be greater than 0 kg.")
 
