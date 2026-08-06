@@ -3,6 +3,7 @@ from flask import Flask
 from app.config.config import Config
 from app.extensions import db, migrate, jwt, cors
 from app.routes.auth import auth_bp
+from app.routes.profile import profile_bp
 
 def create_app():
     app = Flask(__name__)
@@ -33,5 +34,6 @@ def create_app():
         }
 
     app.register_blueprint(auth_bp)
+    app.register_blueprint(profile_bp)
 
     return app
