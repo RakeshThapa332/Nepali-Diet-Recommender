@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from sqlalchemy.exc import SQLAlchemyError
 from flask_jwt_extended import create_access_token
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app.extensions import db
 from app.models import User
@@ -178,6 +179,28 @@ def login():
         "message": "Login successful",
         "access_token": access_token,
         "token_type": "Bearer",
+        "user": {
+            "id": user.id,
+            "name": user.name,
+            "email": user.email
+        }
+    }),200
+
+#Protected Routes
+@auth_bp.route("/me", methods=["GET"])
+@jwt_required()
+def get_current_user():
+    user_id = get_jwt_identity()
+
+    user = db.session.get(User, int(user_id))
+    if not user:
+        return jsonify({
+            "success": False,
+            "message": "User not found."
+        }), 404
+
+    return jsonify({
+        "success": True,
         "user": {
             "id": user.id,
             "name": user.name,
