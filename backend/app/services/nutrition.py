@@ -10,7 +10,7 @@ SUPPORTED_GOALS = {
 
 def calculate_target_calories(
         tdee: float,
-        goals: str,
+        goal: str,
 ) -> float:
     if tdee <= 0:
         raise ValueError("TDEE  must greater than 0.")
@@ -23,7 +23,7 @@ def calculate_target_calories(
         )
 
     if goal == "weight_loss":
-        calories = tdee -500
+        calories = tdee - 500
 
     elif goal == "weight_gain":
         calories = tdee + 500
@@ -37,18 +37,19 @@ def calculate_target_calories(
 def generate_nutrition_summary(
         age: int,
         gender: str,
-        weight: float,
-        height: float,
+        weight_kg: float,
+        height_cm: float,
         activity_level: str,
         goal: str,
 )-> dict:
-    bmi, category = calculate_bmi(weight, height)
+    
+    bmi, category = calculate_bmi(weight_kg, height_cm)
 
     bmr = calculate_bmr(
         age = age,
         gender = gender,
-        weight = weight,
-        height = height,
+        weight_kg = weight_kg,
+        height_cm = height_cm,
     )
 
     tdee = calculate_tdee(
