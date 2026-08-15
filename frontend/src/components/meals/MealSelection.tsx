@@ -6,17 +6,17 @@ import {
 
 import MealCard, { type Meal } from "./MealCard";
 
-interface MealSectionProps {
+interface MealSelectionProps {
   name: string;
   calories: number;
   meals: Meal[];
 }
 
-export default function MealSection({
+export default function MealSelection({
   name,
   calories,
   meals,
-}: MealSectionProps) {
+}: MealSelectionProps) {
   return (
     <Box sx={{ mb: 2.5 }}>
       <Box

@@ -7,7 +7,9 @@ import {
   PersonOutlined,
   LogoutOutlined,
   MenuBookOutlined,
+  AutoAwesomeOutlined,
 } from "@mui/icons-material";
+
 import {
   Box,
   Divider,
@@ -18,6 +20,8 @@ import {
   Typography,
 } from "@mui/material";
 
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 interface SidebarProps {
   mobileOpen: boolean;
   onClose: () => void;
@@ -27,31 +31,42 @@ const menuItems = [
   {
     label: "Dashboard",
     icon: <DashboardOutlined />,
-    active: true,
+    path: "/dashboard",
+  },
+  {
+    label: "Generate Diet",
+    icon: <AutoAwesomeOutlined/>,
+    path: "/generate",
   },
   {
     label: "My Meal Plan",
     icon: <RestaurantMenuOutlined />,
+    path: "/meal-plan",
   },
   {
     label: "Food Explorer",
     icon: <MenuBookOutlined />,
+    path: "/foods",
   },
   {
     label: "Logs / History",
     icon: <HistoryOutlined />,
+    path: "/logs",
   },
   {
     label: "Progress",
     icon: <TrendingUpOutlined />,
+    path: "/progress",
   },
   {
     label: "Profile",
     icon: <PersonOutlined />,
+    path: "/profile",
   },
   {
     label: "Settings",
     icon: <SettingsOutlined />,
+    path: "/settings",
   },
 ];
 
@@ -61,6 +76,13 @@ export default function Sidebar({
   mobileOpen,
   onClose,
 }: SidebarProps) {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+    onClose();
+  }
   return (
     <Box
       component="aside"
@@ -137,29 +159,42 @@ export default function Sidebar({
         <List sx={{ px: 1.25, py: 2 }}>
           {menuItems.map((item) => (
             <ListItemButton
-              key={item.label}
-              selected={item.active}
+              key={item.path}
+              component={NavLink}
+              to={item.path}
               onClick={onClose}
               sx={{
                 mb: 0.5,
                 minHeight: 44,
                 borderRadius: 1.5,
-                "&.Mui-selected": {
+                color: "text-primary",
+                textDecoration: "none",
+                "& .MuiListItemIcon-root": {
+                  color: "text.secondary",
+                },
+
+                "&.active": {
                   bgcolor: "primary.main",
                   color: "primary.contrastText",
+
                   "& .MuiListItemIcon-root": {
                     color: "inherit",
                   },
+
                   "&:hover": {
                     bgcolor: "primary.dark",
                   },
                 },
+                  "&:hover": {
+                    bgcolor: "action.hover",
+                  },
+                
               }}
             >
               <ListItemIcon
                 sx={{
                   minWidth: 38,
-                  color: "text.secondary",
+                  
                 }}
               >
                 {item.icon}
@@ -169,7 +204,7 @@ export default function Sidebar({
                 primary={item.label}
                 primaryTypographyProps={{
                   fontSize: 13,
-                  fontWeight: item.active ? 600 : 400,
+                  fontWeight: 500,
                 }}
               />
             </ListItemButton>
@@ -180,11 +215,18 @@ export default function Sidebar({
 
         <Divider />
 
+        {/* Logout */}
         <List sx={{ px: 1.25, py: 1.5 }}>
           <ListItemButton
+            onClick={handleLogout}
             sx={{
               borderRadius: 1.5,
               color: "text.secondary",
+
+              "&:hover": {
+                bgcolor: "action.hover",
+                color: "error.main",
+              },
             }}
           >
             <ListItemIcon
