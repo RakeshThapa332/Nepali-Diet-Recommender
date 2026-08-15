@@ -24,18 +24,19 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            borderBottom: "divider",
+            borderBottom: "1",
+            borderColor: "divider",
             bgcolor: "background.paper",
             position: "sticky",
             top: 0,
-            zIdex: 1100,
+            zIndex: 1100,
         }}
         >
             <Box sx={{ display: "flex", alignItems: "center", gap:1.5 }}>
                 <IconButton
                 onClick={onMenuClick}
                 sx={{
-                    display: { xs: "inline-flex", md: "naone" },
+                    display: { xs: "inline-flex", md: "none" },
                 }}
                 >
                     <MenuIcon />

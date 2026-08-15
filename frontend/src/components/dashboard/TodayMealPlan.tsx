@@ -4,7 +4,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import MealSection from "../meals/MealSection";
+import MealSection from "../meals/MealSelection";
 import type { Meal } from "../meals/MealCard";
 
 export interface MealGroup {

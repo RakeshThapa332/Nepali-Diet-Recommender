@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Box } from "@mui/material";
+
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 
@@ -35,7 +36,7 @@ export default function DashboardLayout({
 
             {mobileOpen && (
                 <Box
-                onclick={handleClose}
+                onClick={handleClose}
                 sx={{
                     display: { xs: "block", md: "none"},
                     position: "fixed",
