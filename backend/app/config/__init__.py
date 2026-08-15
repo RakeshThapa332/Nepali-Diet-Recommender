@@ -1,3 +1,3 @@
-from app.config.config import app_config
+from app.config.config import Config
 
-__all__ = ["app_config"]
+__all__ = ["Config"]
