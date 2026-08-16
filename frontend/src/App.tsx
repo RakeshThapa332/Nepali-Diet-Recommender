@@ -6,12 +6,14 @@ import Dashboard from "./pages/Dashboard";
 import GenerateDiet from "./pages/GenerateDiet";
 import MealPlan from "./pages/MealPlan";
 import FoodExplorer from "./pages/FoodExplorer";
+import FoodDetails from "./pages/FoodDetails";
 import Logs from "./pages/Logs";
 import Progress from "./pages/Progress";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import DashboardLayout from "./components/layout/DashboardLayout";
 
 function App() {
   return (
@@ -27,7 +29,12 @@ function App() {
           <Route path="/dashboard" element={<Dashboard/>} />
           <Route path="/generate" element={<GenerateDiet/>} />
           <Route path="/meal-plan" element={<MealPlan/>} />
-          <Route path="/foods" element={<FoodExplorer/>} />
+          <Route path="/foods" element={
+            <DashboardLayout>
+              <FoodExplorer/>
+            </DashboardLayout>
+          }/>
+          <Route path="/foods/:id" element={<FoodDetails/>} />
           <Route path="/logs" element={<Logs/>} />
           <Route path="/progress" element={<Progress/>} />
           <Route path="/profile" element={<Profile/>} />

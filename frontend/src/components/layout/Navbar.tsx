@@ -15,6 +15,8 @@ import {
 interface NavbarProps {
     onMenuClick: () => void;
     username?: string;
+    title?: string;
+    subtitle?: string;
 }
 
 function getInitials(name: string): string {
@@ -35,7 +37,11 @@ function getInitials(name: string): string {
 }
 
 export default function Navbar({ 
-    onMenuClick, username = "User",}: NavbarProps) {
+    onMenuClick,
+    username = "User",
+    title= "Dashboard",
+    subtitle= "Your personalized nutrition overview",
+}: NavbarProps) {
         const initials =  getInitials(username);
     return (
         <Box
@@ -65,16 +71,24 @@ export default function Navbar({
                 </IconButton>
 
                 <Box>
-                    <Typography variant="subtitle1" fontWeight={700}>
-                        Dashboard
+                    <Typography
+                        variant="subtitle1"
+                        fontWeight={700}
+                    >
+                        {title}
                     </Typography>
 
                     <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    sx={{ display: { xs: "none", sm: "block" } }}
-                    >
-                        Your personalized nutrition overview
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{
+                            display: {
+                            xs: "none",
+                            sm: "block",
+                        },
+                    }}
+                >
+                    {subtitle}
                     </Typography>
                 </Box>
             </Box>
