@@ -2,7 +2,6 @@ import {
     ArrowForward,
     RestaurantMenuOutlined,
     SearchOutlined,
-    FavoriteBorderOutlined,
     TrendingUpOutlined,
 } from "@mui/icons-material";
 
@@ -257,20 +256,7 @@ export default function Landing(){
                                     Get Started
                                 </Button>
 
-                                <Button
-                                    variant="outlined"
-                                    size="large"
-                                    onClick={() =>
-                                        navigate("/foods")
-                                    }
-                                    sx={{
-                                        px: 3,
-                                        py: 1.4,
-                                        borderRadius: 2,
-                                    }}
-                                >
-                                    Explore Foods
-                                </Button>
+
                             </Box>
                         </Grid>
 
