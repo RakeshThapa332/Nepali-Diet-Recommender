@@ -6,6 +6,7 @@ from app.routes.auth import auth_bp
 from app.routes.profile import profile_bp
 from app.routes.settings import settings_bp
 from app.routes.history import history_bp
+from app.routes.notifications import notifications_bp
 
 def create_app():
     app = Flask(__name__)
@@ -25,7 +26,9 @@ def create_app():
         UserProfile,
         Food,
         MealPlan,
-        MealPlanItem
+        MealPlanItem,
+        UserSettings,
+        Notification,
     )
 
     @app.route("/")
@@ -39,5 +42,6 @@ def create_app():
     app.register_blueprint(profile_bp)
     app.register_blueprint(settings_bp)
     app.register_blueprint(history_bp)
+    app.register_blueprint(notifications_bp)
 
     return app

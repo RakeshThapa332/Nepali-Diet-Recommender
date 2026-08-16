@@ -6,3 +6,4 @@ from .meal_plan_item import MealPlanItem
 from .user_settings import UserSettings
 from .recommendation_log import RecommendationLog
 from .food_intake_log import FoodIntakeLog
+from app.models.notification import Notification

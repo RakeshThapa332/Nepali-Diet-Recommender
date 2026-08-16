@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
+
 import {
+  Alert,
   Box,
   Card,
   CardContent,
@@ -10,40 +13,130 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useState } from "react";
-import type { NotificationSettings as NotificationSettingsType } from "../../types/settings";
+import {
+  getSettings,
+  updateSettings,
+} from "../../services/settingsService";
 
-const initialSettings: NotificationSettingsType = {
-  notifications_enabled: true,
-
-  breakfast_enabled: true,
-  breakfast_time: "08:00",
-
-  lunch_enabled: true,
-  lunch_time: "12:30",
-
-  dinner_enabled: true,
-  dinner_time: "19:30",
-
-  weekly_progress_enabled: true,
-  recommendation_enabled: true,
-};
+import type { UserSettings } from "../../types/settings";
 
 export default function NotificationSettings() {
-  const [settings, setSettings] =
-    useState<NotificationSettingsType>(initialSettings);
+  const [settings, setSettings] = useState<UserSettings | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const updateSetting = <
-    K extends keyof NotificationSettingsType
-  >(
-    key: K,
-    value: NotificationSettingsType[K]
-  ) => {
-    setSettings((current) => ({
-      ...current,
-      [key]: value,
-    }));
+  useEffect(() => {
+    loadSettings();
+  }, []);
+
+  const loadSettings = async () => {
+    try {
+      setLoading(true);
+      setError("");
+
+      const data = await getSettings();
+
+      setSettings(data);
+    } catch (err: any) {
+      console.error("SETTINGS ERROR:", err);
+
+      setError(
+        err.response?.data?.message ||
+          "Failed to load notification settings."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const handleToggle = async (
+    field: keyof UserSettings,
+    value: boolean
+  ) => {
+    if (!settings) return;
+
+    const previousSettings = settings;
+
+    const updatedSettings = {
+      ...settings,
+      [field]: value,
+    };
+
+    // Update UI immediately
+    setSettings(updatedSettings);
+
+    try {
+      const savedSettings = await updateSettings({
+        [field]: value,
+      });
+
+      setSettings(savedSettings);
+    } catch (err: any) {
+      console.error("UPDATE SETTINGS ERROR:", err);
+
+      // Revert UI if backend update fails
+      setSettings(previousSettings);
+
+      setError(
+        err.response?.data?.message ||
+          "Failed to update settings."
+      );
+    }
+  };
+
+  const handleTimeChange = async (
+    field:
+      | "breakfast_time"
+      | "lunch_time"
+      | "dinner_time",
+    value: string
+  ) => {
+    if (!settings) return;
+
+    const previousSettings = settings;
+
+    setSettings({
+      ...settings,
+      [field]: value,
+    });
+
+    try {
+      const savedSettings = await updateSettings({
+        [field]: value,
+      });
+
+      setSettings(savedSettings);
+    } catch (err: any) {
+      console.error("UPDATE TIME ERROR:", err);
+
+      setSettings(previousSettings);
+
+      setError(
+        err.response?.data?.message ||
+          "Failed to update notification time."
+      );
+    }
+  };
+
+  if (loading) {
+    return (
+      <Card>
+        <CardContent sx={{ p: 3 }}>
+          <Typography>
+            Loading notification settings...
+          </Typography>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (!settings) {
+    return (
+      <Alert severity="error">
+        Unable to load notification settings.
+      </Alert>
+    );
+  }
 
   return (
     <Card>
@@ -61,19 +154,26 @@ export default function NotificationSettings() {
           color="text.secondary"
           mb={3}
         >
-          Manage meal reminders and other nutrition notifications.
+          Control meal reminders and other nutrition notifications.
         </Typography>
 
-        <Divider sx={{ mb: 2 }} />
+        {error && (
+          <Alert
+            severity="error"
+            sx={{ mb: 3 }}
+            onClose={() => setError("")}
+          >
+            {error}
+          </Alert>
+        )}
 
         {/* Master notification switch */}
-
         <FormControlLabel
           control={
             <Switch
               checked={settings.notifications_enabled}
               onChange={(e) =>
-                updateSetting(
+                handleToggle(
                   "notifications_enabled",
                   e.target.checked
                 )
@@ -81,7 +181,7 @@ export default function NotificationSettings() {
             />
           }
           label={
-            <Box>
+            <Stack>
               <Typography fontWeight={600}>
                 Enable notifications
               </Typography>
@@ -90,34 +190,31 @@ export default function NotificationSettings() {
                 variant="body2"
                 color="text.secondary"
               >
-                Receive reminders and updates from Nepali Diet.
+                Turn all notifications on or off.
               </Typography>
-            </Box>
+            </Stack>
           }
         />
 
         <Divider sx={{ my: 3 }} />
 
         {/* Meal reminders */}
-
         <Typography
           variant="subtitle1"
           fontWeight={700}
           mb={2}
         >
-          Meal Reminders
+          Meal reminders
         </Typography>
 
-        <Stack spacing={2}>
+        <Stack spacing={2.5}>
           {/* Breakfast */}
-
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: 2,
-              flexWrap: "wrap",
             }}
           >
             <FormControlLabel
@@ -126,7 +223,7 @@ export default function NotificationSettings() {
                   checked={settings.breakfast_enabled}
                   disabled={!settings.notifications_enabled}
                   onChange={(e) =>
-                    updateSetting(
+                    handleToggle(
                       "breakfast_enabled",
                       e.target.checked
                     )
@@ -149,12 +246,12 @@ export default function NotificationSettings() {
                 !settings.breakfast_enabled
               }
               onChange={(e) =>
-                updateSetting(
+                handleTimeChange(
                   "breakfast_time",
                   e.target.value
                 )
               }
-              sx={{ width: 140 }}
+              sx={{ width: 130 }}
               slotProps={{
                 inputLabel: {
                   shrink: true,
@@ -164,14 +261,12 @@ export default function NotificationSettings() {
           </Box>
 
           {/* Lunch */}
-
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: 2,
-              flexWrap: "wrap",
             }}
           >
             <FormControlLabel
@@ -180,7 +275,7 @@ export default function NotificationSettings() {
                   checked={settings.lunch_enabled}
                   disabled={!settings.notifications_enabled}
                   onChange={(e) =>
-                    updateSetting(
+                    handleToggle(
                       "lunch_enabled",
                       e.target.checked
                     )
@@ -203,12 +298,12 @@ export default function NotificationSettings() {
                 !settings.lunch_enabled
               }
               onChange={(e) =>
-                updateSetting(
+                handleTimeChange(
                   "lunch_time",
                   e.target.value
                 )
               }
-              sx={{ width: 140 }}
+              sx={{ width: 130 }}
               slotProps={{
                 inputLabel: {
                   shrink: true,
@@ -218,14 +313,12 @@ export default function NotificationSettings() {
           </Box>
 
           {/* Dinner */}
-
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
               gap: 2,
-              flexWrap: "wrap",
             }}
           >
             <FormControlLabel
@@ -234,7 +327,7 @@ export default function NotificationSettings() {
                   checked={settings.dinner_enabled}
                   disabled={!settings.notifications_enabled}
                   onChange={(e) =>
-                    updateSetting(
+                    handleToggle(
                       "dinner_enabled",
                       e.target.checked
                     )
@@ -257,12 +350,12 @@ export default function NotificationSettings() {
                 !settings.dinner_enabled
               }
               onChange={(e) =>
-                updateSetting(
+                handleTimeChange(
                   "dinner_time",
                   e.target.value
                 )
               }
-              sx={{ width: 140 }}
+              sx={{ width: 130 }}
               slotProps={{
                 inputLabel: {
                   shrink: true,
@@ -275,13 +368,12 @@ export default function NotificationSettings() {
         <Divider sx={{ my: 3 }} />
 
         {/* Other notifications */}
-
         <Typography
           variant="subtitle1"
           fontWeight={700}
           mb={2}
         >
-          Other Notifications
+          Other notifications
         </Typography>
 
         <Stack spacing={1}>
@@ -291,7 +383,7 @@ export default function NotificationSettings() {
                 checked={settings.weekly_progress_enabled}
                 disabled={!settings.notifications_enabled}
                 onChange={(e) =>
-                  updateSetting(
+                  handleToggle(
                     "weekly_progress_enabled",
                     e.target.checked
                   )
@@ -299,7 +391,7 @@ export default function NotificationSettings() {
               />
             }
             label={
-              <Box>
+              <Stack>
                 <Typography fontWeight={600}>
                   Weekly progress
                 </Typography>
@@ -308,9 +400,9 @@ export default function NotificationSettings() {
                   variant="body2"
                   color="text.secondary"
                 >
-                  Receive a weekly summary of your nutrition progress.
+                  Receive a weekly nutrition progress reminder.
                 </Typography>
-              </Box>
+              </Stack>
             }
           />
 
@@ -320,7 +412,7 @@ export default function NotificationSettings() {
                 checked={settings.recommendation_enabled}
                 disabled={!settings.notifications_enabled}
                 onChange={(e) =>
-                  updateSetting(
+                  handleToggle(
                     "recommendation_enabled",
                     e.target.checked
                   )
@@ -328,7 +420,7 @@ export default function NotificationSettings() {
               />
             }
             label={
-              <Box>
+              <Stack>
                 <Typography fontWeight={600}>
                   Diet recommendations
                 </Typography>
@@ -337,9 +429,9 @@ export default function NotificationSettings() {
                   variant="body2"
                   color="text.secondary"
                 >
-                  Receive notifications about new recommendations.
+                  Receive notifications related to your diet recommendations.
                 </Typography>
-              </Box>
+              </Stack>
             }
           />
         </Stack>

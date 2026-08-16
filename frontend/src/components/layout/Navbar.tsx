@@ -1,9 +1,8 @@
 import {
     Menu as MenuIcon,
-    NotificationsNoneOutlined,
 } from "@mui/icons-material";
 
-
+import NotificationMenu from "../notifications/NotificationMenu";
 
 import {
     Avatar,
@@ -93,9 +92,7 @@ export default function Navbar({
                 </Box>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1}}>
-                <IconButton>
-                    <NotificationsNoneOutlined />
-                </IconButton>
+                    <NotificationMenu />
 
                 <Avatar 
                 sx={{

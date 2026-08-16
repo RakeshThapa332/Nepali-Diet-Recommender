@@ -1,4 +1,4 @@
-export interface NotificationSettings {
+export interface UserSettings {
   notifications_enabled: boolean;
 
   breakfast_enabled: boolean;
