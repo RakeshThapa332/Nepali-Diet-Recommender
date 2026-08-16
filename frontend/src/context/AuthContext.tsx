@@ -1,11 +1,13 @@
 import {
   createContext,
   useContext,
+  useEffect,
   useState,
   type ReactNode,
 } from "react";
 
 import type { User } from "../types/user";
+import api from "../services/api";
 
 interface AuthContextType {
   user: User | null;
@@ -13,6 +15,7 @@ interface AuthContextType {
   login: (token: string, user?: User) => void;
   logout: () => void;
   isAuthenticated: boolean;
+  authLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -35,6 +38,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   });
 
+  const [authLoading, setAuthLoading] = useState(true);
+
   const login = (newToken: string, newUser?: User) => {
     localStorage.setItem("access_token", newToken);
     setToken(newToken);
@@ -53,6 +58,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   };
 
+  useEffect(() => {
+    const verifyAuthentication = async () => {
+      const storedToken = localStorage.getItem("access_token");
+
+    if (!storedToken) {
+      setAuthLoading(false);
+      return;
+    }
+    try {
+      const response = await api.get("/auth/me");
+      const currentUser = response.data.user;
+      setUser(currentUser);
+
+      localStorage.setItem("user", JSON.stringify(currentUser));
+    } catch (error: any) {
+      if(error.response?.status === 401) {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("user");
+
+        setToken(null);
+        setUser(null);
+      }
+    } finally {
+      setAuthLoading(false);
+    }
+    };
+    verifyAuthentication();
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
@@ -60,7 +94,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         token,
         login,
         logout,
-        isAuthenticated: !!token,
+        isAuthenticated: !!token && !!user,
+        authLoading,
       }}
     >
       {children}
