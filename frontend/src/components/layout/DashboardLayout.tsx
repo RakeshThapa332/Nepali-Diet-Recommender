@@ -51,7 +51,8 @@ export default function DashboardLayout({
                 flexGrow: 1,
                 minWidth: 0,
             }}>
-                <Navbar onMenuClick={handleMenuClick} />
+                <Navbar onMenuClick={handleMenuClick}
+                username={user?.username} />
 
                 <Box
                 component="main"

@@ -3,6 +3,8 @@ import {
     NotificationsNoneOutlined,
 } from "@mui/icons-material";
 
+import User from "../"
+
 import {
     Avatar,
     Box,
@@ -12,9 +14,29 @@ import {
 
 interface NavbarProps {
     onMenuClick: () => void;
+    username?: string;
 }
 
-export default function Navbar({ onMenuClick }: NavbarProps) {
+function getInitials(name: string): string {
+    const trimmedName = name.trim();
+    if (!trimmedName) {
+        return "U";
+    }
+    const nameParts = trimmedName.split(/\s+/);
+
+    if (nameParts.length === 1) {
+        return nameParts[0].slice(0,2).toUpperCase();
+    }
+
+    return (
+        nameParts[0][0] +
+        nameParts[nameParts.length - 1][0]
+    ).toUpperCase();
+}
+
+export default function Navbar({ 
+    onMenuClick, username = "User",}: NavbarProps) {
+        const initials =  getInitials(username);
     return (
         <Box
         component="header"
@@ -69,7 +91,7 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
                     fontSize: 13,
                 }}
                 >
-                    RT
+                    {initials}
                 </Avatar>
             </Box>
         </Box>
