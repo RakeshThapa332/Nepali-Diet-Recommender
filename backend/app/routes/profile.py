@@ -35,7 +35,7 @@ def create_profile():
     goal = data.get("goal")
     dietary_preference = data.get("dietary_preference")
 
-    if not all([age, gender, height_cm, weight_kg, activity_level, goal]):
+    if age is None or not gender or height_cm is None or weight_kg is None:
         return jsonify({
             "success": False,
             "message": "All required fields must be provided."
@@ -58,7 +58,16 @@ def create_profile():
 
         return jsonify({
             "success": True,
-            "message": "Profile created successfully."
+            "message": "Profile created successfully.",
+            "profile": {
+                "age": profile.age,
+                "gender": profile.gender,
+                "height_cm": profile.height_cm,
+                "weight_kg": profile.weight_kg,
+                "activity_level": profile.activity_level,
+                "goal": profile.goal,
+                "dietary_preference": profile.dietary_preference,
+            }
         }), 201
 
     except SQLAlchemyError:
@@ -75,26 +84,48 @@ def create_profile():
 @jwt_required()
 
 def get_profile():
-    user_id = int(get_jwt_identity())
-    profile = UserProfile.query.filter_by(user_id=user_id).first()
-    if not profile:
+    try:
+        user_id = int(get_jwt_identity())
+        profile = UserProfile.query.filter_by(user_id=user_id).first()
+        if not profile:
+            return jsonify({
+                "success": False,
+                "message": "Profile not found."
+            }), 404
+
+        return jsonify({
+            "success": True,
+            "profile": {
+                "id" : profile.id,
+                "user_id": profile.user_id,
+                "age": profile.age,
+                "gender": profile.gender,
+                "height_cm": profile.height_cm,
+                "weight_kg": profile.weight_kg,
+                "activity_level": profile.activity_level,
+                "goal": profile.goal,
+                "dietary_preference": profile.dietary_preference,
+                "created_at": (
+                    profile.created_at.isoformat()
+                    if profile.created_at
+                    else None
+                ),
+                "updated_at" : (
+                    profile.updated_at.isoformat()
+                    if profile.updated_at
+                    else None
+                ),
+
+        }
+    }), 200
+    except Exception as e:
+        print("GET PROFILE ERROR:", repr(e))
+        import traceback
+        traceback.print_exc()
         return jsonify({
             "success": False,
-            "message": "Profile not found."
-        }), 404
-
-    return jsonify({
-        "success": True,
-        "profile": {
-            "age": profile.age,
-            "gender": profile.gender,
-            "height_cm": profile.height_cm,
-            "weight_kg": profile.weight_kg,
-            "activity_level": profile.activity_level,
-            "goal": profile.goal,
-            "dietary_preference": profile.dietary_preference
-    }
-}), 200
+            "message": "Failed to load profile."
+        }), 500
 
 #Update Profile
 @profile_bp.route("/", methods=["PUT"])

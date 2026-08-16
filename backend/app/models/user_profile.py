@@ -9,7 +9,8 @@ class UserProfile(db.Model):
     user_id = db.Column(
         db.Integer,
         db.ForeignKey("users.id"),
-        nullable=False
+        nullable=False,
+        unique=True
     )
     age = db.Column(db.Integer)
     gender = db.Column(db.String(20))
@@ -26,6 +27,6 @@ class UserProfile(db.Model):
 
     updated_at = db.Column(
         db.DateTime(timezone=True),
-        default=datetime.now(timezone.utc),
-        onupdate=datetime.now(timezone.utc)
+        default=lambda: datetime.now(timezone.utc),
+        onupdate=lambda: datetime.now(timezone.utc)
     )

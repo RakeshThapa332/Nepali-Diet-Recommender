@@ -1,11 +1,11 @@
 export interface UserProfile {
   age: number;
   gender: string;
-  height: number;
-  weight: number;
+  height_cm: number;
+  weight_kg: number;
   activity_level: string;
   goal: string;
-
+  dietary_preference: string,
   bmi?: number;
   bmr?: number;
   tdee?: number;
