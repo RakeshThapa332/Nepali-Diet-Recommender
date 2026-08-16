@@ -13,10 +13,12 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const[success, setSuccess] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
+        setLoading(true);
 
         try {
             const data = await loginUser({
@@ -27,12 +29,14 @@ export default function Login() {
             login(data.access_token, data.user);
             setSuccess(true);
 
-            setTimeout(() => {navigate("/dashboard");},1000)
+            setTimeout(() => {navigate("/dashboard");},100)
 
         }catch (err: any) {
             setError(
                 err.response?.data?.message || "Invalid email or password."
             );
+        } finally {
+          setLoading(false);
         }
     };
     return (
@@ -83,8 +87,9 @@ export default function Login() {
             variant="contained"
             size="large"
             sx={{ mt: 2 }}
+            disabled={loading}
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </Button>
         </Box>
 

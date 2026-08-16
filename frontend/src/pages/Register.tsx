@@ -21,6 +21,7 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +31,7 @@ export default function Register() {
       setError("Passwords do not match.");
       return;
     }
+    setLoading(true);
 
     try {
       await registerUser({
@@ -40,12 +42,14 @@ export default function Register() {
 
       setSuccess(true);
 
-      setTimeout(() => {navigate("/login");},1500)
+      setTimeout(() => {navigate("/login");},100)
     } catch (err: any) {
       setError(
         err.response?.data?.message ||
           "Registration failed."
       );
+    } finally{
+      setLoading(false);
     }
   };
 
@@ -119,8 +123,9 @@ export default function Register() {
             variant="contained"
             size="large"
             sx={{ mt: 2 }}
+            disabled={loading}
           >
-            Register
+            {loading ? "Creating account..." : "Register"}
           </Button>
         </Box>
 
