@@ -3,3 +3,5 @@ from .user_profile import UserProfile
 from .food import Food
 from .meal_plan import MealPlan
 from .meal_plan_item import MealPlanItem
+from .recommendation_log import RecommendationLog
+from .food_intake_log import FoodIntakeLog
