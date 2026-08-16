@@ -4,6 +4,8 @@ import { Box } from "@mui/material";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 
+import { useAuth } from "../../context/AuthContext";
+
 interface DashboardLayoutProps {
     children: React.ReactNode;
 }
@@ -13,6 +15,7 @@ export default function DashboardLayout({
 }: DashboardLayoutProps) {
     const [mobileOpen, setMobileOpen] = useState(false);
 
+    const {user} = useAuth();
     const handleMenuClick = () => {
         setMobileOpen((current) => !current);
     };
@@ -52,7 +55,7 @@ export default function DashboardLayout({
                 minWidth: 0,
             }}>
                 <Navbar onMenuClick={handleMenuClick}
-                username={user?.username} />
+                username={user?.name} />
 
                 <Box
                 component="main"

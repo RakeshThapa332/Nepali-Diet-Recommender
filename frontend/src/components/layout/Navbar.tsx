@@ -3,7 +3,7 @@ import {
     NotificationsNoneOutlined,
 } from "@mui/icons-material";
 
-import User from "../"
+
 
 import {
     Avatar,
@@ -46,7 +46,7 @@ export default function Navbar({
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            borderBottom: "1",
+            borderBottom: 1,
             borderColor: "divider",
             bgcolor: "background.paper",
             position: "sticky",
