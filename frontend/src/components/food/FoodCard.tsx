@@ -13,6 +13,7 @@ export interface FoodCardData {
     id: number;
     name: string;
     category: string;
+    mealTypes: string[];
     calories: number;
     protein: number;
     carbs: number;
@@ -87,11 +88,23 @@ export default function FoodCard({ food, }: FoodCardProps) {
                     >
                         {food.name}
                     </Typography>
-                    <Chip
-                        label={food.category}
-                        size="small"
-                        color="primary"
-                    />
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            gap: 0.5,
+                            justifyContent: "flex-end",
+                        }}
+                    >
+                        {food.mealTypes.map((mealType) => (
+                            <Chip
+                                key={mealType}
+                                label={mealType}
+                                size="small"
+                                color="primary"
+                            />
+                        ))}
+                    </Box>
                 </Box>
                 <Typography
                     variant="body2"

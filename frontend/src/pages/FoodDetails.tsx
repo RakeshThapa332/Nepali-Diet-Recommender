@@ -17,91 +17,47 @@ import {
     useParams,
 } from "react-router-dom";
 
+import { useEffect, useState } from "react";
+
 import type {
     FoodCardData
 } from "../components/food/FoodCard";
-
-const foods: FoodCardData[] = [
-    {
-        id: 1,
-        name: "Dal Bhat",
-        category: "Main Course",
-        calories: 520,
-        protein: 18,
-        carbs: 82,
-        fat: 12,
-    },
-    {
-        id: 2,
-        name: "Momo",
-        category: "Snack",
-        calories: 280,
-        protein: 14,
-        carbs: 30,
-        fat: 11,
-    },
-    {
-        id: 3,
-        name: "Thukpa",
-        category: "Main Course",
-        calories: 350,
-        protein: 16,
-        carbs: 48,
-        fat: 10,
-    },
-    {
-        id: 4,
-        name: "Sel Roti",
-        category: "Snack",
-        calories: 190,
-        protein: 3,
-        carbs: 28,
-        fat: 8,
-    },
-    {
-        id: 5,
-        name: "Aloo Tama",
-        category: "Curry",
-        calories: 210,
-        protein: 6,
-        carbs: 30,
-        fat: 7,
-    },
-    {
-        id: 6,
-        name: "Gundruk",
-        category: "Vegetable",
-        calories: 80,
-        protein: 4,
-        carbs: 12,
-        fat: 2,
-    },
-    {
-        id: 7,
-        name: "Chicken Curry",
-        category: "Curry",
-        calories: 320,
-        protein: 28,
-        carbs: 10,
-        fat: 18,
-    },
-    {
-        id: 8,
-        name: "Dahi",
-        category: "Dairy",
-        calories: 100,
-        protein: 5,
-        carbs: 7,
-        fat: 5,
-    },
-];
+import { getFoodById } from "../services/foodService";
 
 export default function FoodDetails() {
     const navigate = useNavigate();
     const { id } = useParams();
-    const food = foods.find(
-        (item) => item.id === Number(id)
-    );
+    const [food, setFood] = useState<FoodCardData | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        let isMounted = true;
+
+        if (!id) {
+            setLoading(false);
+            return;
+        }
+
+        setLoading(true);
+        getFoodById(Number(id))
+            .then((data) => {
+                if (isMounted) setFood(data);
+            })
+            .catch(() => {
+                if (isMounted) setFood(null);
+            })
+            .finally(() => {
+                if (isMounted) setLoading(false);
+            });
+
+        return () => {
+            isMounted = false;
+        };
+    }, [id]);
+
+    if (loading) {
+        return <Typography>Loading...</Typography>;
+    }
 
     if (!food) {
         return (
@@ -186,10 +142,15 @@ export default function FoodDetails() {
                                 {food.name}
                             </Typography>
 
-                            <Chip
-                                label={food.category}
-                                color="primary"
-                                />
+                            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+                                {food.mealTypes.map((mealType) => (
+                                    <Chip
+                                        key={mealType}
+                                        label={mealType}
+                                        color="primary"
+                                    />
+                                ))}
+                            </Box>
                         </Box>
 
                         <Typography

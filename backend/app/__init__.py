@@ -7,6 +7,9 @@ from app.routes.profile import profile_bp
 from app.routes.settings import settings_bp
 from app.routes.history import history_bp
 from app.routes.notifications import notifications_bp
+from app.routes.recommendation import recommendation_bp
+from app.routes.meal_plans import meal_plan_bp
+from app.routes.food import food_bp
 
 def create_app():
     app = Flask(__name__)
@@ -43,5 +46,8 @@ def create_app():
     app.register_blueprint(settings_bp)
     app.register_blueprint(history_bp)
     app.register_blueprint(notifications_bp)
+    app.register_blueprint(recommendation_bp)
+    app.register_blueprint(meal_plan_bp)
+    app.register_blueprint(food_bp)
 
     return app

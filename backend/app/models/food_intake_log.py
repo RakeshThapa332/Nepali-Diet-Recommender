@@ -37,3 +37,5 @@ class FoodIntakeLog(db.Model):
         nullable=False,
         index=True
     )
+
+    food = db.relationship("Food", backref="intake-logs")

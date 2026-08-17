@@ -66,7 +66,7 @@ def get_food_intake_history():
             {
                 "id": log.id,
                 "food_id": log.food_id,
-                "food_name": log.food.name if log.food else None,
+                "food_name": log.food.food_name if log.food else None,
                 "quantity_g": log.quantity_g,
                 "meal_type": log.meal_type,
                 "consumed_at": (

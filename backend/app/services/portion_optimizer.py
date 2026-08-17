@@ -1,3 +1,5 @@
+from itertools import product
+
 from app.services.food_calories import calculate_food_calories
 
 
@@ -13,17 +15,36 @@ def calculate_portion_score(
     Calculate how closely a set of food portions matches
     the nutritional targets.
 
-    Nutritional values are per 100 g.
-
     Lower score = better fit.
+
+    Nutritional values are assumed to be per 100 g.
     """
 
-    total_protein = 0
-    total_fat = 0
-    total_carbs = 0
-    total_calories = 0
+    if not foods:
+        raise ValueError(
+            "At least one food is required."
+        )
+
+    if len(foods) != len(portions):
+        raise ValueError(
+            "Number of foods and portions must match."
+        )
+
+    if target_calories <= 0:
+        raise ValueError(
+            "Target calories must be greater than 0."
+        )
+
+    total_protein = 0.0
+    total_fat = 0.0
+    total_carbs = 0.0
+    total_calories = 0.0
+    total_portion = 0.0
 
     for food, portion in zip(foods, portions):
+
+        if portion <= 0:
+            return float("inf")
 
         multiplier = portion / 100
 
@@ -31,18 +52,19 @@ def calculate_portion_score(
         fat = (food.fat or 0) * multiplier
         carbs = (food.carbs or 0) * multiplier
 
-        calories = calculate_food_calories(
+        calories_per_100g = calculate_food_calories(
             protein=food.protein or 0,
             fat=food.fat or 0,
             carbs=food.carbs or 0,
         )
 
-        calories *= multiplier
+        calories = calories_per_100g * multiplier
 
         total_protein += protein
         total_fat += fat
         total_carbs += carbs
         total_calories += calories
+        total_portion += portion
 
     calorie_error = (
         abs(total_calories - target_calories)
@@ -64,11 +86,20 @@ def calculate_portion_score(
         / max(target_carbs, 1)
     )
 
+    # Penalize unnecessarily large total portions.
+    #
+    # This prevents the optimizer from selecting huge
+    # portions simply because they happen to match macros.
+    portion_penalty = (
+        total_portion / (len(foods) * 100)
+    ) * 0.02
+
     score = (
-        0.40 * calorie_error
+        0.50 * calorie_error
         + 0.20 * protein_error
-        + 0.20 * fat_error
-        + 0.20 * carb_error
+        + 0.15 * fat_error
+        + 0.15 * carb_error
+        + portion_penalty
     )
 
     return round(score, 6)
@@ -85,15 +116,25 @@ def optimize_food_portions(
     step: float = 5,
 ):
     """
-    Find the best portion size for each selected food.
+    Find realistic independent portion sizes for each food.
 
-    The optimizer searches through practical portion sizes
-    and selects the combination that minimizes nutritional error.
+    Unlike the previous optimizer, each food can have a different
+    portion size.
 
-    Default:
-        Minimum portion = 25 g
-        Maximum portion = 300 g
-        Step = 5 g
+    Example:
+
+        Food A -> 125 g
+        Food B -> 25 g
+        Food C -> 80 g
+
+    instead of forcing:
+
+        Food A -> 75 g
+        Food B -> 75 g
+        Food C -> 75 g
+
+    The optimizer minimizes nutritional error while prioritizing
+    calorie matching and avoiding unnecessarily large portions.
     """
 
     if not foods:
@@ -104,6 +145,21 @@ def optimize_food_portions(
     if target_calories <= 0:
         raise ValueError(
             "Target calories must be greater than 0."
+        )
+
+    if target_protein < 0:
+        raise ValueError(
+            "Target protein cannot be negative."
+        )
+
+    if target_fat < 0:
+        raise ValueError(
+            "Target fat cannot be negative."
+        )
+
+    if target_carbs < 0:
+        raise ValueError(
+            "Target carbohydrates cannot be negative."
         )
 
     if min_portion <= 0:
@@ -121,18 +177,34 @@ def optimize_food_portions(
             "Step must be greater than 0."
         )
 
-    best_portions = None
-    best_score = float("inf")
+    # We currently recommend exactly 3 foods per meal.
+    if len(foods) != 3:
+        raise ValueError(
+            "Portion optimization currently requires exactly 3 foods."
+        )
+
+    # Generate practical portion sizes.
+    portion_values = []
 
     portion = min_portion
 
     while portion <= max_portion:
+        portion_values.append(round(portion, 2))
+        portion += step
 
-        # For now, optimize all selected foods equally.
-        portions = [
-            portion
-            for _ in foods
-        ]
+    best_portions = None
+    best_score = float("inf")
+
+    # Search independently for each of the three foods.
+    #
+    # With 25-300g and 5g steps:
+    # 56 possible portions per food
+    # 56^3 = 175,616 combinations.
+    
+    for portions in product(
+        portion_values,
+        repeat=len(foods),
+    ):
 
         score = calculate_portion_score(
             foods=foods,
@@ -145,11 +217,14 @@ def optimize_food_portions(
 
         if score < best_score:
             best_score = score
-            best_portions = portions
+            best_portions = list(portions)
 
-        portion += step
+    if best_portions is None:
+        raise ValueError(
+            "Unable to find suitable food portions."
+        )
 
     return {
         "portions": best_portions,
-        "score": best_score,
+        "score": round(best_score, 6),
     }

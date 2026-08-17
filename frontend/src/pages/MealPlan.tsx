@@ -1,126 +1,202 @@
+import { useEffect, useState } from "react";
+
 import {
   Box,
   Button,
   Card,
+  CircularProgress,
   Typography,
+  Alert,
 } from "@mui/material";
-import {
-  DownloadOutlined,
-} from "@mui/icons-material";
+
+import { DownloadOutlined } from "@mui/icons-material";
 
 import DashboardLayout from "../components/layout/DashboardLayout";
 import MealSection from "../components/meals/MealSelection";
 
-const meals = [
-  {
-    name: "Breakfast",
-    calories: 500,
-    meals: [
-      {
-        id: 1,
-        name: "Chiura",
-        calories: 120,
-        protein: 3,
-        carbs: 25,
-        fat: 1,
-      },
-      {
-        id: 2,
-        name: "Dahi",
-        calories: 100,
-        protein: 5,
-        carbs: 7,
-        fat: 4,
-      },
-      {
-        id: 3,
-        name: "Banana",
-        calories: 90,
-        protein: 1,
-        carbs: 23,
-        fat: 0,
-      },
-      {
-        id: 4,
-        name: "Badam",
-        calories: 190,
-        protein: 7,
-        carbs: 7,
-        fat: 16,
-      },
-    ],
-  },
-  {
-    name: "Lunch",
-    calories: 700,
-    meals: [
-      {
-        id: 5,
-        name: "Dal Bhat",
-        calories: 350,
-        protein: 13,
-        carbs: 55,
-        fat: 5,
-      },
-      {
-        id: 6,
-        name: "Chicken Curry",
-        calories: 250,
-        protein: 28,
-        carbs: 8,
-        fat: 12,
-      },
-      {
-        id: 7,
-        name: "Tarkari",
-        calories: 100,
-        protein: 3,
-        carbs: 15,
-        fat: 3,
-      },
-    ],
-  },
-  {
-    name: "Dinner",
-    calories: 700,
-    meals: [
-      {
-        id: 8,
-        name: "Roti",
-        calories: 150,
-        protein: 5,
-        carbs: 30,
-        fat: 2,
-      },
-      {
-        id: 9,
-        name: "Matar Veg",
-        calories: 220,
-        protein: 8,
-        carbs: 30,
-        fat: 7,
-      },
-      {
-        id: 10,
-        name: "Paneer Curry",
-        calories: 230,
-        protein: 12,
-        carbs: 10,
-        fat: 15,
-      },
-      {
-        id: 11,
-        name: "Salad",
-        calories: 100,
-        protein: 3,
-        carbs: 15,
-        fat: 2,
-      },
-    ],
-  },
-];
+import {
+  getTodayMealPlan,
+  generateDailyRecommendation,
+} from "../services/mealPlanService";
+
+import type { MealPlan } from "../types/mealPlan";
+
+interface MealSectionFood {
+  id: number;
+  name: string;
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  portion_grams: number;
+}
+
+interface MealSectionData {
+  name: string;
+  calories: number;
+  meals: MealSectionFood[];
+}
 
 export default function MealPlan() {
+  const [mealPlan, setMealPlan] = useState<MealPlan | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const loadMealPlan = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        // First, try to get today's already-saved meal plan.
+        let plan = await getTodayMealPlan();
+
+        // If no plan exists, generate one.
+        if (!plan) {
+          plan = await generateDailyRecommendation();
+        }
+
+        setMealPlan(plan);
+      } catch (err) {
+        console.error(
+          "Failed to load today's meal plan:",
+          err
+        );
+
+        setError(
+          "Failed to load your meal plan."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadMealPlan();
+  }, []);
+
+  /*
+   * Loading state
+   */
+  if (loading) {
+    return (
+      <DashboardLayout>
+        <Box
+          sx={{
+            minHeight: 400,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      </DashboardLayout>
+    );
+  }
+
+  /*
+   * Error state
+   */
+  if (error) {
+    return (
+      <DashboardLayout>
+        <Box
+          sx={{
+            maxWidth: 1200,
+            mx: "auto",
+          }}
+        >
+          <Alert severity="error">
+            {error}
+          </Alert>
+        </Box>
+      </DashboardLayout>
+    );
+  }
+
+  /*
+   * No meal plan
+   */
+  if (!mealPlan) {
+    return (
+      <DashboardLayout>
+        <Box
+          sx={{
+            maxWidth: 1200,
+            mx: "auto",
+          }}
+        >
+          <Alert severity="info">
+            No meal plan has been generated for today.
+          </Alert>
+        </Box>
+      </DashboardLayout>
+    );
+  }
+
+  /*
+   * Convert backend meal structure into
+   * the structure expected by MealSection.
+   */
+  const meals: MealSectionData[] = [
+    {
+      name: "Breakfast",
+      calories:
+        mealPlan.meals.breakfast.total_calories,
+
+      meals:
+        mealPlan.meals.breakfast.foods.map(
+          (food) => ({
+            id: food.food_id,
+            name: food.food_name,
+            calories: food.calories,
+            protein: food.protein,
+            carbs: food.carbs,
+            fat: food.fat,
+            portion_grams: food.portion_grams,
+          })
+        ),
+    },
+
+    {
+      name: "Lunch",
+      calories:
+        mealPlan.meals.lunch.total_calories,
+
+      meals:
+        mealPlan.meals.lunch.foods.map(
+          (food) => ({
+            id: food.food_id,
+            name: food.food_name,
+            calories: food.calories,
+            protein: food.protein,
+            carbs: food.carbs,
+            fat: food.fat,
+            portion_grams: food.portion_grams,
+          })
+        ),
+    },
+
+    {
+      name: "Dinner",
+      calories:
+        mealPlan.meals.dinner.total_calories,
+
+      meals:
+        mealPlan.meals.dinner.foods.map(
+          (food) => ({
+            id: food.food_id,
+            name: food.food_name,
+            calories: food.calories,
+            protein: food.protein,
+            carbs: food.carbs,
+            fat: food.fat,
+            portion_grams: food.portion_grams,
+          })
+        ),
+    },
+  ];
+
   return (
     <DashboardLayout>
       <Box
@@ -129,6 +205,7 @@ export default function MealPlan() {
           mx: "auto",
         }}
       >
+        {/* Header */}
         <Box
           sx={{
             display: "flex",
@@ -156,7 +233,9 @@ export default function MealPlan() {
             <Typography
               variant="body2"
               color="text.secondary"
-              sx={{ mt: 0.5 }}
+              sx={{
+                mt: 0.5,
+              }}
             >
               Your personalized meals for today
             </Typography>
@@ -165,12 +244,15 @@ export default function MealPlan() {
           <Button
             variant="contained"
             color="primary"
-            startIcon={<DownloadOutlined />}
+            startIcon={
+              <DownloadOutlined />
+            }
           >
             Generate Plan PDF
           </Button>
         </Box>
 
+        {/* Meal Plan Card */}
         <Card
           sx={{
             p: {
@@ -183,6 +265,7 @@ export default function MealPlan() {
             boxShadow: "none",
           }}
         >
+          {/* Nutrition Summary */}
           <Box
             sx={{
               display: "grid",
@@ -195,26 +278,35 @@ export default function MealPlan() {
             }}
           >
             <Summary
-              label="Total Calories"
-              value="1,900 kcal"
+              label="Target Calories"
+              value={`${mealPlan.target_calories.toFixed(
+                2
+              )} kcal`}
             />
 
             <Summary
               label="Protein"
-              value="120 g"
+              value={`${mealPlan.daily_macros.protein.toFixed(
+                2
+              )} g`}
             />
 
             <Summary
               label="Carbohydrates"
-              value="270 g"
+              value={`${mealPlan.daily_macros.carbs.toFixed(
+                2
+              )} g`}
             />
 
             <Summary
               label="Fat"
-              value="60 g"
+              value={`${mealPlan.daily_macros.fat.toFixed(
+                2
+              )} g`}
             />
           </Box>
 
+          {/* Breakfast / Lunch / Dinner */}
           {meals.map((meal) => (
             <MealSection
               key={meal.name}
@@ -229,6 +321,9 @@ export default function MealPlan() {
   );
 }
 
+/*
+ * Nutrition summary component
+ */
 interface SummaryProps {
   label: string;
   value: string;
@@ -256,7 +351,9 @@ function Summary({
       <Typography
         variant="body1"
         fontWeight={700}
-        sx={{ mt: 0.25 }}
+        sx={{
+          mt: 0.25,
+        }}
       >
         {value}
       </Typography>

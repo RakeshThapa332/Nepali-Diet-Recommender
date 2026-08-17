@@ -1,5 +1,6 @@
 import os
 import joblib
+import pandas as pd
 
 from app.models import Food
 from app.services.food_calories import calculate_food_calories
@@ -104,11 +105,11 @@ def predict_cluster(
 
     model, scaler = load_meal_model(meal)
 
-    values = [[
+    values = pd.DataFrame([[
         protein,
         fat,
         carbs
-    ]]
+    ]], columns=FEATURES)
 
     values_scaled = scaler.transform(values)
 

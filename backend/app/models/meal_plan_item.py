@@ -15,8 +15,18 @@ class MealPlanItem(db.Model):
         db.ForeignKey("foods.id"),
         nullable=False
     )
-    meal_type = db.Column(db.String(30))
-    serving_size = db.Column(db.Float)
+    meal_type = db.Column(
+        db.String(30),
+        nullable=False,
+    )
 
+    serving_size = db.Column(
+        db.Float,
+        nullable=False,
+    )
+    calories = db.Column(db.Float)
+    protein = db.Column(db.Float)
+    fat = db.Column(db.Float)
+    carbs = db.Column(db.Float)
 
     food = db.relationship("Food")
