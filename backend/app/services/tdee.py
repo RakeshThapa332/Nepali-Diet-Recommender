@@ -15,7 +15,7 @@ def calculate_tdee(
     if bmr <= 0:
         raise ValueError("BMR must be greater than 0.")
 
-    activity_level = activity_level.lower()
+    activity_level = activity_level.strip().lower().replace(" ", "_")
 
     if activity_level not in ACTIVITY_MULTIPLIERS:
         raise ValueError(

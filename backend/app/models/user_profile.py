@@ -16,6 +16,7 @@ class UserProfile(db.Model):
     gender = db.Column(db.String(20))
     height_cm = db.Column(db.Float)
     weight_kg = db.Column(db.Float)
+    body_type = db.Column(db.String(30))
     activity_level = db.Column(db.String(50))
     goal = db.Column(db.String(50))
     dietary_preference = db.Column(db.String(100))

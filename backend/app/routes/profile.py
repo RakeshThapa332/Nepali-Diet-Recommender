@@ -4,6 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app.extensions import db
 from app.models import UserProfile
+from app.services.nutrition import generate_nutrition_summary
 
 profile_bp = Blueprint("profile", __name__, url_prefix="/api/profile")
 
@@ -32,6 +33,7 @@ def create_profile():
     height_cm = data.get("height_cm")
     weight_kg = data.get("weight_kg")
     activity_level = data.get("activity_level")
+    body_type = data.get("body_type")
     goal = data.get("goal")
     dietary_preference = data.get("dietary_preference")
 
@@ -49,12 +51,22 @@ def create_profile():
         weight_kg = weight_kg,
         activity_level = activity_level,
         goal = goal,
-        dietary_preference = dietary_preference
+        dietary_preference = dietary_preference,
+        body_type=body_type,
     )
 
     try:
         db.session.add(profile)
         db.session.commit()
+
+        nutrition = generate_nutrition_summary(
+            age=profile.age,
+            gender=profile.gender,
+            weight_kg=profile.weight_kg,
+            height_cm=profile.height_cm,
+            activity_level=profile.activity_level,
+            goal=profile.goal
+        )
 
         return jsonify({
             "success": True,
@@ -67,7 +79,9 @@ def create_profile():
                 "activity_level": profile.activity_level,
                 "goal": profile.goal,
                 "dietary_preference": profile.dietary_preference,
-            }
+                "body_type": profile.body_type,
+            },
+            "nutrition": nutrition
         }), 201
 
     except SQLAlchemyError:
@@ -105,6 +119,7 @@ def get_profile():
                 "activity_level": profile.activity_level,
                 "goal": profile.goal,
                 "dietary_preference": profile.dietary_preference,
+                "body_type": profile.body_type,
                 "created_at": (
                     profile.created_at.isoformat()
                     if profile.created_at
@@ -152,6 +167,10 @@ def update_profile():
     )
     profile.goal = data.get("goal", profile.goal)
     profile.dietary_preference = data.get("dietary_preference", profile.dietary_preference)
+    profile.body_type = data.get(
+    "body_type",
+    profile.body_type
+)
 
     db.session.commit()
 
