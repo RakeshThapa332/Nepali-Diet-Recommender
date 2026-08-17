@@ -1,0 +1,621 @@
+sn,food_name,protein,fat,carbs,fiber,calories,calcium,iron,vitamin_c,breakfast,lunch,dinner,food_name_clean
+1,Amaranth seed,9.4,7.17,68.1,2.2,375.0,37.0,5.2,58.94,1,0,0,amaranth seed
+2,Barely,11.5,1.3,69.6,3.9,336.0,26.0,1.7,0.0,0,1,0,barely
+3,Buck wheat (whole),10.3,2.4,65.1,8.6,323.0,64.0,15.5,0.0,1,0,0,buck wheat (whole)
+4,Bajra,11.6,5.0,67.5,1.2,361.0,42.0,8.0,0.0,1,0,0,bajra
+5,Bamboo seed,13.1,1.1,75.9,0.9,367.0,37.0,6.4,58.95,0,1,1,bamboo seed
+6,Buckwheat flour,6.1,1.3,69.2,7.8,313.0,75.57,5.6,59.03,0,0,1,buckwheat flour
+7,Foxtail millet,12.3,4.3,60.9,8.0,331.0,31.0,12.9,59.01,1,0,0,foxtail millet
+8,Finger millet (Ragi),7.3,1.3,72.0,3.6,328.0,344.0,3.9,58.97,1,0,0,finger millet (ragi)
+9,Prosomillet (chino),11.0,4.22,72.9,1.0,378.0,8.0,3.0,58.94,1,0,0,prosomillet (chino)
+10,French millet,12.5,1.1,70.4,2.2,341.0,14.0,5.0,59.0,1,0,0,french millet
+11,Jowar,10.4,1.9,72.6,1.6,349.0,25.0,5.8,0.0,0,0,1,jowar
+12,Maize green (tender),4.7,0.9,24.6,1.9,125.0,9.0,1.1,0.0,0,1,1,maize green (tender)
+13,Maize Dry,11.1,3.6,66.2,2.7,342.0,10.0,3.3,0.0,0,0,1,maize dry
+14,Maize dry (Murali),12.1,4.31,70.9,2.2,372.0,125.47,7.01,58.93,0,1,0,maize dry (murali)
+15,Maize flour (yellow),9.2,3.9,72.1,1.6,360.0,20.0,2.4,0.0,0,0,1,maize flour (yellow)
+16,Maize flour (white),9.2,3.9,72.1,1.6,360.0,20.0,2.4,0.0,0,0,1,maize flour (white)
+17,Millet,7.7,1.2,70.1,3.7,322.0,288.0,49.1,58.97,0,0,1,millet
+18,Maize granular,9.0,3.4,74.5,1.0,362.0,17.0,1.8,0.0,0,1,0,maize granular
+19,Naked barley white (Uwa),12.6,1.6,70.5,2.3,346.0,25.0,4.1,58.99,1,0,0,naked barley white (uwa)
+20,Naked barley black (Uwa),10.4,1.75,70.9,2.5,340.0,20.3,7.5,59.0,1,0,0,naked barley black (uwa)
+21,Uwa flour,9.6,2.6,76.7,2.0,369.0,13.49,1.4,58.96,1,0,0,uwa flour
+22,Oatmeal,13.6,7.6,62.8,3.5,374.0,50.0,3.8,58.94,1,0,0,oatmeal
+23,Rice Parboiled (hand pounded),8.5,0.6,77.4,2.94,349.0,10.0,2.8,0.0,0,1,1,rice parboiled (hand pounded)
+24,Rice (raw) (Milled),6.8,0.5,78.2,0.2,345.0,10.0,0.7,0.0,0,1,1,rice (raw) (milled)
+25,Rice (Raw) (Handpounded),7.5,1.0,76.7,0.6,346.0,10.0,3.2,0.0,0,1,1,rice (raw) (handpounded)
+26,Rice flakes,6.6,1.2,77.3,0.7,346.0,20.0,20.0,0.0,0,1,1,rice flakes
+27,Rice parboiled (Milled),6.4,0.4,79.0,0.2,345.0,9.0,1.0,0.0,0,1,1,rice parboiled (milled)
+28,Rice Puff,7.5,0.1,73.6,0.3,325.0,23.0,6.6,0.0,0,1,1,rice puff
+29,Rice bran,13.5,16.2,48.4,4.3,393.0,67.0,35.0,0.0,0,1,1,rice bran
+30,Semolina,10.4,0.8,74.8,0.2,348.0,16.0,1.6,58.99,1,0,0,semolina
+31,Sorghum,7.6,2.4,74.7,0.6,357.0,17.0,3.6,0.0,1,0,0,sorghum
+32,Sarvottam pitho (lito),21.29,10.84,61.7,0.4,427.0,22.5,4.3,58.87,1,0,0,sarvottam pitho (lito)
+33,Taichin beaten rice,7.68,1.94,77.9,0.56,360.0,19.11,4.9,58.97,1,1,1,taichin beaten rice
+34,Vermicelli,8.7,0.4,78.3,0.2,352.0,22.0,2.0,58.98,1,0,0,vermicelli
+35,Varagu,6.7,0.7,67.0,3.1,310.0,73.68,5.52,59.03,1,0,0,varagu
+36,Varagu flour,6.1,1.3,69.2,2.0,313.0,65.19,5.56,59.03,1,0,0,varagu flour
+37,Wheat flour (whole),12.1,1.7,69.4,1.9,341.0,48.0,4.9,0.0,0,0,1,wheat flour (whole)
+38,Wheat flour (refined),11.0,0.9,73.9,0.3,348.0,23.0,2.7,0.0,0,0,1,wheat flour (refined)
+39,Wheat germ,29.2,7.4,53.3,1.4,397.0,40.0,6.0,0.0,1,0,0,wheat germ
+40,Wheat bran,14.6,3.0,66.0,6.8,397.0,132.0,13.8,0.0,1,0,0,wheat bran
+41,"Bengal gram, Big, white (whole)",21.1,4.0,56.7,4.5,347.2,56.2,5.3,58.98,0,0,1,"bengal gram, big, white (whole)"
+42,Bengal gram dal (chickpea),20.8,5.6,59.8,1.2,372.0,56.0,5.3,1.0,0,1,1,bengal gram dal (chickpea)
+43,"Bengal gram medium, white",23.2,3.7,54.6,4.7,345.0,45.6,3.6,58.99,0,1,0,"bengal gram medium, white"
+44,"Bengal gram, Dark brown big",17.1,5.3,60.9,3.9,360.0,44.8,4.6,3.0,0,1,0,"bengal gram, dark brown big"
+45,"Bengal gram, light brown small",24.0,4.1,54.9,3.7,352.5,47.6,4.4,58.98,0,1,0,"bengal gram, light brown small"
+46,"Bengal gram, brown small",20.6,3.5,59.0,3.5,349.9,59.2,5.3,58.98,0,1,0,"bengal gram, brown small"
+47,"Bengal gram, Small, White",23.2,3.7,54.6,4.7,344.5,45.6,3.6,58.99,0,1,0,"bengal gram, small, white"
+48,Black gram (Dal),24.0,1.4,59.6,0.9,347.0,154.0,3.8,0.0,0,1,1,black gram (dal)
+49,Black gram (Whole),21.0,1.6,58.8,4.4,344.0,110.0,8.4,2.0,0,0,1,black gram (whole)
+50,Broadbean,25.0,1.2,29.3,5.1,328.0,104.0,4.2,59.01,0,1,1,broadbean
+51,Black bean,23.73,1.31,58.7,2.1,342.0,263.58,9.42,58.96,0,1,1,black bean
+52,Bhote simi,23.49,3.71,57.7,1.32,358.0,263.45,9.51,58.94,0,1,1,bhote simi
+53,Cow Pea,24.1,1.0,54.5,3.8,323.0,77.0,8.6,0.0,0,0,1,cow pea
+54,Fieldbean dry (simi),24.9,1.3,60.1,1.4,347.0,60.0,4.4,58.98,0,1,1,fieldbean dry (simi)
+55,Gram Flour besan,17.9,4.3,63.5,0.1,364.0,129.0,5.6,58.95,1,0,0,gram flour besan
+56,"Green gram (Dal), Green",24.5,1.2,59.9,4.2,348.0,75.0,3.9,0.0,0,1,1,"green gram (dal), green"
+57,Green gram (whole),24.0,1.3,56.7,4.1,335.0,124.0,7.3,0.0,0,0,1,green gram (whole)
+58,Green peas dry,23.33,1.03,61.3,3.71,348.0,145.02,1.86,58.97,0,1,0,green peas dry
+59,Mung dal (yellow),26.71,0.93,58.0,1.71,348.0,160.27,1.17,58.97,0,1,1,mung dal (yellow)
+60,Horsegram black,22.0,0.5,57.2,5.3,321.0,287.0,6.77,58.99,0,1,0,horsegram black
+61,Horsegram red,21.11,0.85,57.4,4.12,322.0,242.75,8.86,58.99,0,1,0,horsegram red
+62,Khesari dal,28.2,0.6,56.6,2.3,345.0,90.0,6.3,58.98,0,1,1,khesari dal
+63,Katike Cow Pea,22.86,1.56,56.1,5.1,330.0,9.0,4.24,59.01,0,1,1,katike cow pea
+64,Kause bean,18.04,5.26,62.5,0.88,369.0,199.17,8.35,58.93,0,1,1,kause bean
+65,Lentil,25.1,0.7,59.0,0.7,343.0,69.0,7.5,58.99,0,1,1,lentil
+66,Moth beans,23.6,1.1,56.6,4.5,330.0,202.0,9.5,2.0,0,1,1,moth beans
+67,Moth beans (Yellow),22.95,0.46,59.1,3.27,358.0,253.04,9.13,58.94,0,1,1,moth beans (yellow)
+68,Moth beans (Red),19.74,0.7,62.7,3.63,336.0,218.34,8.53,58.97,0,1,1,moth beans (red)
+69,Peas (dry),19.7,1.9,55.7,4.5,319.0,75.0,7.05,0.0,0,0,1,peas (dry)
+70,Rajmah,22.9,1.3,60.6,4.8,346.0,260.0,5.1,58.95,0,0,1,rajmah
+71,Red gram dal,22.3,1.7,57.6,1.5,335.0,73.0,2.7,59.0,0,1,1,red gram dal
+72,Soyabean (black),33.3,15.0,31.3,4.3,393.0,213.0,9.5,58.9,0,1,1,soyabean (black)
+73,Soyabean (Brown),43.2,19.5,20.9,3.7,432.0,240.0,10.4,58.84,0,1,1,soyabean (brown)
+74,Soyabean (white),33.3,17.7,29.6,4.2,411.0,226.0,8.5,0.0,0,1,1,soyabean (white)
+75,Tarbare Simi (red),23.52,1.42,57.8,1.24,338.0,260.84,9.33,58.96,0,1,1,tarbare simi (red)
+76,Sprout bean,13.0,0.2,0.5,0.8,56.0,5.7,3.8,16.8,0,1,1,sprout bean
+77,White peas big,23.3,0.8,58.0,3.1,332.0,11.0,5.3,59.01,0,1,0,white peas big
+78,White bean,22.6,1.42,56.6,1.42,330.0,173.47,3.8,58.99,0,1,1,white bean
+79,Mung (Titura),26.2,1.3,59.5,0.9,355.0,11.0,4.8,58.98,0,1,1,mung (titura)
+80,Tofu (Soybean product),16.5,0.3,1.6,0.03,75.0,18.4,1.0,59.38,0,1,1,tofu (soybean product)
+81,Nutrila (Soybean),46.9,1.0,33.2,1.4,329.0,33.0,12.8,59.01,0,1,1,nutrila (soybean)
+82,Amaranth (spined),3.0,0.3,7.0,1.1,43.0,800.0,22.9,33.0,0,1,1,amaranth (spined)
+83,Amaranth (tender),4.0,0.5,6.1,1.0,45.0,397.0,3.49,99.0,0,1,1,amaranth (tender)
+84,Asparagus (Kurilo),3.3,0.1,2.7,0.8,25.0,30.6,1.3,12.8,0,1,1,asparagus (kurilo)
+85,Agathi,8.4,1.4,11.8,2.2,93.0,1130.0,3.9,169.0,0,1,1,agathi
+86,Aniseed leaves,2.86,0.59,5.2,1.15,38.0,119.9,4.51,42.31,0,1,1,aniseed leaves
+87,Bethel leaves,3.7,0.4,2.9,0.8,30.0,150.0,4.2,35.0,0,1,1,bethel leaves
+88,Beet green,3.4,0.8,6.5,0.7,46.0,380.0,16.2,70.0,0,1,1,beet green
+89,Buckwheat leaves,3.92,0.11,3.8,0.87,31.0,141.64,4.16,81.85,1,0,0,buckwheat leaves
+90,Bengalgram leaves,7.0,1.4,14.1,2.0,97.0,340.0,23.8,61.0,0,1,1,bengalgram leaves
+91,Bottleguard leaves,2.3,0.7,6.1,1.3,39.0,80.0,3.07,59.42,0,1,1,bottleguard leaves
+92,Broadbean leaves,5.6,0.3,11.5,1.7,71.0,111.0,3.97,59.37,0,1,1,broadbean leaves
+93,Brussels sprouts,4.7,0.5,7.1,1.2,52.0,43.0,1.8,72.0,1,0,0,brussels sprouts
+94,Cabbage green,1.8,0.1,4.6,1.0,27.0,39.0,0.8,124.0,0,0,1,cabbage green
+95,Cabbage purple,1.9,0.2,3.5,2.2,11.0,22.7,1.1,59.47,0,0,1,cabbage purple
+96,"Cauliflower, Green",5.9,1.3,7.6,2.0,66.0,626.0,40.0,59.3,0,1,1,"cauliflower, green"
+97,Cauliflower (flower only),0.75,2.4,6.6,0.25,41.0,11.51,0.85,86.62,0,1,1,cauliflower (flower only)
+98,Choisum Sag,2.7,0.3,6.4,1.5,39.0,65.2,1.5,10.3,0,1,1,choisum sag
+99,Chukandar,2.8,0.1,7.8,0.4,43.0,20.0,1.3,59.43,0,1,1,chukandar
+100,Chocho leaves,3.01,0.21,3.2,1.01,27.0,42.53,2.26,11.92,0,1,1,chocho leaves
+101,Coriander leaves,3.3,0.6,6.3,1.2,44.0,184.0,1.42,135.0,0,0,0,coriander leaves
+102,Carrot leaves,5.1,0.5,13.1,1.9,77.0,340.0,8.8,79.0,0,1,1,carrot leaves
+103,Celery leaves,6.3,0.6,1.6,1.4,37.0,230.0,6.3,62.0,0,1,1,celery leaves
+104,Colocasia leaves (Black variety),6.8,2.0,8.1,1.8,77.0,460.0,0.98,63.0,0,1,1,colocasia leaves (black variety)
+105,Colocasia leaves (Green variety),3.9,1.5,6.8,2.9,56.0,227.0,10.0,12.0,0,1,1,colocasia leaves (green variety)
+106,Colocasia leaves (dried),13.7,5.9,42.3,16.0,277.0,1546.0,34.38,58.86,0,1,1,colocasia leaves (dried)
+107,Cowpea leaves,3.4,0.7,4.1,1.2,38.0,290.0,20.1,4.0,0,1,1,cowpea leaves
+108,Dundu,2.57,0.0,3.66,1.22,25.0,86.22,3.19,11.92,0,1,1,dundu
+109,Drumstick leaves,6.7,1.7,12.5,0.9,92.0,440.0,0.85,220.0,0,1,1,drumstick leaves
+110,Fenugreek leaves,4.4,0.9,6.0,1.1,49.0,395.0,1.93,52.0,0,1,1,fenugreek leaves
+111,Garden cress,5.8,1.0,8.7,4.5,67.0,360.0,28.6,59.34,0,1,1,garden cress
+112,Garden sorrel,0.6,0.2,5.1,1.3,25.0,130.0,1.7,5.0,0,1,1,garden sorrel
+113,Garlic (stem & leaves),2.4,0.5,15.1,1.6,76.0,53.0,0.6,36.0,0,1,1,garlic (stem & leaves)
+114,Gyanth Kobi,2.6,1.0,6.0,0.2,43.0,19.3,13.2,8.6,0,1,1,gyanth kobi
+115,Gyanth Kobi Leaves,2.8,0.5,9.7,0.8,56.0,31.1,0.1,10.1,0,1,1,gyanth kobi leaves
+116,Gothale Sag,2.07,0.4,9.6,2.01,51.0,274.0,7.13,31.6,0,1,1,gothale sag
+117,jaluka Saag,2.4,0.43,5.5,3.02,35.0,254.45,3.6,3.25,0,1,1,jaluka saag
+118,Khesari leaves,6.1,1.0,5.5,2.1,55.0,160.0,7.3,41.0,0,1,1,khesari leaves
+119,Koiralo Sag,3.6,1.0,9.7,5.5,62.0,312.0,7.91,59.36,0,1,1,koiralo sag
+120,Khole garden cress,3.5,0.4,4.4,0.95,35.0,113.0,3.68,59.43,0,1,1,khole garden cress
+121,Knol-knol green,3.5,0.4,6.4,1.8,43.0,740.0,13.3,157.0,0,1,1,knol-knol green
+122,Kitchen garden pesley,2.4,0.6,2.9,1.3,27.0,111.0,14.8,29.0,0,1,1,kitchen garden pesley
+123,lettuce,2.1,0.3,2.5,0.5,21.0,50.0,2.4,10.0,0,1,1,lettuce
+124,love-lies bleeding,3.0,0.7,2.0,1.0,26.0,200.0,5.32,59.43,0,1,1,love-lies bleeding
+125,Mint,4.8,0.6,5.8,2.0,48.0,200.0,15.6,27.0,0,1,1,mint
+126,Mustard leaves,4.0,0.6,3.2,0.8,34.0,155.0,16.3,33.0,0,1,1,mustard leaves
+127,Nakore sag,2.49,0.18,8.0,0.89,44.0,83.54,3.13,84.39,0,1,1,nakore sag
+128,Niguro green,1.15,0.15,3.4,0.99,19.0,72.96,1.03,6.2,0,1,1,niguro green
+129,Neem leaves tender,11.6,3.0,21.2,2.2,158.0,130.0,25.3,104.0,0,1,1,neem leaves tender
+130,Poisag,2.8,0.4,4.2,3.65,32.0,200.0,1.0,87.0,0,1,1,poisag
+131,Patua sag,5.1,1.1,8.1,1.6,63.0,241.0,6.47,59.37,0,1,1,patua sag
+132,Potato leaves,4.4,0.9,3.6,1.3,40.0,120.0,3.84,59.42,0,1,1,potato leaves
+133,Pumpkin leaves,4.6,0.8,6.9,2.1,53.0,392.0,9.4,59.36,0,1,1,pumpkin leaves
+134,Purple Cabbage,1.9,0.2,52.0,2.2,66.0,22.7,1.1,59.39,0,1,1,purple cabbage
+135,Rape leaves,5.1,0.4,5.9,1.2,48.0,370.0,12.5,65.0,0,1,1,rape leaves
+136,Radish leaves,3.8,0.4,2.4,1.0,28.0,265.0,0.9,81.0,0,1,1,radish leaves
+137,Rapes leaves dried,27.0,2.9,40.7,6.7,297.0,3095.0,65.36,58.6,0,1,1,rapes leaves dried
+138,Safflower leaves,2.5,0.6,4.5,3.59,33.0,185.0,5.7,15.0,0,1,1,safflower leaves
+139,Sim saag fresh,2.4,0.44,1.5,0.67,20.0,127.07,3.2,59.45,0,1,1,sim saag fresh
+140,Spinach,2.0,0.7,2.9,0.6,26.0,73.0,1.14,28.0,0,0,1,spinach
+141,Stinging Nettle (Sisnu) leaves,6.9,0.2,5.0,1.8,53.0,981.3,21.26,5.5,0,1,1,stinging nettle (sisnu) leaves
+142,Soya leaves,6.0,0.5,10.8,3.58,72.0,180.0,8.0,59.36,0,1,1,soya leaves
+143,Sweet potato green leaves,4.2,0.8,9.7,2.4,63.0,360.0,1.14,27.0,0,1,1,sweet potato green leaves
+144,Sweetchard,2.21,0.24,5.3,0.7,32.0,86.4,4.57,33.83,0,1,1,sweetchard
+145,Tamarind leaves tender,8.6,3.0,60.9,10.1,305.0,1485.0,33.57,58.83,0,1,1,tamarind leaves tender
+146,Tanki Sag,1.3,0.8,44.2,3.7,190.0,361.0,6.1,9.5,0,1,1,tanki sag
+147,Thai spinach,2.3,0.3,6.1,0.8,36.0,79.5,2.4,10.0,0,1,1,thai spinach
+148,Turnip green leaves,4.0,1.5,9.4,1.0,67.0,710.0,24.4,180.0,0,1,1,turnip green leaves
+149,Ashgourd,0.4,0.1,1.9,0.8,10.0,30.0,0.8,1.0,0,0,1,ashgourd
+150,Agathi flower,1.0,0.5,4.4,0.8,26.0,9.0,1.54,59.45,0,1,1,agathi flower
+151,Bitter gourd,1.6,0.2,4.2,0.8,25.0,20.0,0.61,88.0,0,1,0,bitter gourd
+152,Barela,0.99,0.26,6.7,0.79,33.0,143.65,2.0,6.86,0,1,1,barela
+153,Bottle gourd,0.2,0.1,2.5,0.6,12.0,20.0,0.46,0.0,0,0,1,bottle gourd
+154,Brinjal,1.4,0.3,4.0,1.3,24.0,18.0,0.37,12.0,0,0,1,brinjal
+155,Broadbeans,4.5,0.1,7.2,2.0,48.0,50.0,1.4,12.0,0,1,1,broadbeans
+156,Bamboo shoot (tender),3.9,0.5,5.7,2.76,43.0,20.0,0.1,5.0,0,1,1,bamboo shoot (tender)
+157,Broccoli marrow,4.99,0.2,7.1,0.94,50.0,44.86,1.52,59.41,0,1,1,broccoli marrow
+158,Cauliflower,2.6,0.0,4.0,1.2,30.0,33.0,1.23,56.0,0,0,1,cauliflower
+159,Cho-chomarrow,0.7,0.1,5.7,0.6,27.0,140.0,0.6,4.0,0,1,1,cho-chomarrow
+160,Cluster beans,3.2,0.4,10.8,3.2,16.0,130.0,1.08,49.0,0,1,1,cluster beans
+161,Cowpea pods,3.5,0.2,8.1,2.0,48.0,72.0,2.5,14.0,0,1,1,cowpea pods
+162,Cucumber,0.4,0.1,2.5,0.4,13.0,10.0,0.6,7.0,0,0,1,cucumber
+163,Chattel,2.04,0.18,6.1,1.2,34.0,70.08,0.92,317.69,0,1,1,chattel
+164,Colocasia stem,0.3,0.3,3.6,0.6,18.0,60.0,0.5,3.0,0,1,1,colocasia stem
+165,Capsicum Yellow,0.86,0.11,17.2,0.66,73.23,17.05,1.94,115.82,0,1,1,capsicum yellow
+166,Capsicum Red,0.92,0.1,25.2,0.7,105.38,25.41,2.38,59.34,0,1,1,capsicum red
+167,Capsicum Green,0.9,0.11,25.0,0.7,103.6,25.1,2.67,48.03,0,1,1,capsicum green
+168,Chillies Akbare Fresh,3.81,0.62,8.2,0.76,53.42,133.59,4.26,59.4,0,1,1,chillies akbare fresh
+169,Chillies Akbare Dry,13.97,7.77,52.9,7.34,337.37,154.33,5.43,58.98,0,1,1,chillies akbare dry
+170,Celery Stalks,0.8,0.1,3.5,1.2,18.0,30.0,4.8,6.0,0,1,1,celery stalks
+171,Double bean,8.3,0.3,12.3,4.3,85.0,40.0,2.3,22.0,0,1,1,double bean
+172,Drumstick flower,3.6,0.8,7.1,1.3,50.0,51.0,2.58,59.41,0,1,1,drumstick flower
+173,Drumstick,2.5,0.1,3.7,4.8,26.0,30.0,0.18,120.0,0,0,1,drumstick
+174,French bean,1.7,0.1,4.5,1.8,26.0,50.0,0.61,24.0,0,1,1,french bean
+175,Field bean tender,3.8,0.7,6.7,1.8,48.0,210.0,0.83,9.0,0,1,1,field bean tender
+176,Jack fruit tender,2.6,0.3,9.4,2.8,51.0,30.0,1.7,14.0,1,0,0,jack fruit tender
+177,Knol-knol,1.1,0.2,3.8,1.5,21.0,20.0,0.4,85.0,0,1,1,knol-knol
+178,Karonda Fresh,1.1,2.9,2.9,1.5,42.0,21.0,1.87,59.43,0,0,0,karonda fresh
+179,Ladies finger,1.9,0.2,6.4,1.2,35.0,66.0,0.35,13.0,0,0,1,ladies finger
+180,Leeks,1.8,0.1,17.2,1.3,77.0,50.0,2.3,11.0,0,1,1,leeks
+181,"Lakooch, Badher raw",1.6,1.2,13.9,2.8,73.0,67.0,3.14,59.38,0,0,0,"lakooch, badher raw"
+182,"Lotus stem, dry",4.1,1.3,51.4,25.0,234.0,405.0,60.6,3.0,0,1,1,"lotus stem, dry"
+183,Mushroom Botton (Gobre),4.6,0.8,4.3,0.4,43.0,6.0,1.5,59.43,0,1,1,mushroom botton (gobre)
+184,Mushroom Oyster (Kanne),3.0,0.2,5.8,0.9,37.0,128.91,4.03,59.42,0,1,1,mushroom oyster (kanne)
+185,"Mushroom, wild , dry",16.9,2.73,14.1,20.8,134.7,443.62,17.2,59.23,0,1,1,"mushroom, wild , dry"
+186,Mango green,0.7,0.1,10.1,1.2,44.0,10.0,6.33,3.0,1,0,0,mango green
+187,Onion stalk (Green),0.9,0.2,8.9,1.6,41.0,50.0,7.43,17.0,0,1,1,onion stalk (green)
+188,Pink beans,3.1,0.4,7.0,2.1,44.0,54.0,1.5,12.0,0,1,1,pink beans
+189,Pumpkin,1.4,0.1,4.6,0.7,25.0,10.0,0.44,2.0,0,0,1,pumpkin
+190,Plantain flower,1.7,0.7,5.1,1.3,34.0,32.0,1.6,16.0,0,1,1,plantain flower
+191,Plantain green,1.4,0.2,14.0,0.7,64.0,10.0,6.27,24.0,0,1,0,plantain green
+192,plantain stem,0.5,0.1,90.7,0.8,42.0,10.0,1.1,7.0,0,1,1,plantain stem
+193,Pumpkin flower,2.2,0.8,5.8,0.7,39.0,120.0,3.86,59.42,0,1,1,pumpkin flower
+194,Parwar,2.0,0.3,2.2,3.0,20.0,30.0,1.7,29.0,0,1,1,parwar
+195,Peas,7.2,0.1,15.9,4.0,93.0,20.0,1.5,9.0,0,1,1,peas
+196,Papaya green,0.7,0.2,5.7,0.9,27.0,28.0,0.9,12.0,0,1,0,papaya green
+197,Ridge gourd,0.5,0.1,3.4,0.5,17.0,18.0,0.39,5.0,0,0,1,ridge gourd
+198,"Rape, stem",0.1,1.4,4.0,3.15,29.0,100.0,1.2,59.44,0,1,1,"rape, stem"
+199,Redgram tender,9.8,1.0,16.9,6.2,116.0,57.0,1.1,25.0,0,1,1,redgram tender
+200,Red beans (Rato Bodi),3.1,0.1,5.2,2.5,34.0,18.1,4.9,59.44,0,1,1,red beans (rato bodi)
+201,Red bean (Simi),3.5,0.1,26.6,2.7,121.0,33.0,5.0,7.8,0,1,1,red bean (simi)
+202,Spotted beans (Chirke simi),3.34,0.75,21.8,2.12,107.0,109.9,4.32,59.32,0,1,1,spotted beans (chirke simi)
+203,Red cowpea,3.1,0.1,5.2,2.5,34.0,18.1,4.9,59.44,0,1,1,red cowpea
+204,Snakegourd,0.5,0.3,3.3,0.8,18.0,26.0,1.51,0.0,0,0,1,snakegourd
+205,Sponge guard,1.03,0.11,5.0,0.39,26.43,28.2,1.18,4.55,0,1,1,sponge guard
+206,Sannhemp flower,4.8,0.6,10.4,3.9,66.0,200.0,5.7,59.37,0,1,1,sannhemp flower
+207,Silkcotton flower,1.5,0.3,9.5,1.6,47.0,22.0,2.01,59.42,0,1,1,silkcotton flower
+208,Spinach stalk,0.9,0.1,3.8,3.1,20.0,90.0,1.6,3.0,0,1,1,spinach stalk
+209,Sword beans,2.7,0.2,7.8,1.5,44.0,60.0,2.0,0.08,0,1,1,sword beans
+210,Soyabean tender,14.89,2.92,15.1,3.68,146.2,89.7,3.7,4.55,0,1,1,soyabean tender
+211,Tomato green,1.9,0.1,3.6,0.7,23.0,20.0,1.8,31.0,0,1,1,tomato green
+212,Tomato red,1.3,0.1,3.9,0.5,21.0,15.0,0.7,23.0,0,0,1,tomato red
+213,Tree tomato,1.5,0.2,6.7,4.2,35.0,12.0,1.0,0.0,0,1,1,tree tomato
+214,Tinda tender,1.4,0.2,3.4,1.0,21.0,25.0,0.9,18.0,0,1,1,tinda tender
+215,Vegetable marrow,0.5,0.1,3.5,0.8,17.0,10.0,1.35,18.0,0,1,1,vegetable marrow
+216,Water chesnut fresh,4.7,0.3,23.3,0.6,115.0,20.0,0.8,9.0,0,0,0,water chesnut fresh
+217,Water chesnut dry,13.4,0.8,68.9,330.0,70.0,440.0,12.1,59.31,0,0,0,water chesnut dry
+218,Water lily flower,1.6,0.6,5.4,0.9,33.0,29.0,2.0,59.44,0,1,1,water lily flower
+219,Winged bean tender,2.66,34.0,7.9,1.79,45.1,26.32,2.11,3.37,0,1,1,winged bean tender
+220,Beet root,1.7,0.1,8.8,0.9,43.0,18.0,1.19,10.0,0,1,1,beet root
+221,Banana rhizome,0.4,0.2,11.8,1.1,51.0,25.0,1.1,1.0,1,0,0,banana rhizome
+222,Colacasia,3.0,0.1,21.1,1.0,97.0,40.0,0.42,0.0,0,1,1,colacasia
+223,Cassava,1.2,0.3,34.7,0.43,146.3,33.0,0.7,59.28,0,1,1,cassava
+224,Carrot,0.9,0.2,10.6,1.2,47.8,80.0,1.03,3.0,0,0,1,carrot
+225,Cho-cho marrow root,1.9,0.1,20.3,0.7,89.93,52.47,0.89,10.02,0,1,1,cho-cho marrow root
+226,Ghar tarul,4.0,0.1,32.6,2.56,147.0,69.8,24.03,59.26,0,1,1,ghar tarul
+227,Garlic dry,6.0,0.1,29.8,0.8,145.0,30.0,1.3,13.0,0,1,1,garlic dry
+228,Gittha,3.72,0.9,25.2,0.91,124.0,12.41,0.95,59.31,0,1,1,gittha
+229,Lotus root,1.7,0.1,11.3,0.8,53.0,21.0,0.4,22.0,0,1,1,lotus root
+230,Mango ginger,1.1,0.7,10.5,1.3,53.0,25.0,2.6,1.0,1,0,0,mango ginger
+231,Onion   (Small),1.8,0.1,12.6,0.6,59.0,40.0,1.2,2.0,0,1,1,onion   (small)
+232,Onion   (Big),1.2,0.1,10.4,1.3,47.0,47.0,0.6,11.0,0,1,1,onion   (big)
+233,Potato,1.6,0.1,22.4,0.6,97.0,10.0,0.46,17.0,0,0,1,potato
+234,Potato( Red),1.1,0.52,15.0,0.25,72.0,5.42,0.48,59.39,0,1,0,potato( red)
+235,Potato boiled ( without skin),1.9,0.1,16.3,0.4,72.0,7.0,0.8,0.06,0,1,1,potato boiled ( without skin)
+236,Potato chips fried,3.6,43.8,45.9,0.9,562.0,18.0,1.6,0.0,0,1,1,potato chips fried
+237,Rani vyakur,2.3,0.2,22.7,1.1,101.0,24.71,8.38,59.34,0,1,1,rani vyakur
+238,Radish Pink,0.6,0.3,6.8,0.6,32.0,50.0,0.37,17.0,0,1,0,radish pink
+239,Radish white,0.7,0.1,22.7,9.6,101.0,24.7,0.4,15.0,0,0,1,radish white
+240,Radish Rat- tailed,1.3,0.03,4.3,0.4,72.0,7.0,0.8,0.06,0,1,1,radish rat- tailed
+241,Sweet Potato( white)),1.2,0.3,28.3,0.7,121.0,46.0,0.21,24.0,0,1,1,sweet potato( white))
+242,Sweet potato red,1.35,0.5,29.1,1.0,126.0,145.81,2.21,2.42,0,1,1,sweet potato red
+243,Sweet potato boiled,1.0,0.1,27.4,0.8,114.0,36.0,0.9,11.0,0,1,1,sweet potato boiled
+244,Turnip red,1.2,0.2,7.7,1.3,37.0,47.7,2.3,59.43,0,1,1,turnip red
+245,Yam elephant,1.2,0.1,18.4,0.9,79.0,50.0,0.6,59.37,0,1,1,yam elephant
+246,Yam wild,2.5,0.3,29.1,0.8,110.0,20.0,1.0,1.0,0,1,1,yam wild
+247,Gundurk(Mustard),37.87,38.5,21.15,15.59,571.53,2488.0,94.3,58.3,0,0,1,gundurk(mustard)
+248,Mulako Sinki,12.0,0.7,47.5,14.92,245.0,190.09,7.2,59.11,0,1,1,mulako sinki
+249,Dried rape leaves,27.0,2.9,40.7,6.7,297.0,3095.0,65.36,58.6,0,1,1,dried rape leaves
+250,Blackgram+Colocosia tuber Maseura,19.8,0.7,63.8,3.5,341.0,17.6,4.5,59.0,0,1,1,blackgram+colocosia tuber maseura
+251,Blackgram+Colocosia tuber+Gundruk Maseura,25.3,0.7,57.6,3.7,338.0,33.37,11.6,59.0,0,1,1,blackgram+colocosia tuber+gundruk maseura
+252,Blackgram+Ashgourd (kubindo) Maseura,30.3,1.0,55.5,2.5,352.0,11.7,1.9,58.98,0,1,1,blackgram+ashgourd (kubindo) maseura
+253,Blackgram+Garlic Maseura,22.0,1.2,346.0,1.2,346.0,11.9,3.3,58.93,0,1,1,blackgram+garlic maseura
+254,Blackgram+Cabbage Maseura,22.0,0.1,64.4,2.5,347.0,13.5,5.0,58.99,0,1,1,blackgram+cabbage maseura
+255,Blackgram+Gardencress (Chamsur) Maseura,26.9,0.1,59.2,2.5,345.0,17.6,6.3,58.99,0,1,1,blackgram+gardencress (chamsur) maseura
+256,Blackgram+Raddish Maseura,24.6,1.9,58.6,2.7,350.0,13.0,4.5,58.98,0,1,1,blackgram+raddish maseura
+257,Blackgram+Cauliflower Maseura,24.5,0.6,57.5,2.5,333.0,8.1,3.1,59.01,0,1,1,blackgram+cauliflower maseura
+258,Apple,0.2,0.5,13.4,1.0,59.0,10.0,0.66,1.0,1,0,0,apple
+259,Amala ( big),0.0,0.2,13.7,3.6,54.0,91.32,2.82,324.1,1,0,0,amala ( big)
+260,Amala (small),0.0,0.2,15.34,3.21,58.0,50.0,1.2,562.62,1,0,0,amala (small)
+261,Apricot fresh,1.0,0.3,11.6,1.1,53.0,20.0,2.2,6.0,1,0,0,apricot fresh
+262,Apricot dried,1.6,0.7,73.4,2.1,306.0,110.0,4.6,2.0,1,0,0,apricot dried
+263,Avocado,1.7,22.8,0.8,2.78,215.0,10.0,0.7,59.19,1,0,0,avocado
+264,Bael fruit,1.8,0.3,31.8,2.9,137.0,85.0,0.6,8.0,1,0,0,bael fruit
+265,Bael sarbet,1.7,0.1,45.2,3.05,189.0,56.01,4.09,59.21,1,0,0,bael sarbet
+266,Banana ripe,1.2,0.3,27.2,0.4,116.0,17.0,0.37,7.0,1,0,0,banana ripe
+267,Banyan tree figs,1.7,2.0,11.8,8.5,72.0,364.0,9.04,59.33,1,0,0,banyan tree figs
+268,Bamboo fruit,3.9,0.1,34.2,3.9,153.0,10.0,1.5,1.0,1,0,0,bamboo fruit
+269,Cashew fruit,0.2,0.1,12.3,0.9,51.0,10.0,0.2,180.0,1,0,0,cashew fruit
+270,"Dates, dried",2.5,0.4,75.8,3.9,317.0,120.0,7.3,3.0,1,0,0,"dates, dried"
+271,"Dates, Fresh",1.2,0.4,33.8,3.7,144.0,22.0,0.96,59.28,1,0,0,"dates, fresh"
+272,Figs,1.3,0.2,7.6,2.2,37.0,80.0,1.0,5.0,1,0,0,figs
+273,Grape- pale green variety,0.5,0.3,16.5,2.9,71.0,20.0,0.52,1.0,1,0,0,grape- pale green variety
+274,Grape-Blue variety,0.6,0.4,13.1,2.8,58.0,20.0,0.5,1.0,1,0,0,grape-blue variety
+275,Grapes fruits( Marsh' seedless),1.0,0.1,10.0,2.8,45.0,30.0,0.2,59.42,0,0,0,grapes fruits( marsh' seedless)
+276,Grape fruit( trumph) juice,0.7,0.1,7.0,2.75,32.0,20.0,0.2,31.0,1,0,0,grape fruit( trumph) juice
+277,"Guava , hill",0.1,0.2,9.0,4.8,38.0,50.0,1.2,15.0,1,0,0,"guava , hill"
+278,"Guava, country",0.9,0.3,11.2,5.2,51.0,10.0,0.27,212.0,1,0,0,"guava, country"
+279,Ground apple,1.3,0.2,14.4,0.1,64.0,95.05,3.64,59.39,1,0,0,ground apple
+280,Jackfruit   ripe seed,1.9,0.1,19.8,0.9,88.0,20.0,0.56,7.0,1,0,0,jackfruit   ripe seed
+281,Jambu fruit,0.7,0.3,14.0,0.6,62.0,15.0,0.43,18.0,1,0,0,jambu fruit
+282,Kussum fruit,1.5,0.8,9.9,2.0,53.0,15.0,1.92,59.41,1,0,0,kussum fruit
+283,Lapsi,0.5,0.02,17.68,1.4,73.0,218.0,2.7,48.15,1,0,0,lapsi
+284,Lemon(Nibuwa),1.0,0.9,11.1,0.7,57.0,70.0,0.26,39.0,1,0,0,lemon(nibuwa)
+285,Lemon sweet,0.7,0.3,7.3,2.8,35.0,30.0,0.7,54.0,1,0,0,lemon sweet
+286,Lemon Juice,1.0,0.9,12.8,3.02,63.0,70.0,0.3,39.0,1,0,0,lemon juice
+287,Lichi,1.1,0.2,13.6,0.5,61.0,10.0,0.7,31.0,1,0,0,lichi
+288,"Lich ,bastard",1.4,0.3,13.1,0.5,61.0,15.0,2.01,59.4,1,0,0,"lich ,bastard"
+289,Lime,1.5,1.0,10.9,1.3,59.0,90.0,0.3,63.0,1,0,0,lime
+290,"Lime, sweet, malta",0.7,0.2,7.8,0.6,36.0,30.0,1.0,54.0,1,0,0,"lime, sweet, malta"
+291,Lakuch,0.7,1.1,3.3,1.7,66.0,50.0,0.5,135.0,1,0,0,lakuch
+292,Laruat,0.6,0.3,9.6,0.8,43.0,30.0,1.3,0.0,1,0,0,laruat
+293,"Mango, Ripe",0.6,0.4,16.9,0.7,74.0,14.0,1.3,16.0,1,0,0,"mango, ripe"
+294,"Mango, Ripe / Bombay",1.2,0.03,21.0,0.07,89.0,82.94,3.65,59.35,1,0,0,"mango, ripe / bombay"
+295,"Mango, Ripe / Malda",1.4,0.09,17.9,0.28,78.0,90.7,3.69,59.37,1,0,0,"mango, ripe / malda"
+296,"Mango, Ripe / Sukutara",1.0,0.17,16.9,0.17,73.0,87.96,3.59,59.37,1,0,0,"mango, ripe / sukutara"
+297,"Mango, Ripe / Dashari",1.1,0.06,17.6,0.18,75.0,87.76,3.61,59.37,1,0,0,"mango, ripe / dashari"
+298,"Mango, Ripe / Jarda",0.8,0.03,15.0,0.41,63.0,89.41,3.53,59.39,1,0,0,"mango, ripe / jarda"
+299,"Mango, Ripe / Kalkatiya",0.4,0.01,19.0,0.09,80.0,77.93,3.46,59.36,1,0,0,"mango, ripe / kalkatiya"
+300,"Mango, Ripe / Fajali",0.9,0.15,15.0,0.1,65.0,89.84,3.55,59.39,1,0,0,"mango, ripe / fajali"
+301,"Mango, Ripe / Amrapali",1.5,0.09,15.4,0.08,68.0,95.34,3.68,59.38,1,0,0,"mango, ripe / amrapali"
+302,"Mango, Ripe / Chausa",0.77,0.08,17.8,0.34,75.0,84.4,3.54,59.37,1,0,0,"mango, ripe / chausa"
+303,"Mango, Ripe / Mallika",0.61,0.09,17.4,0.04,73.0,82.66,3.49,59.37,1,0,0,"mango, ripe / mallika"
+304,"Mahua, ripe",1.4,1.6,22.7,2.93,111.0,45.0,0.23,40.0,1,0,0,"mahua, ripe"
+305,Mulberry,1.1,0.4,10.3,1.1,49.0,70.0,2.3,12.0,1,0,0,mulberry
+306,Melon water,0.2,0.2,3.3,0.2,16.0,11.0,7.9,1.0,1,0,0,melon water
+307,Neem fruit,1.3,1.0,15.1,0.7,75.0,25.0,2.32,59.38,1,0,0,neem fruit
+308,Junar,3.06,0.05,11.9,3.29,48.0,125.04,4.11,59.4,1,0,0,junar
+309,Orange,0.7,0.2,10.9,0.3,48.0,26.0,0.32,30.0,1,0,0,orange
+310,Orange juice,0.2,0.1,1.9,2.65,9.0,5.0,0.7,64.0,1,0,0,orange juice
+311,Papaya   (ripe),0.6,0.1,7.2,0.8,32.0,17.0,0.5,57.0,1,0,0,papaya   (ripe)
+312,Persimon with peel,0.7,0.14,24.85,0.57,102.7,10.71,0.29,46.0,1,0,0,persimon with peel
+313,Persimon without peel,0.9,0.11,25.1,0.85,104.04,11.14,0.27,34.6,1,0,0,persimon without peel
+314,Peaches,1.2,0.3,10.5,1.2,50.0,15.0,2.4,6.0,1,0,0,peaches
+315,Phalsa,1.3,0.9,14.7,1.2,72.0,129.0,3.1,22.0,1,0,0,phalsa
+316,Pinapple,0.4,0.1,10.8,0.5,46.0,20.0,2.42,39.0,1,0,0,pinapple
+317,Pipal tree figs,2.6,1.7,21.2,9.9,110.0,289.0,7.92,59.29,1,0,0,pipal tree figs
+318,Plums,0.7,0.5,11.1,0.4,52.0,10.0,0.6,5.0,1,0,0,plums
+319,Pomegranate,1.6,0.1,14.5,5.1,65.0,10.0,1.79,16.0,1,0,0,pomegranate
+320,Pummelo,0.6,0.1,10.2,0.6,44.0,30.0,0.3,20.0,1,0,0,pummelo
+321,Pear,0.6,0.2,11.9,1.0,52.0,8.0,0.5,0.0,1,0,0,pear
+322,Pani amala,2.6,0.14,3.4,1.26,26.0,29.3,1.94,59.45,1,0,0,pani amala
+323,Raspbery,1.0,0.6,11.7,1.1,56.0,40.0,2.3,30.0,1,0,0,raspbery
+324,Red rapsberry( kafal),1.72,0.1,8.2,6.43,41.0,125.14,4.02,59.41,1,0,0,red rapsberry( kafal)
+325,Rayan,0.0,9.6,27.7,3.14,134.0,83.0,0.9,16.0,1,0,0,rayan
+326,Rose sppple,0.7,0.2,8.5,1.2,39.0,10.0,0.5,3.0,1,0,0,rose sppple
+327,Seethphal,1.6,0.4,23.5,3.1,104.0,17.0,4.31,37.0,1,0,0,seethphal
+328,Strawberry,0.7,0.2,9.8,1.1,44.0,30.0,1.8,52.0,1,0,0,strawberry
+329,Sapota,0.7,1.1,21.4,2.6,98.0,28.0,1.25,6.0,1,0,0,sapota
+330,Wood apple,7.1,3.7,18.1,5.0,134.0,130.0,0.48,3.0,1,0,0,wood apple
+331,Zizyphus,0.8,0.3,17.0,2.69,74.0,4.0,0.5,76.0,1,0,0,zizyphus
+332,Asafoetida,4.0,1.1,67.7,4.1,297.0,690.0,39.4,0.0,0,0,0,asafoetida
+333,Anise (Sounf),17.5,3.4,60.0,13.5,341.0,1163.0,3.8,58.83,0,0,0,anise (sounf)
+334,Arithippilli Arisithipplli,13.2,4.7,58.0,5.2,329.0,460.0,13.5,58.95,0,1,1,arithippilli arisithipplli
+335,Betal nut ( Supari),4.7,10.2,66.1,13.2,375.0,295.0,4.5,58.91,0,0,0,betal nut ( supari)
+336,Cinnamon,6.1,1.9,64.6,26.5,259.0,415.0,15.0,0.0,0,0,0,cinnamon
+337,Cardamom,10.2,2.2,42.1,20.1,229.0,130.0,4.6,0.0,0,0,0,cardamom
+338,"Chilliy, dry",15.9,6.2,31.6,30.2,246.0,160.0,2.3,50.0,0,1,1,"chilliy, dry"
+339,"Chilliy, green",2.9,0.6,3.0,6.8,29.0,30.0,4.4,111.0,0,1,1,"chilliy, green"
+340,"Cloves, dry",5.2,8.9,46.0,9.5,286.0,740.0,11.7,0.0,0,0,0,"cloves, dry"
+341,"Coriander, dry",14.4,16.1,21.6,32.6,288.0,630.0,7.1,0.0,0,0,0,"coriander, dry"
+342,Cumin seed,18.7,15.0,36.6,12.0,356.0,1080.0,11.7,3.0,0,0,0,cumin seed
+343,Fenμgreek seed,26.2,5.8,44.1,7.2,333.0,160.0,6.5,0.0,0,1,1,fenμgreek seed
+345,"Ginger, fresh",2.3,0.9,12.3,2.4,67.0,20.0,3.5,6.0,0,1,1,"ginger, fresh"
+346,Mace,6.5,24.5,47.8,3.8,437.0,180.0,12.6,0.0,0,0,0,mace
+347,Nutmeg,7.5,36.4,28.5,11.6,472.0,120.0,2.03,0.0,0,0,0,nutmeg
+348,Omum,17.1,21.8,24.6,21.2,363.0,1525.0,12.5,58.75,0,0,0,omum
+349,pepper dry,11.5,6.8,49.2,14.9,304.0,460.0,12.4,58.98,0,0,0,pepper dry
+350,Pepper green,4.8,2.7,13.7,6.4,98.0,270.0,2.4,1.0,0,0,0,pepper green
+351,Tamarind pulp,3.1,0.1,67.4,5.6,283.0,170.0,17.0,3.0,0,1,1,tamarind pulp
+352,Turmeric,6.3,5.1,69.4,2.6,349.0,150.0,67.8,0.0,0,0,0,turmeric
+353,Timur,19.46,6.24,46.79,8.06,316.89,1026.97,59.94,58.87,0,0,0,timur
+354,Zimbu,19.46,19.28,34.59,7.33,379.42,879.7,48.9,58.81,0,0,0,zimbu
+355,"Lime, peel",1.8,0.5,29.4,6.32,129.0,710.0,2.7,59.2,1,0,0,"lime, peel"
+356,Almond,20.8,58.9,10.5,1.7,665.0,230.0,5.09,0.0,1,0,0,almond
+357,Cashew nut,21.2,46.9,22.3,1.3,596.0,50.0,5.8,0.0,1,0,0,cashew nut
+358,Coconut (dry),6.8,62.3,18.4,6.6,662.0,400.0,7.8,7.0,1,0,0,coconut (dry)
+359,Coconut (fresh),4.5,41.6,13.0,3.6,444.0,10.0,1.7,1.0,1,0,0,coconut (fresh)
+360,chilgoza,13.9,49.3,29.0,1.0,615.0,91.0,3.6,0.0,1,0,0,chilgoza
+361,Filinge( Jhusetil),25.6,41.4,22.3,3.1,567.0,390.18,12.94,58.63,1,0,0,filinge( jhusetil)
+362,Groundnut,25.3,40.1,26.1,3.1,567.0,90.0,2.5,0.0,1,0,0,groundnut
+363,"Groundnut, roasted",26.2,39.8,26.7,3.1,570.0,77.0,3.1,0.0,1,0,0,"groundnut, roasted"
+364,Linseed seeds,20.3,37.7,28.3,4.8,533.0,170.0,2.7,0.0,1,0,0,linseed seeds
+365,Walnut,15.6,64.5,11.0,2.6,687.0,100.0,2.04,0.0,1,0,0,walnut
+366,Silam,20.0,22.1,30.6,3.13,461.0,297.81,10.53,58.79,1,0,0,silam
+367,Mustard seed,20.0,39.7,23.8,1.8,541.0,490.0,7.9,0.0,1,0,0,mustard seed
+368,Niger seed,23.9,39.0,17.1,10.9,515.0,300.0,56.7,58.71,1,0,0,niger seed
+369,Pistachio nut,19.8,53.5,16.2,2.1,626.0,140.0,7.7,58.58,1,0,0,pistachio nut
+370,Poppy Seed,15.1,2.3,75.3,1.9,382.0,981.0,5.2,58.79,1,0,0,poppy seed
+371,Safflower seed,13.5,25.6,17.9,34.9,356.0,236.0,4.6,58.95,1,0,0,safflower seed
+372,Sunflower seed,19.8,52.1,17.9,1.0,620.0,280.0,5.0,1.0,1,0,0,sunflower seed
+374,Sesame seed black,21.3,47.97,9.33,8.86,554.0,387.91,12.65,58.65,1,0,0,sesame seed black
+375,Sesame seed white,25.9,49.57,12.4,2.53,599.0,282.71,4.59,58.6,1,0,0,sesame seed white
+376,Sesame seed brown,23.4,37.3,22.9,2.89,521.0,422.94,16.13,58.69,1,0,0,sesame seed brown
+377,Siltimur,7.1,42.15,26.3,14.4,542.0,219.34,9.44,58.69,0,0,0,siltimur
+378,Bhang ko geda,19.9,34.8,30.6,3.1,516.0,309.47,11.1,58.71,0,0,0,bhang ko geda
+379,Buffalo meat (lean meat),19.4,0.9,0.0,2.68,86.0,3.0,1.78,59.37,0,0,0,buffalo meat (lean meat)
+380,Buff Sausage,15.9,5.64,8.8,4.09,150.0,273.07,7.7,59.24,0,1,0,buff sausage
+381,Chicken flesh,18.8,17.6,0.0,0.0,187.0,12.0,3.0,59.23,0,1,1,chicken flesh
+382,Chicken Sausage,16.5,18.8,0.0,0.09,253.0,175.16,0.55,59.11,0,1,1,chicken sausage
+383,Duck meat,21.6,4.8,0.0,2.71,130.0,4.0,2.09,59.31,0,0,0,duck meat
+384,Field rat's meet,23.6,1.0,0.9,2.83,104.0,30.0,2.46,59.34,0,1,1,field rat's meet
+385,Finch,26.6,3.0,3.87,3.15,133.0,90.0,3.88,59.29,0,1,1,finch
+386,Goat- Meat(Lean meat),21.4,3.6,0.0,2.74,118.0,12.0,2.17,59.32,0,0,0,goat- meat(lean meat)
+387,"Liver , goat",20.0,3.0,3.74,2.77,107.0,17.0,2.24,59.34,1,0,0,"liver , goat"
+388,"Liver , sheep",19.3,7.5,1.3,2.76,150.0,10.0,6.3,20.0,0,1,0,"liver , sheep"
+389,Mutton muscle,18.5,13.3,3.83,3.49,194.0,150.0,2.5,59.2,0,1,1,mutton muscle
+390,Pork muscle,18.7,4.4,3.6,2.84,114.0,30.0,2.2,59.33,0,0,1,pork muscle
+391,Pigeon meat,23.3,4.9,4.02,2.77,137.0,12.0,2.49,2.0,0,0,0,pigeon meat
+392,Ham Sliced (Barume),20.8,23.9,12.5,2.88,349.0,12.41,0.67,59.0,0,1,1,ham sliced (barume)
+393,Ham(Smoked),21.4,15.0,0.4,0.0,122.0,8.65,1.05,59.32,0,1,1,ham(smoked)
+394,Pork Bacon (Swiss Gourmet),14.9,21.0,10.1,0.02,289.0,150.38,0.72,59.06,0,1,1,pork bacon (swiss gourmet)
+395,Pork Prine Bacon,18.8,23.0,3.4,0.01,296.0,185.88,0.53,59.05,0,1,1,pork prine bacon
+396,Pork Sausages,19.2,28.95,13.7,2.91,392.0,15.53,0.83,58.93,0,1,1,pork sausages
+397,Salami Cooked,17.8,4.0,0.0,0.01,172.0,9.75,1.65,59.25,0,1,1,salami cooked
+398,"Snail , small",12.6,1.0,3.7,9.37,74.0,1321.0,28.04,59.19,0,1,1,"snail , small"
+399,"Snail , big",10.5,0.6,12.4,7.1,97.0,870.0,19.31,59.22,0,1,1,"snail , big"
+400,Turtle meat,16.5,1.5,1.5,2.7,86.0,7.0,1.88,59.37,0,0,0,turtle meat
+401,Venison,21.0,0.6,1.9,2.69,97.0,3.0,1.88,59.35,0,0,1,venison
+402,Duck- egg,13.5,13.5,0.8,3.07,181.0,70.0,2.5,59.23,1,0,0,duck- egg
+403,Hen- egg,13.3,13.3,3.81,3.03,173.0,60.0,2.1,0.0,1,0,0,hen- egg
+404,Battai-egg( Quail egg),13.0,11.09,0.41,3.03,158.0,62.0,3.7,0.0,1,0,0,battai-egg( quail egg)
+405,Bam fish,16.1,0.9,6.9,4.36,100.0,330.0,0.8,3.0,0,0,0,bam fish
+406,Hisla,21.8,19.4,2.9,3.68,273.0,180.0,2.1,24.0,0,0,1,hisla
+407,Katla,19.5,2.4,2.9,5.37,111.0,530.0,0.9,59.26,0,0,1,katla
+408,Kol,14.8,8.8,4.4,4.79,156.0,410.0,1.4,32.0,0,1,1,kol
+409,Mungri,15.0,1.0,4.2,3.74,86.0,210.0,0.7,11.0,0,1,1,mungri
+410,Singhi,22.8,0.6,6.9,6.1,124.0,670.0,2.3,9.0,0,1,1,singhi
+411,Tengra fish,19.2,6.4,2.3,4.07,144.0,270.0,2.0,18.0,0,0,0,tengra fish
+412,Prawn,19.1,1.0,0.8,4.31,89.0,323.0,5.3,59.32,0,0,1,prawn
+413,Crab small,11.2,9.8,9.1,10.88,169.0,1606.0,34.41,59.01,0,0,1,crab small
+414,Rahu,16.7,1.4,4.4,5.98,97.0,650.0,1.0,22.0,0,0,1,rahu
+415,Dry fish (Sun dried ),64.9,4.21,16.9,6.79,366.0,777.9,19.34,58.85,0,0,0,dry fish (sun dried )
+416,Dried Fish,58.5,11.14,72.43,6.2,622.48,626.23,18.71,58.5,0,0,0,dried fish
+417,Salted Dry Fish,62.2,6.03,18.4,6.65,377.0,748.85,18.85,58.84,0,0,0,salted dry fish
+418,Smoked Dry Fish,70.8,7.23,11.6,7.17,391.0,852.58,20.93,58.81,0,0,0,smoked dry fish
+419,Buffalo milk,4.3,6.5,7.4,3.75,105.0,210.0,0.2,1.0,1,0,0,buffalo milk
+420,Cow milk,3.2,4.1,4.4,3.28,67.0,120.0,0.2,2.0,1,0,0,cow milk
+421,Curd,3.1,4.0,3.0,3.42,60.0,149.0,0.2,1.0,1,1,1,curd
+422,Dairy's milk,3.0,2.94,26.51,3.25,141.33,103.87,4.49,59.27,1,0,0,dairy's milk
+423,Goat milk,3.3,4.5,4.6,3.53,72.0,170.0,0.3,1.0,1,0,0,goat milk
+424,Sheep milk,5.4,6.0,5.1,3.54,95.0,170.0,5.22,59.33,1,0,0,sheep milk
+425,Paneer,23.7,26.0,0.6,0.3,331.0,441.0,4.5,58.96,1,1,1,paneer
+426,Cheese,24.1,25.1,6.3,6.82,348.0,790.0,2.1,58.88,1,0,0,cheese
+427,Human milk,1.1,3.4,7.4,2.81,65.0,28.0,2.37,3.0,1,0,0,human milk
+428,Buttermilk,0.8,1.1,0.5,2.78,15.0,30.0,0.1,59.47,1,0,0,buttermilk
+429,Khuwa (whole buffalo milk),14.6,31.2,20.5,6.16,421.0,650.0,5.8,58.8,1,0,0,khuwa (whole buffalo milk)
+430,Skimmed milk powder (cow's milk),38.0,0.1,51.0,9.82,357.0,1370.0,1.4,5.0,1,0,0,skimmed milk powder (cow's milk)
+431,"Channa, buffalo's milk",13.4,23.0,7.9,5.22,292.0,480.0,12.74,59.01,1,0,0,"channa, buffalo's milk"
+432,Butter,21.95,81.0,0.0,5.31,729.0,457.88,14.87,58.39,0,0,0,butter
+433,Ghee cow,26.72,100.0,0.0,5.79,900.0,535.17,17.49,58.14,0,0,0,ghee cow
+434,Ghee (Buffalo),26.72,100.0,0.0,5.79,900.0,535.17,17.49,58.14,0,0,0,ghee (buffalo)
+435,Ghee vegetable,30.77,100.0,5.47,5.9,900.0,543.08,18.62,57.99,0,0,0,ghee vegetable
+436,Vegetable cooking oil,26.72,100.0,0.0,5.79,900.0,535.17,17.49,58.14,0,0,0,vegetable cooking oil
+437,Hydrogenated oil,26.72,100.0,0.0,5.79,900.0,535.17,17.49,58.14,0,0,0,hydrogenated oil
+438,Sunflower oil,26.72,100.0,0.0,5.79,900.0,535.17,17.49,58.14,0,0,0,sunflower oil
+439,Soya bean oil,26.72,100.0,0.0,5.79,900.0,535.17,17.49,58.14,0,0,0,soya bean oil
+440,Corn oil,26.72,100.0,0.0,5.79,900.0,535.17,17.49,58.14,0,0,0,corn oil
+441,Coconut oil,26.72,100.0,0.0,5.79,900.0,535.17,17.49,58.14,0,0,0,coconut oil
+442,Cotton seed oil,26.72,100.0,0.0,5.79,900.0,535.17,17.49,58.14,0,0,0,cotton seed oil
+443,Olive oil,26.72,100.0,0.0,5.79,900.0,535.17,17.49,58.14,0,0,0,olive oil
+444,Ground nut oil,26.72,100.0,0.0,5.79,900.0,535.17,17.49,58.14,0,0,0,ground nut oil
+445,Seasome oil,26.72,100.0,0.0,5.79,900.0,535.17,17.49,58.14,0,0,0,seasome oil
+446,Linseed oil,26.72,100.0,0.0,5.79,900.0,535.17,17.49,58.14,0,0,0,linseed oil
+447,Areca nut,4.9,4.4,47.2,11.2,249.0,50.0,1.5,5.0,0,1,1,areca nut
+448,Betel leaves,3.1,0.8,6.1,2.3,44.0,230.0,7.0,59.4,0,1,1,betel leaves
+449,"Biscuit, salty",6.6,32.4,54.6,3.61,534.0,129.39,7.93,58.71,1,0,0,"biscuit, salty"
+450,"Biscuit, sweet",6.4,15.2,71.9,3.33,450.0,79.09,6.61,58.83,1,0,0,"biscuit, sweet"
+451,Brown bread,8.8,1.4,49.0,1.2,244.0,18.0,2.2,59.14,1,0,0,brown bread
+452,Bread white,7.8,0.7,51.9,0.2,245.0,11.0,1.1,59.14,1,0,0,bread white
+453,Corn flakes,7.4,0.5,30.9,1.1,157.55,134.72,5.26,59.24,1,0,0,corn flakes
+454,Canu sugar,0.1,0.0,99.4,0.0,398.0,2.44,3.9,58.92,1,0,0,canu sugar
+455,Coconut tender,0.9,1.1,6.3,2.7,41.0,10.0,0.9,59.43,1,0,0,coconut tender
+456,coconut water,1.4,0.1,4.4,0.0,24.0,24.0,0.1,2.0,1,0,0,coconut water
+457,Grounnut cake,40.9,7.4,38.8,3.2,386.0,213.0,8.46,58.91,0,0,0,grounnut cake
+458,Honey,0.3,0.0,79.5,2.9,319.0,5.0,0.9,4.0,1,0,0,honey
+459,jaggary white,3.7,0.1,85.2,3.21,357.0,63.0,7.2,58.96,1,0,0,jaggary white
+460,Chaku,3.9,0.5,89.7,3.24,379.0,65.0,9.6,58.93,1,0,0,chaku
+461,Dhatelo,27.5,30.4,29.9,2.7,504.0,384.27,12.51,58.72,1,0,0,dhatelo
+462,Jack fruit seeds,6.6,0.4,25.8,1.5,133.0,50.0,1.5,11.0,1,0,0,jack fruit seeds
+463,Jaggary cane,0.4,0.1,95.0,3.33,383.0,80.0,11.4,0.0,1,0,0,jaggary cane
+464,Jandh,2.0,0.08,0.9,2.72,2.6,20.2,0.02,59.49,1,0,0,jandh
+465,Mahuwa flowers,4.4,0.6,72.0,1.7,311.0,140.0,15.0,7.0,1,0,0,mahuwa flowers
+466,Malberry leaves powder,13.0,2.1,38.2,8.5,293.0,162.6,6.85,59.05,0,1,1,malberry leaves powder
+467,Papad,18.8,0.3,52.4,3.21,228.0,80.0,17.2,0.0,1,1,1,papad
+468,Pumpkin seed,24.3,47.2,15.6,0.2,584.0,50.0,5.5,1.0,0,1,1,pumpkin seed
+469,Sugacane juice,0.1,0.2,9.1,2.7,39.0,10.0,1.1,59.44,1,0,0,sugacane juice
+470,Sohan papad,6.3,25.9,63.5,2.1,513.0,100.78,7.33,58.74,1,1,1,sohan papad
+471,Yarsagumba Capsule,22.0,5.86,42.7,10.35,312.0,493.09,22.69,58.97,1,0,0,yarsagumba capsule
+472,Cooked rice,2.5,0.17,29.4,3.18,129.0,90.63,4.18,59.29,0,1,1,cooked rice
+473,Dal(pulses),3.3,0.6,7.4,3.34,48.7,135.94,4.27,59.4,0,1,1,dal(pulses)
+474,Green vegetables,2.0,2.61,7.3,2.32,61.0,122.2,4.07,59.39,0,0,0,green vegetables
+475,Mixed vegetables,1.94,2.51,7.5,2.9,61.0,122.58,4.08,59.39,0,0,0,mixed vegetables
+476,Whole wheat bread,8.0,1.0,44.0,2.93,218.0,30.0,3.0,59.17,1,0,0,whole wheat bread
+477,Maize dough( Dhindo),2.8,1.2,22.2,2.73,111.0,6.0,0.72,59.33,1,1,1,maize dough( dhindo)
+478,Bengalgram vegetables,5.92,1.85,21.5,3.07,127.0,71.1,1.62,59.3,0,0,0,bengalgram vegetables
+479,Samosa,4.6,14.8,36.7,0.48,298.0,110.39,5.77,59.05,0,0,1,samosa
+480,Aaluchap,4.2,11.5,29.6,1.01,238.0,115.43,5.38,59.13,0,0,1,aaluchap
+481,Pakauda,5.4,21.1,37.3,3.05,361.0,131.21,6.61,58.96,0,0,1,pakauda
+482,Sel,4.5,11.7,61.3,0.07,225.0,61.08,4.58,59.15,1,0,0,sel
+483,jeri,2.4,21.3,60.4,3.23,445.0,62.67,6.09,58.84,1,0,0,jeri
+484,Buff Momo,11.7,7.74,24.6,0.89,215.0,197.65,6.81,59.15,0,1,1,buff momo
+485,Chicken Momo,9.8,8.06,23.6,0.55,206.0,178.91,6.37,59.17,0,1,1,chicken momo
+486,Paneer Momo,9.3,11.7,28.1,0.84,256.0,171.13,6.6,59.1,0,1,1,paneer momo
+487,Paneer+Veg Momo,4.7,2.62,25.1,0.91,143.0,117.86,4.75,59.27,0,1,1,paneer+veg momo
+488,Vegetable Momo,4.4,2.25,27.6,1.17,148.0,110.84,4.68,59.26,0,1,1,vegetable momo
+489,Aalu Naan,5.3,0.33,41.9,0.08,175.0,91.61,4.65,59.22,1,1,1,aalu naan
+490,Plain naan,7.6,1.53,57.9,3.32,269.0,99.09,5.64,59.09,1,1,1,plain naan
+491,Butter naan,7.5,4.44,55.1,0.05,283.0,97.79,5.66,59.07,0,0,0,butter naan
+492,Kimma naan( mutton),11.1,7.99,30.2,0.21,261.0,181.39,6.87,59.09,1,1,1,kimma naan( mutton)
+493,Chicken naan,9.6,6.28,39.3,0.11,252.0,148.03,6.26,59.11,1,1,1,chicken naan
+494,Veg naan,6.4,3.53,40.8,0.29,221.0,109.45,5.3,59.16,1,1,1,veg naan
+495,Paneer naan,10.07,7.73,38.1,0.08,256.0,156.26,6.43,59.1,1,1,1,paneer naan
+496,Maize: Wheat: soybean,22.2,14.9,55.7,4.3,446.0,273.1,10.25,58.81,1,1,1,maize: wheat: soybean
+497,"Maize, wheat and germinated green mung",17.0,11.7,65.0,3.66,433.0,147.73,5.5,29.6,1,0,0,"maize, wheat and germinated green mung"
+498,"Amaranths seed, barley, soybean",25.6,12.5,54.5,3.97,433.0,208.64,4.4,16.2,1,1,1,"amaranths seed, barley, soybean"
+499,"Germinated buckwheat, amaranths seed, soybean",24.4,3.3,54.9,3.74,386.0,168.66,2.54,16.1,1,1,1,"germinated buckwheat, amaranths seed, soybean"
+500,"Foxtail millet, Maize, soybean",21.1,3.4,54.9,3.63,453.0,141.36,2.7,15.8,1,1,1,"foxtail millet, maize, soybean"
+501,"Germinated buckwheat, G green mung, Maize",18.6,5.1,9.1,3.85,396.0,199.69,3.1,22.6,1,0,0,"germinated buckwheat, g green mung, maize"
+502,"Uwa, Maize and soybean",21.6,16.6,57.5,3.77,449.0,167.42,3.8,14.1,0,1,1,"uwa, maize and soybean"
+503,"Barley, Maize and soybean",22.3,11.8,57.5,3.67,425.0,151.48,2.5,13.8,1,1,1,"barley, maize and soybean"
+504,"Proso millet,,wheat, Green Mung",18.4,2.8,72.8,3.41,390.0,99.78,2.6,13.3,1,0,0,"proso millet,,wheat, green mung"
+505,Wheat and Green mung (1:1),15.0,1.9,72.0,1.3,365.1,61.6,13.7,58.95,1,0,0,wheat and green mung (1:1)
+506,Barley and black gram (1:1),15.1,1.7,70.7,2.7,358.5,8.7,8.7,58.97,1,0,0,barley and black gram (1:1)
+507,"Wheat, rice and green mung",10.2,7.0,73.7,1.6,398.6,30.0,2.3,58.91,1,1,1,"wheat, rice and green mung"
+508,"Rice, maize and Bengal gram",8.4,2.6,79.7,1.8,375.8,35.0,2.2,58.94,0,1,1,"rice, maize and bengal gram"
+509,"Millet, rice and and Blackgram",12.9,3.4,74.1,1.4,378.6,107.0,20.0,58.92,1,1,1,"millet, rice and and blackgram"
+510,Millet and blackgram (1:1),13.8,4.4,66.2,3.5,359.6,146.0,120.0,58.93,1,0,0,millet and blackgram (1:1)
+511,Rice and blackgram (1:1),12.3,4.9,70.5,0.7,375.3,56.0,25.0,58.94,0,1,1,rice and blackgram (1:1)
+512,"Rice, wheat and bengalgram",9.3,11.8,71.2,0.9,428.2,101.0,4.0,58.86,1,1,1,"rice, wheat and bengalgram"
+513,Jaulo (rice and green mung) 2:1,11.4,5.2,11.4,2.0,300.0,120.0,6.0,59.05,0,1,1,jaulo (rice and green mung) 2:1
+514,Amala,2.0,0.0,2.1,1.4,16.0,20.5,1.76,29.5,1,0,0,amala
+515,Asparagus,2.1,0.3,3.8,0.2,27.0,22.5,1.91,20.87,0,0,0,asparagus
+516,Bander bheti,2.4,0.2,27.3,3.1,320.0,45.1,4.67,11.7,0,1,1,bander bheti
+517,Banderi saag,3.5,0.3,4.3,0.8,33.0,89.0,3.19,59.43,0,1,1,banderi saag
+518,Ban tarul,1.7,0.0,17.7,1.3,77.0,43.0,43.0,5.45,0,1,1,ban tarul
+519,Bethe sag,7.1,0.0,8.8,2.0,64.0,400.0,9.66,59.34,0,1,1,bethe sag
+520,"Bhriingraj, antalicha",3.1,0.8,64.0,1.7,46.0,224.0,6.81,5.45,0,1,1,"bhriingraj, antalicha"
+521,Chamsur jhar,3.6,0.6,5.7,2.3,43.0,382.0,8.93,133.3,0,1,1,chamsur jhar
+522,chinia,6.1,0.0,8.7,1.5,59.0,157.36,4.92,3.7,0,1,1,chinia
+523,Chitlang sag,2.4,0.2,6.7,1.1,38.0,4.0,1.64,24.8,0,1,1,chitlang sag
+524,Chutro,2.5,6.9,16.2,1.4,87.0,114.17,4.18,59.35,0,1,1,chutro
+525,Damaiphal,0.5,0.3,11.5,1.7,51.0,60.0,2.82,59.41,0,1,1,damaiphal
+526,"Wild mushroom,dry",12.7,1.65,37.5,10.89,208.75,343.74,16.33,59.14,0,1,1,"wild mushroom,dry"
+527,Frase tarul,1.6,0.11,21.0,1.5,91.0,90.74,3.82,59.35,0,1,1,frase tarul
+528,Gande,2.1,0.3,11.0,2.5,55.0,105.5,16.25,7.56,0,1,1,gande
+529,Ghod tapre,3.0,0.2,13.6,2.6,68.0,155.94,8.0,12.91,0,1,1,ghod tapre
+530,Ginare dried,22.0,2.34,37.7,12.0,238.0,232.4,7.86,59.11,0,1,1,ginare dried
+531,Githa,1.5,0.1,22.0,1.3,96.0,61.5,3.2,5.6,0,1,1,githa
+532,Guyelo,4.6,0.7,17.9,7.8,96.0,70.2,3.57,1.6,1,0,0,guyelo
+533,Hathale sag,3.1,0.3,3.8,1.3,31.0,76.6,0.02,9514.0,0,1,1,hathale sag
+534,Jamun,4.0,0.0,6.0,1.4,40.0,23.15,1.95,59.43,1,0,0,jamun
+535,Kali Kath,1.59,0.69,25.4,5.76,114.0,95.09,4.12,59.31,0,1,1,kali kath
+536,Kali mayel,0.7,0.62,21.3,8.3,89.0,98.1,3.97,59.35,0,1,1,kali mayel
+537,Kamal phal,1.8,0.3,10.3,4.7,51.0,21.1,2.04,59.42,1,0,0,kamal phal
+538,Kane saag,2.3,0.1,3.2,1.7,23.0,820.8,7.0,14.39,0,1,1,kane saag
+539,Kavro,2.8,0.33,25.8,1.6,114.0,95.87,4.13,59.31,0,1,1,kavro
+540,Khaneu,1.4,0.3,5.6,6.1,31.0,180.7,5.03,59.42,0,1,1,khaneu
+541,Koiralo,1.0,3.4,8.1,0.8,54.0,75.9,3.11,59.4,0,1,1,koiralo
+542,Kikur diano,1.6,0.0,2.8,1.2,17.0,20.1,1.83,3.66,0,1,1,kikur diano
+543,"Latte saag, green stem",6.4,0.0,11.4,2.4,71.0,158.54,4.92,59.37,0,1,1,"latte saag, green stem"
+544,"Latte saag, red stem",4.4,0.0,9.5,1.1,48.0,136.39,4.3,59.4,0,1,1,"latte saag, red stem"
+545,Lude sag,4.7,0.2,7.1,5.5,49.0,406.1,9.66,59.36,0,1,1,lude sag
+546,Malo,1.1,1.52,25.37,1.6,118.0,80.26,3.79,78.9,0,1,1,malo
+547,Maslahare,3.3,0.05,14.1,2.9,70.0,123.24,4.24,59.37,0,1,1,maslahare
+548,Mayal,0.4,0.2,16.2,1.8,68.0,86.89,3.53,59.38,0,1,1,mayal
+549,Neuro,4.4,0.2,4.2,1.0,36.0,71.53,2.86,59.43,0,1,1,neuro
+550,Phaper saag,3.9,0.1,3.8,0.8,12.0,140.74,4.21,3.56,0,1,1,phaper saag
+551,Pidale,2.2,0.1,2.4,1.8,19.0,14.5,1.73,3.7,0,1,1,pidale
+552,Pudina ( Mint),4.5,0.0,4.6,0.2,38.0,143.98,4.43,16.1,0,1,1,pudina ( mint)
+553,Rato tarul,1.9,0.1,2.3,10.0,100.0,76.9,1.7,3.27,0,1,1,rato tarul
+554,Sati bayer,2.8,0.5,32.2,1.4,142.0,170.5,5.89,59.26,1,0,0,sati bayer
+555,Sisnu( Stinging Nettle),6.9,0.2,5.0,1.8,53.0,981.3,21.26,5.5,0,1,1,sisnu( stinging nettle)
+556,Sisnu powder dry,25.0,1.9,39.0,8.0,271.0,404.0,23.2,59.04,0,1,1,sisnu powder dry
+557,Siplican,6.3,0.0,5.8,1.8,50.0,196.0,5.19,165.8,0,1,1,siplican
+558,Seabuck thron squash,0.1,40.82,0.16,16.0,9.11,2.44,26.6,59.47,1,0,0,seabuck thron squash
+559,Tarul githa,2.2,0.05,3.0,1.6,85.0,128.22,4.44,8.6,0,1,1,tarul githa
+560,Tarul munta,2.8,0.1,5.0,2.4,33.0,131.72,4.16,16.6,0,1,1,tarul munta
+561,Theki phal,0.5,0.0,7.5,0.9,33.0,35.1,2.3,2.35,1,0,0,theki phal
+562,Thonte,1.5,0.3,5.8,2.7,29.0,27.67,2.1,6.2,0,1,1,thonte
+563,Timila Pakche,1.1,0.4,7.2,1.6,37.0,108.68,3.66,53.1,1,0,0,timila pakche
+564,"Timilia, wakche",1.0,0.0,7.4,3.21,37.0,110.64,3.8,17.3,1,0,0,"timilia, wakche"
+565,Vyakur,1.6,0.05,26.1,1.8,110.03,83.02,3.99,6.2,0,1,1,vyakur
+566,Vyakur githa,2.0,0.0,14.0,1.7,66.0,106.67,4.02,7.51,0,1,1,vyakur githa
+567,Vyakur jhutre,1.5,0.0,18.0,3.19,78.0,98.62,3.99,6.94,0,1,1,vyakur jhutre
+568,Rara,6.15,19.9,70.0,0.14,484.0,56.0,5.1,58.79,1,0,0,rara
+569,Maggi,7.12,17.9,67.0,0.09,458.0,40.0,1.4,58.83,1,0,0,maggi
+570,Ezee,5.9,16.8,66.4,2.99,440.0,14.9,3.7,58.86,1,0,0,ezee
+571,Yeo's Inst. Noodle,11.4,18.1,61.0,3.01,454.0,19.1,2.9,58.84,0,1,1,yeo's inst. noodle
+572,Yeo's Inst. Noodle (Curry F1),9.1,18.0,63.6,3.0,453.0,16.4,1.4,58.84,0,1,1,yeo's inst. noodle (curry f1)
+573,Yeo's Inst. Noodle (Spicy F1.),8.8,19.4,63.6,3.03,464.0,21.8,1.9,58.82,0,1,1,yeo's inst. noodle (spicy f1.)
+574,Yeo's Inst. Noodle (Mushroom F1),9.0,17.6,63.0,2.98,446.0,14.0,1.1,58.85,0,1,1,yeo's inst. noodle (mushroom f1)
+575,Ma Ma Inst. Noodle (Chicken F1 Thai),7.3,17.3,65.0,2.99,445.0,15.7,1.6,58.85,0,1,1,ma ma inst. noodle (chicken f1 thai)
+576,Ma Ma Inst. Noodle,6.5,15.6,68.0,3.04,438.0,24.8,2.7,58.86,0,1,1,ma ma inst. noodle
+577,Ma Ma Inst. Noodle (Shour Shrimp F1),9.7,17.2,64.0,2.97,448.0,10.5,1.7,58.85,0,1,1,ma ma inst. noodle (shour shrimp f1)
+578,Tiger bran Noodles,10.0,1.6,75.0,2.95,357.0,14.7,1.0,58.97,0,1,1,tiger bran noodles
+579,Surya Noodles,6.2,0.6,79.0,2.96,346.0,15.6,4.0,58.99,0,1,1,surya noodles
+580,Testy Noodles,7.0,0.4,80.0,2.96,352.0,14.5,2.8,58.98,0,1,1,testy noodles
+581,Egg steam Noodle (Tiger Br. Coiled),6.8,1.3,77.6,3.01,349.0,25.5,0.5,58.98,1,1,1,egg steam noodle (tiger br. coiled)
+582,Gauri Shankar Noodle,9.2,0.46,76.0,2.92,344.0,9.3,0.7,58.99,0,1,1,gauri shankar noodle
+583,San Noodle,4.6,0.19,81.0,2.97,344.0,17.3,5.2,58.99,0,1,1,san noodle
+584,San Egg Noodle,8.0,1.4,77.0,3.34,353.0,90.27,7.1,58.97,1,1,1,san egg noodle
+585,Steam Chau Chau (dear Brand Colied),8.3,0.3,77.4,3.02,345.0,29.0,1.5,58.99,1,0,0,steam chau chau (dear brand colied)
+586,Yak Noodle,8.6,0.2,76.5,3.11,340.0,47.0,10.0,58.99,0,1,1,yak noodle
+587,Annapurna steam No.,10.9,0.3,76.0,3.06,352.0,35.0,0.5,58.98,1,0,0,annapurna steam no.
+588,S.- Noodle coiled Singapore,8.3,0.2,79.0,2.94,351.0,12.1,1.7,58.98,0,1,1,s.- noodle coiled singapore
+589,Saugat,2.0,0.6,84.0,3.09,349.0,40.0,2.2,58.98,1,0,0,saugat
+590,Gimi Spaghetti,8.0,0.19,83.0,2.97,364.0,15.3,0.6,58.96,1,0,0,gimi spaghetti
+591,Gimi Short Noodle Chicken Soup Base (Zebra),19.81,0.23,80.0,2.97,360.0,15.3,0.7,58.97,0,1,1,gimi short noodle chicken soup base (zebra)
+592,Chicken Cracker,16.7,19.4,57.2,3.04,470.0,23.4,6.3,58.81,0,1,1,chicken cracker
+593,Pra''ii Cracker,7.4,20.9,61.3,3.14,463.0,43.7,5.0,58.82,1,0,0,pra''ii cracker
+594,Paprika Cracker (Thai),6.1,24.2,62.0,3.55,490.0,121.0,1.3,58.77,1,0,0,paprika cracker (thai)
+595,Shrimp Cracker (Thai),5.1,21.2,65.4,4.13,473.0,236.0,2.0,58.78,1,0,0,shrimp cracker (thai)
+596,Shrimp Cracker (Korea),4.4,17.95,70.3,3.74,459.0,160.0,8.25,58.81,1,0,0,shrimp cracker (korea)
+597,Prawn Cracker raw (China),2.5,0.26,81.1,3.2,337.0,65.0,5.1,58.99,0,1,1,prawn cracker raw (china)
+588,Cheese Ball Hello,5.1,19.0,68.0,3.36,463.0,86.0,2.8,58.81,1,1,1,cheese ball hello
+599,Cheese Ball Hello (India),4.8,20.0,68.0,3.5,471.0,113.0,3.4,58.8,1,1,1,cheese ball hello (india)
+600,Girni Short Macaroni (Nes),8.2,0.21,84.5,2.99,373.0,17.8,2.1,58.95,1,0,0,girni short macaroni (nes)
+601,Bambion Macaroni (India),5.6,0.19,82.5,3.02,354.0,26.2,0.6,58.97,1,0,0,bambion macaroni (india)
+602,Ma Ma cut Macaroni (india),9.3,0.2,75.0,2.91,339.0,8.3,4.51,59.0,1,0,0,ma ma cut macaroni (india)
+603,Rice vermiealli (Thai),6.6,0.12,81.0,2.93,351.0,9.0,2.2,58.98,0,1,1,rice vermiealli (thai)
+604,Special Pasta,4.0,0.5,84.0,2.94,354.0,10.6,3.9,58.98,1,0,0,special pasta
+605,Vegetable Pasta,6.1,1.45,81.0,3.06,361.0,34.0,0.3,58.96,0,1,1,vegetable pasta
+606,Pasta / (Enrico Nepal),11.8,1.3,73.0,2.96,351.0,17.6,2.9,58.98,1,0,0,pasta / (enrico nepal)
+607,Wai Wai,7.68,20.0,66.4,0.15,476.0,87.0,4.4,58.79,1,0,0,wai wai
+608,Aaha,10.36,11.1,73.0,0.09,433.0,28.0,1.09,58.86,1,0,0,aaha
+609,New Ma Ma,7.7,21.3,64.7,3.01,481.0,15.2,4.9,58.8,1,0,0,new ma ma
+610,Hits Noodle,8.3,18.6,62.3,2.99,450.0,14.3,2.6,58.84,0,1,1,hits noodle
+611,Min Min,7.7,18.1,67.0,3.08,462.0,29.7,3.5,58.82,1,0,0,min min
+612,Fe Mee,7.3,19.8,67.0,3.0,475.0,14.3,2.6,58.81,1,0,0,fe mee
+613,Yom Yum (Snack Noodle),7.3,18.6,68.0,3.08,469.0,29.7,0.9,58.81,0,1,1,yom yum (snack noodle)
+614,Yam Yam,8.07,18.1,67.0,0.19,463.0,44.0,0.86,58.82,1,0,0,yam yam
+615,Muesli,10.06,5.6,75.0,2.07,390.0,220.0,1.0,58.9,1,0,0,muesli
+616,Protein supplement powder,3.8,6.78,19.33,6.36,151.35,717.0,23.8,59.17,1,0,0,protein supplement powder
+617,High energy soya biscuit,6.8,16.5,69.9,1.55,455.0,104.2,7.11,58.82,1,0,0,high energy soya biscuit
+618,High energy Khajuri biscuit,8.4,22.8,64.6,1.5,497.0,115.99,7.55,58.76,1,0,0,high energy khajuri biscuit
+619,Coffee with pulp,7.83,1.13,66.5,7.63,307.0,97.77,5.99,59.03,1,0,0,coffee with pulp
+620,Coffee without pulp,7.0,1.08,73.2,1.7,330.0,63.41,5.52,59.0,1,0,0,coffee without pulp
+621,Coffee powder refined,13.42,15.41,61.4,3.78,438.0,171.13,8.23,58.84,1,0,0,coffee powder refined
+622,Nutrimixed,18.52,7.25,63.0,1.5,391.0,116.9,6.89,49.38,1,0,0,nutrimixed

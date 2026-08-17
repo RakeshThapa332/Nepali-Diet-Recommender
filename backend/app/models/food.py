@@ -6,32 +6,32 @@ class Food(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    # Food information
-    food_name = db.Column(db.String(150), nullable=False)
-    edible_portion = db.Column(db.Float)
+    # Original dataset identifier
+    sn = db.Column(db.Integer, nullable=False)
 
-    # Macronutrients / composition
-    moisture = db.Column(db.Float)
+    # Food information
+    food_name = db.Column(db.String(200), nullable=False)
+    food_name_clean = db.Column(db.String(200))
+
+    # Nutritional information per 100g
     protein = db.Column(db.Float)
     fat = db.Column(db.Float)
-    carbohydrate = db.Column(db.Float)
-    minerals = db.Column(db.Float)
+    carbs = db.Column(db.Float)
     fiber = db.Column(db.Float)
+    calories = db.Column(db.Float)
 
-    # Energy
-    energy = db.Column(db.Float)
-
-    # Minerals
+    # Minerals / vitamins
     calcium = db.Column(db.Float)
-    phosphorus = db.Column(db.Float)
     iron = db.Column(db.Float)
-
-    # Vitamins
-    carotene = db.Column(db.Float)
     vitamin_c = db.Column(db.Float)
-    thiamine = db.Column(db.Float)
-    riboflavin = db.Column(db.Float)
-    niacin = db.Column(db.Float)
 
-    # Generated later by ML
-    cluster_id = db.Column(db.Integer)
+    # Meal categories
+    breakfast = db.Column(db.Boolean, default=False, nullable=False)
+    lunch = db.Column(db.Boolean, default=False, nullable=False)
+    dinner = db.Column(db.Boolean, default=False, nullable=False)
+
+    # K-Means clusters
+    # A food may have a different cluster for each meal.
+    breakfast_cluster = db.Column(db.Integer, nullable=True)
+    lunch_cluster = db.Column(db.Integer, nullable=True)
+    dinner_cluster = db.Column(db.Integer, nullable=True)
