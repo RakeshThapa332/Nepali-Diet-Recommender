@@ -8,6 +8,7 @@ def calculate_food_fit_score(
     target_protein: float,
     target_fat: float,
     target_carbs: float,
+    recent_food_ids=None,
 ) -> float:
     """
     Calculate how closely a food matches the nutritional
@@ -59,6 +60,9 @@ def calculate_food_fit_score(
         + 0.25 * carb_difference
     )
 
+    if recent_food_ids and getattr(food, "id", None) in recent_food_ids:
+        score += 0.50
+
     return round(score, 6)
 
 
@@ -68,6 +72,7 @@ def rank_foods(
     target_protein: float,
     target_fat: float,
     target_carbs: float,
+    recent_food_ids=None,
 ):
     """
     Rank individual foods from best to worst nutritional fit.
@@ -90,6 +95,7 @@ def rank_foods(
             target_protein=target_protein,
             target_fat=target_fat,
             target_carbs=target_carbs,
+            recent_food_ids=recent_food_ids,
         )
 
         if score == float("inf"):
@@ -113,6 +119,7 @@ def calculate_combination_score(
     target_protein: float,
     target_fat: float,
     target_carbs: float,
+    recent_food_ids=None,
 ) -> float:
     """
     Calculate how well a combination of foods matches
@@ -172,6 +179,14 @@ def calculate_combination_score(
         + 0.25 * carb_error
     )
 
+    if recent_food_ids:
+        repeated_items = sum(
+            1
+            for food in foods
+            if getattr(food, "id", None) in recent_food_ids
+        )
+        score += repeated_items * 0.75
+
     return round(score, 6)
 
 
@@ -184,6 +199,7 @@ def find_best_food_combination(
     number_of_foods: int = 3,
     candidate_pool_size: int = 15,
     top_k: int = 5,
+    recent_food_ids=None,
 ):
     """
     Find a well-fitting combination of foods from the K-Means
@@ -208,6 +224,8 @@ def find_best_food_combination(
             "Number of foods must be greater than 0."
         )
 
+    recent_food_ids = set(recent_food_ids or [])
+
     valid_foods = [
         food
         for food in foods
@@ -217,6 +235,15 @@ def find_best_food_combination(
             and food.carbs is not None
         )
     ]
+
+    if recent_food_ids:
+        unseen_foods = [
+            food
+            for food in valid_foods
+            if getattr(food, "id", None) not in recent_food_ids
+        ]
+        if len(unseen_foods) >= number_of_foods:
+            valid_foods = unseen_foods
 
     if len(valid_foods) < number_of_foods:
         raise ValueError(
@@ -233,6 +260,7 @@ def find_best_food_combination(
             target_protein=target_protein,
             target_fat=target_fat,
             target_carbs=target_carbs,
+            recent_food_ids=recent_food_ids,
         )
 
         candidate_foods = [
@@ -259,6 +287,7 @@ def find_best_food_combination(
             target_protein=target_protein,
             target_fat=target_fat,
             target_carbs=target_carbs,
+            recent_food_ids=recent_food_ids,
         )
 
         scored_combinations.append((score, combination))

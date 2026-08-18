@@ -29,8 +29,13 @@ export default function EditProfile({
   onSave,
   onCancel,
 }: EditProfileProps) {
-  const [form, setForm] = useState<UserProfile>(profile);
-  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [form, setForm] = useState<UserProfile>({
+    ...profile,
+    date_of_birth: profile.date_of_birth ?? "",
+  });
+  const [dateOfBirth, setDateOfBirth] = useState(
+    profile.date_of_birth ?? ""
+  );
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -92,25 +97,30 @@ export default function EditProfile({
         </Alert>
       )}
 
-    <TextField
+      <TextField
         label="Date of Birth"
         type="date"
         value={dateOfBirth}
         onChange={(e) => {
-        const dob = e.target.value;
-        setDateOfBirth(dob);
-        if (dob) {
-          updateField("age", calculateAge(dob));
-        }
+          const dob = e.target.value;
+          setDateOfBirth(dob);
+          updateField("date_of_birth", dob || "");
+
+          if (dob) {
+            updateField("age", calculateAge(dob));
+          }
         }}
         slotProps={{
-        inputLabel: {
-        shrink: true,
-      },
-    }}
-        helperText={`Current age on file: ${form.age} years. Pick a date to recalculate.`}
-    required
-  />
+          inputLabel: {
+            shrink: true,
+          },
+        }}
+        helperText={
+          form.date_of_birth
+            ? `Saved DOB on file: ${form.date_of_birth}. Update only if needed.`
+            : `Leave empty if you do not want to change the DOB.`
+        }
+      />
 
       <FormControl required>
         <InputLabel>Gender</InputLabel>
