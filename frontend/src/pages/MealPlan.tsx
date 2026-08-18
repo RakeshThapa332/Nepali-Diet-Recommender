@@ -476,6 +476,23 @@ export default function MealPlan() {
               )} g`}
             />
           </Box>
+          <Alert
+  severity="warning"
+  sx={{
+    mb: 3,
+    borderRadius: 1.5,
+  }}
+>
+  <Typography variant="body2">
+    <strong>Food Safety Notice:</strong> Recommendations are generated
+    based on nutritional information from the dataset. Please verify
+    the food, its preparation method, and suitability before consumption.
+    Some foods may require proper cooking or preparation and may not be
+    safe to consume raw. If you have allergies, medical conditions, or
+    specific dietary restrictions, consult a qualified nutrition or
+    healthcare professional.
+  </Typography>
+</Alert>
 
           {/* Breakfast / Lunch / Dinner */}
           {meals.map((meal) => (

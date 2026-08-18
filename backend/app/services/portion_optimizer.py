@@ -110,7 +110,7 @@ def optimize_food_portions(
     target_fat: float,
     target_carbs: float,
     min_portion: float = 25,
-    max_portion: float = 300,
+    max_portion: float = 250,
     step: float = 5,
 ):
     """

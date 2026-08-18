@@ -1,21 +1,15 @@
+import random
+
 from app.services.macros import calculate_macro_targets
-from app.services.meal_distribution import (
-    calculate_meal_macros,
-)
+from app.services.meal_distribution import calculate_meal_macros
 from app.services.recommendation import (
     predict_cluster,
     get_cluster_foods,
 )
-from app.services.food_ranking import (
-    find_best_food_combination,
-)
+from app.services.food_ranking import find_best_food_combination
+from app.services.portion_optimizer import optimize_food_portions
+from app.services.food_calories import calculate_food_calories
 
-from app.services.portion_optimizer import (
-    optimize_food_portions,
-)
-from app.services.food_calories import(
-    calculate_food_calories
-)
 
 MEALS = [
     "breakfast",
@@ -33,29 +27,47 @@ def recommend_meal(
     number_of_foods: int = 3,
 ):
     """
-    Generate recommendations for one meal.
+    Generate one meal recommendation.
 
-    Process:
+    Pipeline:
 
-    1. Predict meal-specific K-Means cluster.
-    2. Get foods belonging to that cluster.
-    3. Find the best combination of foods.
-    4. Optimize the portion sizes.
-    5. Return the final recommendation.
+    1. Predict nutritional K-Means cluster.
+    2. Retrieve foods from that cluster.
+    3. Build a larger candidate pool.
+    4. Randomly select a nutritionally suitable combination.
+    5. Optimize portions.
+    6. Return the final meal.
+
+    Randomized selection means regeneration can produce
+    a different meal instead of repeatedly returning the
+    same foods.
     """
+
+    meal = meal.strip().lower()
+
+    if meal not in MEALS:
+        raise ValueError(
+            f"Unsupported meal: {meal}"
+        )
 
     if target_calories <= 0:
         raise ValueError(
             "Target calories must be greater than 0."
         )
 
-    #Predict k-means cluster
+    if number_of_foods != 3:
+        raise ValueError(
+            "Currently exactly 3 foods are recommended per meal."
+        )
+
+
     cluster_id = predict_cluster(
         meal=meal,
         protein=protein,
         fat=fat,
         carbs=carbs,
     )
+
 
     foods = get_cluster_foods(
         meal=meal,
@@ -67,9 +79,37 @@ def recommend_meal(
             f"No foods found for {meal} cluster {cluster_id}."
         )
 
+    valid_foods = []
+
+    for food in foods:
+
+        calories_per_100g = calculate_food_calories(
+            protein=food.protein or 0,
+            fat=food.fat or 0,
+            carbs=food.carbs or 0,
+        )
+
+        if calories_per_100g <= 0:
+            continue
+
+        valid_foods.append(food)
+
+    if len(valid_foods) < number_of_foods:
+        raise ValueError(
+            f"Not enough valid foods available for {meal}."
+        )
+
+
+    shuffled_foods = valid_foods.copy()
+
+    random.shuffle(shuffled_foods)
+
+
+    candidate_pool = shuffled_foods[:20]
+
 
     combination = find_best_food_combination(
-        foods=foods,
+        foods=candidate_pool,
         target_calories=target_calories,
         target_protein=protein,
         target_fat=fat,
@@ -79,14 +119,20 @@ def recommend_meal(
 
     selected_foods = combination["foods"]
 
+    if len(selected_foods) != number_of_foods:
+        raise ValueError(
+            f"Could not select {number_of_foods} foods for {meal}."
+        )
+
+
     optimized = optimize_food_portions(
         foods=selected_foods,
         target_calories=target_calories,
         target_protein=protein,
         target_fat=fat,
         target_carbs=carbs,
-        min_portion=25,
-        max_portion=300,
+        min_portion=30,
+        max_portion=250,
         step=5,
     )
 
@@ -95,10 +141,10 @@ def recommend_meal(
 
     recommendations = []
 
-    total_calories = 0
-    total_protein = 0
-    total_fat = 0
-    total_carbs = 0
+    total_calories = 0.0
+    total_protein = 0.0
+    total_fat = 0.0
+    total_carbs = 0.0
 
     for food, portion in zip(
         selected_foods,
@@ -146,32 +192,32 @@ def recommend_meal(
 
             "portion_grams": round(
                 portion,
-                2
+                2,
             ),
 
             "calories": round(
                 calories,
-                2
+                2,
             ),
 
             "calories_per_100g": round(
                 calories_per_100g,
-                2
+                2,
             ),
 
             "protein": round(
                 protein_amount,
-                2
+                2,
             ),
 
             "fat": round(
                 fat_amount,
-                2
+                2,
             ),
 
             "carbs": round(
                 carbs_amount,
-                2
+                2,
             ),
         })
 
@@ -183,26 +229,44 @@ def recommend_meal(
 
         "target_calories": round(
             target_calories,
-            2
+            2,
         ),
 
         "target_macros": {
-            "protein": round(protein, 2),
-            "fat": round(fat, 2),
-            "carbs": round(carbs, 2),
+            "protein": round(
+                protein,
+                2,
+            ),
+            "fat": round(
+                fat,
+                2,
+            ),
+            "carbs": round(
+                carbs,
+                2,
+            ),
         },
 
         "foods": recommendations,
 
         "total_calories": round(
             total_calories,
-            2
+            2,
         ),
 
         "total_macros": {
-            "protein": round(total_protein, 2),
-            "fat": round(total_fat, 2),
-            "carbs": round(total_carbs, 2),
+            "protein": round(
+                total_protein,
+                2,
+            ),
+            "fat": round(
+                total_fat,
+                2,
+            ),
+            "carbs": round(
+                total_carbs,
+                2,
+            ),
         },
 
         "fit_score": optimized["score"],
