@@ -68,3 +68,21 @@ export const generateDailyRecommendation =
       "Generated recommendation has no meal plan ID."
     );
   };
+
+export const regenerateMealPlan =
+  async (): Promise<MealPlan> => {
+    const response = await api.post<{
+      success: boolean;
+      recommendation?: MealPlan;
+      message?: string;
+    }>("/recommendation/regenerate");
+
+    if (!response.data.success || !response.data.recommendation) {
+      throw new Error(
+        response.data.message ||
+          "Failed to regenerate your diet plan."
+      );
+    }
+
+    return response.data.recommendation;
+  };

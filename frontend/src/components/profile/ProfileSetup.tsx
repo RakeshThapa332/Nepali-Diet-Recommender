@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 
 import { createProfile } from "../../services/profileService";
+import { calculateAge } from "../../utils/age";
 import type { UserProfile } from "../../types/profile";
 
 interface ProfileSetupProps {
@@ -20,12 +21,14 @@ interface ProfileSetupProps {
 
 const initialProfile: UserProfile = {
   age: 0,
+  date_of_birth: "",
   gender: "",
   height_cm: 0,
   weight_kg: 0,
   activity_level: "",
   goal: "",
   dietary_preference: "",
+  body_type: "",
 };
 
 export default function ProfileSetup({
@@ -54,12 +57,14 @@ export default function ProfileSetup({
     setError("");
 
     if (
+      !form.date_of_birth ||
       !form.age ||
       !form.gender ||
       !form.height_cm ||
       !form.weight_kg ||
       !form.activity_level ||
-      !form.goal
+      !form.goal ||
+      !form.body_type
     ) {
       setError(
         "Please fill in all required fields."
@@ -122,14 +127,19 @@ export default function ProfileSetup({
         }}
       >
         <TextField
-          label="Age"
-          type="number"
-          value={form.age || ""}
-          onChange={(e) =>
-            handleChange(
-              "age",
-              Number(e.target.value)
-            )
+          label="Date of Birth"
+          type="date"
+          value={form.date_of_birth ?? ""}
+          onChange={(e) => {
+            const dob = e.target.value;
+            handleChange("date_of_birth", dob);
+            handleChange("age", calculateAge(dob));
+          }}
+          InputLabelProps={{ shrink: true }}
+          helperText={
+            form.age
+              ? `Age: ${form.age} years`
+              : "Used to calculate your age"
           }
           required
         />
@@ -247,6 +257,33 @@ export default function ProfileSetup({
 
             <MenuItem value="weight_gain">
               Weight Gain
+            </MenuItem>
+          </Select>
+        </FormControl>
+
+        <FormControl required>
+          <InputLabel>Body Type</InputLabel>
+
+          <Select
+            value={form.body_type}
+            label="Body Type"
+            onChange={(e) =>
+              handleChange(
+                "body_type",
+                e.target.value
+              )
+            }
+          >
+            <MenuItem value="ectomorph">
+              Ectomorph (lean / slender)
+            </MenuItem>
+
+            <MenuItem value="mesomorph">
+              Mesomorph (athletic)
+            </MenuItem>
+
+            <MenuItem value="endomorph">
+              Endomorph (broader build)
             </MenuItem>
           </Select>
         </FormControl>

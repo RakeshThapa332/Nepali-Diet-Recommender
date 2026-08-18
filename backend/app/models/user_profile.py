@@ -13,6 +13,7 @@ class UserProfile(db.Model):
         unique=True
     )
     age = db.Column(db.Integer)
+    date_of_birth = db.Column(db.Date)
     gender = db.Column(db.String(20))
     height_cm = db.Column(db.Float)
     weight_kg = db.Column(db.Float)

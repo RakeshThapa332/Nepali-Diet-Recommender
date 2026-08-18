@@ -86,7 +86,18 @@ export default function ProfileDetails({
           />
         </Grid>
 
-        <Grid size={{ xs: 12 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+          <ProfileItem
+            label="Body Type"
+            value={
+              profile.body_type
+                ? formatValue(profile.body_type)
+                : "Not set"
+            }
+          />
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6,md: 4 }}>
           <ProfileItem
             label="Dietary Preference"
             value={
@@ -97,6 +108,52 @@ export default function ProfileDetails({
           />
         </Grid>
       </Grid>
+
+      {profile.bmi !== undefined && (
+        <>
+          <Typography
+            variant="h6"
+            fontWeight={700}
+            sx={{ mt: 4, mb: 2 }}
+          >
+            Your Nutrition Overview
+          </Typography>
+
+          <Grid container spacing={2}>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <ProfileItem
+                label="BMI"
+                value={
+                  profile.bmi_category
+                    ? `${profile.bmi} (${profile.bmi_category})`
+                    : `${profile.bmi}`
+                }
+              />
+            </Grid>
+
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <ProfileItem
+                label="BMR"
+                value={`${profile.bmr} kcal/day`}
+              />
+            </Grid>
+
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <ProfileItem
+                label="TDEE"
+                value={`${profile.tdee} kcal/day`}
+              />
+            </Grid>
+
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <ProfileItem
+                label="Target Calories"
+                value={`${profile.target_calories} kcal/day`}
+              />
+            </Grid>
+          </Grid>
+        </>
+      )}
     </Box>
   );
 }

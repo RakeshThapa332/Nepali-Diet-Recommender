@@ -42,8 +42,10 @@ def calculate_macro_targets(
         raise ValueError(
             "Target calories must be greater than 0."
         )
-
-    body_type = body_type.strip().lower()
+    if not body_type:
+        body_type = "mesomorph"
+    else:
+        body_type = body_type.strip().lower()
 
     # Accept both adjective and noun forms.
     body_type_mapping = {

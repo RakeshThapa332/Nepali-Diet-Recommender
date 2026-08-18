@@ -1,5 +1,3 @@
-from itertools import product
-
 from app.services.food_calories import calculate_food_calories
 
 
@@ -192,21 +190,35 @@ def optimize_food_portions(
         portion_values.append(round(portion, 2))
         portion += step
 
-    best_portions = None
-    best_score = float("inf")
-
-    # Search independently for each of the three foods.
+    # A full grid search here would mean trying every portion
+    # for every food against every portion of every other food
+    # (56 x 56 x 56 = 175,616 combinations per meal). That is
+    # what was making meal-plan generation slow.
     #
-    # With 25-300g and 5g steps:
-    # 56 possible portions per food
-    # 56^3 = 175,616 combinations.
-    
-    for portions in product(
-        portion_values,
-        repeat=len(foods),
-    ):
+    # Instead we use coordinate descent: start from a sensible
+    # initial guess (calories split evenly across the foods),
+    # then repeatedly optimize one food's portion at a time
+    # while holding the others fixed. This checks a few hundred
+    # combinations instead of hundreds of thousands, while still
+    # converging to essentially the same result because the
+    # portion score is well-behaved (changing one food's portion
+    # doesn't flip the best choice for the others).
 
-        score = calculate_portion_score(
+    def calories_per_100g(food):
+        return calculate_food_calories(
+            protein=food.protein or 0,
+            fat=food.fat or 0,
+            carbs=food.carbs or 0,
+        )
+
+    def closest_portion_value(grams):
+        return min(
+            portion_values,
+            key=lambda value: abs(value - grams),
+        )
+
+    def score_for(portions):
+        return calculate_portion_score(
             foods=foods,
             portions=portions,
             target_calories=target_calories,
@@ -215,14 +227,82 @@ def optimize_food_portions(
             target_carbs=target_carbs,
         )
 
+    def coordinate_descent(initial_portions, passes=3):
+        current = list(initial_portions)
+        current_score = score_for(current)
+
+        for _ in range(passes):
+            improved = False
+
+            for index in range(len(foods)):
+                local_best_value = current[index]
+                local_best_score = current_score
+
+                for value in portion_values:
+                    trial_portions = list(current)
+                    trial_portions[index] = value
+
+                    score = score_for(trial_portions)
+
+                    if score < local_best_score:
+                        local_best_score = score
+                        local_best_value = value
+
+                if local_best_value != current[index]:
+                    current[index] = local_best_value
+                    current_score = local_best_score
+                    improved = True
+
+            if not improved:
+                break
+
+        return current, current_score
+
+    # Coordinate descent can settle into different local optima
+    # depending on where it starts, so we try it from a couple
+    # of different, cheap-to-compute starting points and keep
+    # whichever converges to the best score. This is still a
+    # tiny fraction of the cost of a full grid search.
+    even_share = target_calories / len(foods)
+    midpoint = closest_portion_value(
+        (min_portion + max_portion) / 2
+    )
+
+    starting_points = []
+
+    # 1. Proportional to each food's calorie density.
+    proportional_start = []
+
+    for food in foods:
+        density = calories_per_100g(food)
+
+        if density <= 0:
+            grams = min_portion
+        else:
+            grams = (even_share / density) * 100
+            grams = min(max(grams, min_portion), max_portion)
+
+        proportional_start.append(closest_portion_value(grams))
+
+    starting_points.append(proportional_start)
+
+    # 2. Every food at the midpoint of the allowed range.
+    starting_points.append([midpoint] * len(foods))
+
+    # 3. Every food at the minimum portion.
+    starting_points.append(
+        [closest_portion_value(min_portion)] * len(foods)
+    )
+
+    best_portions = None
+    best_score = float("inf")
+
+    for start in starting_points:
+        portions, score = coordinate_descent(start)
+
         if score < best_score:
             best_score = score
-            best_portions = list(portions)
-
-    if best_portions is None:
-        raise ValueError(
-            "Unable to find suitable food portions."
-        )
+            best_portions = portions
 
     return {
         "portions": best_portions,

@@ -1,12 +1,25 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy.exc import SQLAlchemyError 
+from datetime import datetime
 
 from app.extensions import db
 from app.models import UserProfile
 from app.services.nutrition import generate_nutrition_summary
 
 profile_bp = Blueprint("profile", __name__, url_prefix="/api/profile")
+
+
+def _parse_date_of_birth(value):
+    """
+    Parse an incoming date_of_birth value (YYYY-MM-DD string)
+    into a date object. Returns None for empty/missing values.
+    Raises ValueError for malformed dates.
+    """
+    if not value:
+        return None
+
+    return datetime.strptime(value, "%Y-%m-%d").date()
 
 #Create profile 
 @profile_bp.route("/", methods=["POST"])
@@ -43,9 +56,21 @@ def create_profile():
             "message": "All required fields must be provided."
         }), 400
 
+    try:
+        date_of_birth = _parse_date_of_birth(
+            data.get("date_of_birth")
+        )
+    except ValueError:
+        return jsonify({
+            "success": False,
+            "message": "date_of_birth must be in YYYY-MM-DD format."
+        }), 400
+
+
     profile = UserProfile(
         user_id = user_id,
         age = age,
+        date_of_birth = date_of_birth,
         gender = gender,
         height_cm = height_cm,
         weight_kg = weight_kg,
@@ -73,6 +98,11 @@ def create_profile():
             "message": "Profile created successfully.",
             "profile": {
                 "age": profile.age,
+                "date_of_birth": (
+                    profile.date_of_birth.isoformat()
+                    if profile.date_of_birth
+                    else None
+                ),
                 "gender": profile.gender,
                 "height_cm": profile.height_cm,
                 "weight_kg": profile.weight_kg,
@@ -107,32 +137,58 @@ def get_profile():
                 "message": "Profile not found."
             }), 404
 
+        profile_data = {
+            "id" : profile.id,
+            "user_id": profile.user_id,
+            "age": profile.age,
+            "date_of_birth": (
+                profile.date_of_birth.isoformat()
+                if profile.date_of_birth
+                else None
+            ),
+            "gender": profile.gender,
+            "height_cm": profile.height_cm,
+            "weight_kg": profile.weight_kg,
+            "activity_level": profile.activity_level,
+            "goal": profile.goal,
+            "dietary_preference": profile.dietary_preference,
+            "body_type": profile.body_type,
+            "created_at": (
+                profile.created_at.isoformat()
+                if profile.created_at
+                else None
+            ),
+            "updated_at" : (
+                profile.updated_at.isoformat()
+                if profile.updated_at
+                else None
+            ),
+        }
+
+        try:
+            nutrition = generate_nutrition_summary(
+                age=profile.age,
+                gender=profile.gender,
+                weight_kg=profile.weight_kg,
+                height_cm=profile.height_cm,
+                activity_level=profile.activity_level,
+                goal=profile.goal,
+            )
+
+            profile_data["bmi"] = nutrition["bmi"]
+            profile_data["bmi_category"] = nutrition["bmi_category"]
+            profile_data["bmr"] = nutrition["bmr"]
+            profile_data["tdee"] = nutrition["tdee"]
+            profile_data["target_calories"] = nutrition["target_calories"]
+
+        except (ValueError, TypeError, AttributeError) as nutrition_error:
+            print("PROFILE NUTRITION SKIPPED:", repr(nutrition_error))
+
         return jsonify({
             "success": True,
-            "profile": {
-                "id" : profile.id,
-                "user_id": profile.user_id,
-                "age": profile.age,
-                "gender": profile.gender,
-                "height_cm": profile.height_cm,
-                "weight_kg": profile.weight_kg,
-                "activity_level": profile.activity_level,
-                "goal": profile.goal,
-                "dietary_preference": profile.dietary_preference,
-                "body_type": profile.body_type,
-                "created_at": (
-                    profile.created_at.isoformat()
-                    if profile.created_at
-                    else None
-                ),
-                "updated_at" : (
-                    profile.updated_at.isoformat()
-                    if profile.updated_at
-                    else None
-                ),
+            "profile": profile_data,
+        }), 200
 
-        }
-    }), 200
     except Exception as e:
         print("GET PROFILE ERROR:", repr(e))
         import traceback
@@ -156,6 +212,16 @@ def update_profile():
         }), 404
 
     data = request.get_json()
+    if "date_of_birth" in data:
+        try:
+            profile.date_of_birth = _parse_date_of_birth(
+                data.get("date_of_birth")
+            )
+        except ValueError:
+            return jsonify({
+                "success": False,
+                "message": "date_of_birth must be in YYYY-MM-DD format."
+            }), 400
 
     profile.age = data.get("age", profile.age)
     profile.gender = data.get("gender", profile.gender)

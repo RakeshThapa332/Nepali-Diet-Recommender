@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   Alert,
@@ -6,10 +7,6 @@ import {
   Button,
   Card,
   CircularProgress,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
   Typography,
 } from "@mui/material";
 
@@ -22,6 +19,8 @@ import {
   updateProfile,
 } from "../services/profileService";
 
+import { regenerateMealPlan } from "../services/mealPlanService";
+
 import type { UserProfile } from "../types/profile";
 
 type GenerateForm = {
@@ -29,7 +28,21 @@ type GenerateForm = {
   foodPreference: string;
 };
 
+const GOAL_OPTIONS = [
+  { value: "weight_loss", label: "Weight Loss" },
+  { value: "maintenance", label: "Maintain Weight" },
+  { value: "weight_gain", label: "Weight Gain" },
+];
+
+const FOOD_PREFERENCE_OPTIONS = [
+  { value: "", label: "No Preference" },
+  { value: "vegetarian", label: "Vegetarian" },
+  { value: "non_vegetarian", label: "Non-Vegetarian" },
+];
+
 export default function GenerateDiet() {
+  const navigate = useNavigate();
+
   const [profile, setProfile] =
     useState<UserProfile | null>(null);
 
@@ -61,8 +74,6 @@ export default function GenerateDiet() {
       setSuccess("");
 
       const data = await getProfile();
-
-      console.log("GENERATE DIET PROFILE:", data);
 
       setProfile(data);
 
@@ -114,7 +125,6 @@ export default function GenerateDiet() {
     }));
   };
 
-
   const handleProfileSaved = async (
     updatedProfile: UserProfile
   ) => {
@@ -131,7 +141,6 @@ export default function GenerateDiet() {
     setSuccess(
       "Your profile has been updated successfully."
     );
-
 
     try {
       const freshProfile = await getProfile();
@@ -151,7 +160,6 @@ export default function GenerateDiet() {
     }
   };
 
-
   const handleGenerateDiet = async () => {
     if (!profile) {
       setError(
@@ -160,30 +168,39 @@ export default function GenerateDiet() {
       return;
     }
 
+    if (!formData.goal) {
+      setError("Please select a goal.");
+      return;
+    }
+
     try {
       setSaving(true);
       setError("");
       setSuccess("");
 
-      const generationData = {
-        age: profile.age,
-        gender: profile.gender,
-        height_cm: profile.height_cm,
-        weight_kg: profile.weight_kg,
-        activity_level: profile.activity_level,
-        goal: formData.goal,
-        dietary_preference:
-          formData.foodPreference,
-      };
+      // If the goal or food preference chosen here differs
+      // from what's saved on the profile, persist it first —
+      // the backend reads goal/diet from the saved profile,
+      // not from this form directly.
+      const goalChanged = formData.goal !== profile.goal;
+      const preferenceChanged =
+        formData.foodPreference !== (profile.dietary_preference ?? "");
 
-      console.log(
-        "DIET GENERATION DATA:",
-        generationData
-      );
+      if (goalChanged || preferenceChanged) {
+        await updateProfile({
+          goal: formData.goal,
+          dietary_preference: formData.foodPreference,
+        });
+      }
 
-      setSuccess(
-        "Your profile information is ready for diet generation."
-      );
+      // Always regenerate so the plan reflects the
+      // goal/preference selected on this page, even if
+      // a plan was already generated earlier today.
+      await regenerateMealPlan();
+
+      setSuccess("Your diet plan has been generated!");
+
+      navigate("/meal-plan");
     } catch (err: any) {
       console.error(
         "GENERATE DIET ERROR:",
@@ -192,16 +209,14 @@ export default function GenerateDiet() {
 
       setError(
         err.response?.data?.message ||
-          "Failed to prepare your diet recommendation."
+          err.message ||
+          "Failed to generate your diet plan."
       );
     } finally {
       setSaving(false);
     }
   };
 
-  /*
-   * Loading state
-   */
   if (loading) {
     return (
       <DashboardLayout>
@@ -219,9 +234,6 @@ export default function GenerateDiet() {
     );
   }
 
-  /*
-   * If the user has no profile yet.
-   */
   if (!profile) {
     return (
       <DashboardLayout>
@@ -240,9 +252,6 @@ export default function GenerateDiet() {
     );
   }
 
-  /*
-   * Profile editing mode
-   */
   if (editingProfile) {
     return (
       <DashboardLayout>
@@ -369,6 +378,10 @@ export default function GenerateDiet() {
               value={profile.activity_level}
             />
 
+            <ProfileValue
+              label="Body Type"
+              value={profile.body_type || "Not set"}
+            />
           </Box>
 
           <Button
@@ -407,21 +420,17 @@ export default function GenerateDiet() {
               mb: 3,
             }}
           >
-            {[
-              "Weight Loss",
-              "Maintain Weight",
-              "Weight Gain",
-            ].map((goal) => (
+            {GOAL_OPTIONS.map((option) => (
               <Button
-                key={goal}
+                key={option.value}
                 variant={
-                  formData.goal === goal
+                  formData.goal === option.value
                     ? "contained"
                     : "outlined"
                 }
                 color="primary"
                 onClick={() =>
-                  handleGoalChange(goal)
+                  handleGoalChange(option.value)
                 }
                 sx={{
                   minHeight: 58,
@@ -429,7 +438,7 @@ export default function GenerateDiet() {
                   textTransform: "none",
                 }}
               >
-                {goal}
+                {option.label}
               </Button>
             ))}
           </Box>
@@ -454,23 +463,19 @@ export default function GenerateDiet() {
               mb: 3,
             }}
           >
-            {[
-              "Prefer Veg",
-              "Vegetarian",
-              "No Restrictions",
-            ].map((preference) => (
+            {FOOD_PREFERENCE_OPTIONS.map((option) => (
               <Button
-                key={preference}
+                key={option.value || "none"}
                 variant={
                   formData.foodPreference ===
-                  preference
+                  option.value
                     ? "contained"
                     : "outlined"
                 }
                 color="primary"
                 onClick={() =>
                   handleFoodPreferenceChange(
-                    preference
+                    option.value
                   )
                 }
                 sx={{
@@ -478,7 +483,7 @@ export default function GenerateDiet() {
                   textTransform: "none",
                 }}
               >
-                {preference}
+                {option.label}
               </Button>
             ))}
           </Box>
@@ -511,9 +516,6 @@ export default function GenerateDiet() {
   );
 }
 
-/*
- * Small reusable display component for profile values.
- */
 function ProfileValue({
   label,
   value,

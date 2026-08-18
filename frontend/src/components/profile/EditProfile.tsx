@@ -15,6 +15,7 @@ import {
   updateProfile,
 } from "../../services/profileService";
 
+import { calculateAge } from "../../utils/age";
 import type { UserProfile } from "../../types/profile";
 
 interface EditProfileProps {
@@ -29,6 +30,7 @@ export default function EditProfile({
   onCancel,
 }: EditProfileProps) {
   const [form, setForm] = useState<UserProfile>(profile);
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -90,15 +92,25 @@ export default function EditProfile({
         </Alert>
       )}
 
-      <TextField
-        label="Age"
-        type="number"
-        value={form.age}
-        onChange={(e) =>
-          updateField("age", Number(e.target.value))
+    <TextField
+        label="Date of Birth"
+        type="date"
+        value={dateOfBirth}
+        onChange={(e) => {
+        const dob = e.target.value;
+        setDateOfBirth(dob);
+        if (dob) {
+          updateField("age", calculateAge(dob));
         }
-        required
-      />
+        }}
+        slotProps={{
+        inputLabel: {
+        shrink: true,
+      },
+    }}
+        helperText={`Current age on file: ${form.age} years. Pick a date to recalculate.`}
+    required
+  />
 
       <FormControl required>
         <InputLabel>Gender</InputLabel>
@@ -188,6 +200,33 @@ export default function EditProfile({
 
           <MenuItem value="weight_gain">
             Weight Gain
+          </MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl required>
+        <InputLabel>Body Type</InputLabel>
+
+        <Select
+          value={form.body_type ?? ""}
+          label="Body Type"
+          onChange={(e) =>
+            updateField(
+              "body_type",
+              e.target.value
+            )
+          }
+        >
+          <MenuItem value="ectomorph">
+            Ectomorph (lean / slender)
+          </MenuItem>
+
+          <MenuItem value="mesomorph">
+            Mesomorph (athletic)
+          </MenuItem>
+
+          <MenuItem value="endomorph">
+            Endomorph (broader build)
           </MenuItem>
         </Select>
       </FormControl>
