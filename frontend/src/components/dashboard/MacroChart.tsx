@@ -43,7 +43,7 @@ export default function MacroChart({
     },
   ];
 
-  const total = protein + carbs + fat;
+  const total = Number((protein + carbs + fat).toFixed(2));
 
   return (
     <Card
@@ -58,7 +58,7 @@ export default function MacroChart({
     >
       <Typography
         variant="subtitle2"
-        fontWeight={700}
+        sx={{ fontWeight: 700 }}
       >
         Macronutrient Split
       </Typography>
@@ -107,17 +107,10 @@ export default function MacroChart({
             pointerEvents: "none",
           }}
         >
-          <Typography
-            variant="h6"
-            fontWeight={700}
-          >
-            {total}g
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>
+            {total.toFixed(2)}g
           </Typography>
-
-          <Typography
-            variant="caption"
-            color="text.secondary"
-          >
+          <Typography variant="caption" color="text.secondary">
             total
           </Typography>
         </Box>
@@ -191,10 +184,9 @@ function MacroValue({
 
       <Typography
         variant="body2"
-        fontWeight={700}
-        sx={{ mt: 0.25 }}
+        sx={{ mt: 0.25, fontWeight: 700 }}
       >
-        {value}g
+        {value.toFixed(2)}g
       </Typography>
     </Box>
   );

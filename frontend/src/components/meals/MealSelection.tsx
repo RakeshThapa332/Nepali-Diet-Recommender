@@ -139,6 +139,7 @@ export default function MealSelection({
               <MealCard
                 key={meal.id}
                 meal={meal}
+                mealType={name}
               />
             ))}
           </Box>

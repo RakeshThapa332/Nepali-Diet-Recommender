@@ -3,7 +3,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.extensions import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from app.models import RecommendationLog, FoodIntakeLog, Food
+from app.models import RecommendationLog, FoodIntakeLog, Food, MealPlan, UserProfile
 
 history_bp = Blueprint(
     "history",
@@ -19,29 +19,52 @@ def get_recommendation_history():
 
     user_id = int(get_jwt_identity())
 
-    logs = (
-        RecommendationLog.query
+    meal_plans = (
+        MealPlan.query
         .filter_by(user_id=user_id)
-        .order_by(RecommendationLog.generated_at.desc())
+        .order_by(MealPlan.date.desc(), MealPlan.created_at.desc())
         .all()
     )
 
+    profile = UserProfile.query.filter_by(user_id=user_id).first()
+
+    recommendations = []
+
+    for plan in meal_plans:
+        foods = []
+
+        for item in plan.items:
+            if not item.food:
+                continue
+
+            foods.append({
+                "food_id": item.food_id,
+                "food_name": item.food.food_name,
+                "meal_type": item.meal_type,
+                "portion_grams": round(float(item.serving_size or 0), 2),
+                "calories": round(float(item.calories or 0), 2),
+                "protein": round(float(item.protein or 0), 2),
+                "carbs": round(float(item.carbs or 0), 2),
+                "fat": round(float(item.fat or 0), 2),
+            })
+
+        recommendations.append({
+            "id": plan.id,
+            "meal_plan_id": plan.id,
+            "target_calories": round(float(plan.target_calories or 0), 2),
+            "goal": profile.goal if profile else "",
+            "cluster_id": None,
+            "generated_at": (
+                plan.created_at.isoformat()
+                if plan.created_at
+                else plan.date.isoformat()
+            ),
+            "foods": foods,
+        })
+
     return jsonify({
         "success": True,
-        "recommendations": [
-            {
-                "id": log.id,
-                "target_calories": log.target_calories,
-                "goal": log.goal,
-                "cluster_id": log.cluster_id,
-                "generated_at": (
-                    log.generated_at.isoformat()
-                    if log.generated_at
-                    else None
-                ),
-            }
-            for log in logs
-        ]
+        "recommendations": recommendations,
     }), 200
 
 
@@ -60,23 +83,45 @@ def get_food_intake_history():
         .all()
     )
 
+    intake_logs = []
+
+    for log in logs:
+        food = log.food
+
+        if food:
+            quantity_g = float(log.quantity_g or 0)
+            factor = quantity_g / 100 if quantity_g > 0 else 0
+
+            calories = (food.calories or 0) * factor
+            protein = (food.protein or 0) * factor
+            carbs = (food.carbs or 0) * factor
+            fat = (food.fat or 0) * factor
+        else:
+            calories = 0
+            protein = 0
+            carbs = 0
+            fat = 0
+
+        intake_logs.append({
+            "id": log.id,
+            "food_id": log.food_id,
+            "food_name": food.food_name if food else None,
+            "quantity_g": log.quantity_g,
+            "meal_type": log.meal_type,
+            "calories": round(calories, 2),
+            "protein": round(protein, 2),
+            "carbs": round(carbs, 2),
+            "fat": round(fat, 2),
+            "consumed_at": (
+                log.consumed_at.isoformat()
+                if log.consumed_at
+                else None
+            ),
+        })
+
     return jsonify({
         "success": True,
-        "intake_logs": [
-            {
-                "id": log.id,
-                "food_id": log.food_id,
-                "food_name": log.food.food_name if log.food else None,
-                "quantity_g": log.quantity_g,
-                "meal_type": log.meal_type,
-                "consumed_at": (
-                    log.consumed_at.isoformat()
-                    if log.consumed_at
-                    else None
-                ),
-            }
-            for log in logs
-        ]
+        "intake_logs": intake_logs,
     }), 200
 
 #record food eaten
@@ -135,7 +180,7 @@ def add_food_intake():
             "intake": {
                 "id": intake.id,
                 "food_id": intake.food_id,
-                "food_name": food.name,
+                "food_name": food.food_name,
                 "quantity_g": intake.quantity_g,
                 "meal_type": intake.meal_type,
                 "consumed_at": intake.consumed_at.isoformat()
