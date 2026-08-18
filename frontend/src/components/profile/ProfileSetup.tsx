@@ -108,6 +108,8 @@ export default function ProfileSetup({
         personalized nutrition recommendations.
       </Typography>
 
+      <Box sx={{ height: 16 }} />
+
       {error && (
         <Alert severity="error" sx={{ mb: 3 }}>
           {error}
@@ -126,23 +128,32 @@ export default function ProfileSetup({
           gap: 2,
         }}
       >
-        <TextField
-          label="Date of Birth"
-          type="date"
-          value={form.date_of_birth ?? ""}
-          onChange={(e) => {
-            const dob = e.target.value;
-            handleChange("date_of_birth", dob);
-            handleChange("age", calculateAge(dob));
-          }}
-          InputLabelProps={{ shrink: true }}
-          helperText={
-            form.age
-              ? `Age: ${form.age} years`
-              : "Used to calculate your age"
-          }
-          required
-        />
+<TextField
+  label="Date of Birth"
+  type="date"
+  value={form.date_of_birth ?? ""}
+  onChange={(e) => {
+    const dob = e.target.value;
+    handleChange("date_of_birth", dob);
+    
+    if (dob) {
+      handleChange("age", calculateAge(dob));
+    } else {
+      handleChange("age", 0);
+    }
+  }}
+  slotProps={{
+    inputLabel: {
+      shrink: true,
+    },
+  }}
+  helperText={
+    form.age
+      ? `Age: ${form.age} years`
+      : "Used to calculate your age"
+  }
+  required
+/>
 
         <FormControl required>
           <InputLabel>Gender</InputLabel>
@@ -288,14 +299,7 @@ export default function ProfileSetup({
           </Select>
         </FormControl>
 
-        <FormControl
-          sx={{
-            gridColumn: {
-              xs: "auto",
-              md: "1 / -1",
-            },
-          }}
-        >
+        <FormControl>
           <InputLabel>
             Dietary Preference
           </InputLabel>
