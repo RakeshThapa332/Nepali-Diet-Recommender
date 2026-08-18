@@ -125,7 +125,7 @@ export default function DashboardLayout({
       >
         <Navbar
           onMenuClick={handleMenuClick}
-          username={user?.name}
+          username={user?.username || user?.name || "User"}
           title={currentPage.title}
           subtitle={currentPage.subtitle}
         />

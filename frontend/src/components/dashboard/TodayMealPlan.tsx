@@ -4,6 +4,7 @@ import {
   Typography,
 } from "@mui/material";
 
+import { useNavigate } from "react-router-dom";
 import MealSection from "../meals/MealSelection";
 import type { Meal } from "../meals/MealCard";
 
@@ -20,6 +21,8 @@ interface TodayMealPlanProps {
 export default function TodayMealPlan({
   mealGroups,
 }: TodayMealPlanProps) {
+  const navigate = useNavigate();
+
   return (
     <Card
       sx={{
@@ -57,9 +60,13 @@ export default function TodayMealPlan({
         <Typography
           variant="caption"
           color="primary.main"
+          onClick={() => navigate("/meal-plan")}
           sx={{
             cursor: "pointer",
             fontWeight: 600,
+            "&:hover": {
+              textDecoration: "underline",
+            },
           }}
         >
           View full plan
