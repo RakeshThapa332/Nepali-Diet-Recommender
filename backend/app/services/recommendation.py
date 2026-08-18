@@ -38,6 +38,13 @@ FEATURES = [
 ]
 
 
+# Cache loaded models/scalers in memory so they're only read
+# from disk once per process instead of on every single
+# recommendation request — this was adding avoidable latency
+# to every meal plan generation.
+_MODEL_CACHE = {}
+
+
 def load_meal_model(meal):
     """
     Load the trained K-Means model and scaler
@@ -48,6 +55,9 @@ def load_meal_model(meal):
         raise ValueError(
             f"Unsupported meal: {meal}"
         )
+
+    if meal in _MODEL_CACHE:
+        return _MODEL_CACHE[meal]
 
     config = MEAL_CONFIG[meal]
 
@@ -74,7 +84,9 @@ def load_meal_model(meal):
     model = joblib.load(model_path)
     scaler = joblib.load(scaler_path)
 
-    return model, scaler
+    _MODEL_CACHE[meal] = (model, scaler)
+
+    return _MODEL_CACHE[meal]
 
 
 def get_meal_foods(meal):

@@ -9,7 +9,13 @@ import {
   Alert,
 } from "@mui/material";
 
-import { DownloadOutlined } from "@mui/icons-material";
+import {
+  DownloadOutlined,
+  RefreshOutlined,
+} from "@mui/icons-material";
+
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 import DashboardLayout from "../components/layout/DashboardLayout";
 import MealSection from "../components/meals/MealSelection";
@@ -17,6 +23,7 @@ import MealSection from "../components/meals/MealSelection";
 import {
   getTodayMealPlan,
   generateDailyRecommendation,
+  regenerateMealPlan,
 } from "../services/mealPlanService";
 
 import type { MealPlan } from "../types/mealPlan";
@@ -40,6 +47,7 @@ interface MealSectionData {
 export default function MealPlan() {
   const [mealPlan, setMealPlan] = useState<MealPlan | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -73,6 +81,147 @@ export default function MealPlan() {
 
     loadMealPlan();
   }, []);
+
+  /*
+   * Refresh: ask the backend for a new set of foods that
+   * still hit the same nutrition targets. Doesn't block the
+   * whole page — only the button shows a spinner so the
+   * currently displayed plan stays visible while it loads.
+   */
+  const handleRefresh = async () => {
+    try {
+      setRefreshing(true);
+      setError("");
+
+      const newPlan = await regenerateMealPlan();
+
+      setMealPlan(newPlan);
+    } catch (err) {
+      console.error(
+        "Failed to refresh meal plan:",
+        err
+      );
+
+      setError(
+        "Failed to refresh your meal plan. Please try again."
+      );
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
+  /*
+   * Generate a downloadable PDF summary of today's plan.
+   */
+  const handleDownloadPdf = () => {
+    if (!mealPlan) return;
+
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("Your Daily Meal Plan", 14, 18);
+
+    doc.setFontSize(10);
+    doc.setTextColor(100);
+    doc.text(
+      `Date: ${new Date(
+        mealPlan.date
+      ).toLocaleDateString()}`,
+      14,
+      25
+    );
+
+    autoTable(doc, {
+      startY: 32,
+      head: [["Summary", "Amount"]],
+      body: [
+        [
+          "Target Calories",
+          `${mealPlan.target_calories.toFixed(0)} kcal`,
+        ],
+        [
+          "Protein",
+          `${mealPlan.daily_macros.protein.toFixed(1)} g`,
+        ],
+        [
+          "Carbohydrates",
+          `${mealPlan.daily_macros.carbs.toFixed(1)} g`,
+        ],
+        [
+          "Fat",
+          `${mealPlan.daily_macros.fat.toFixed(1)} g`,
+        ],
+      ],
+      theme: "striped",
+      headStyles: { fillColor: [46, 125, 50] },
+    });
+
+    const sections: {
+      title: string;
+      calories: number;
+      foods: MealPlan["meals"]["breakfast"]["foods"];
+    }[] = [
+      {
+        title: "Breakfast",
+        calories: mealPlan.meals.breakfast.total_calories,
+        foods: mealPlan.meals.breakfast.foods,
+      },
+      {
+        title: "Lunch",
+        calories: mealPlan.meals.lunch.total_calories,
+        foods: mealPlan.meals.lunch.foods,
+      },
+      {
+        title: "Dinner",
+        calories: mealPlan.meals.dinner.total_calories,
+        foods: mealPlan.meals.dinner.foods,
+      },
+    ];
+
+    for (const section of sections) {
+      const previousTable = (doc as any).lastAutoTable;
+      const nextY = previousTable
+        ? previousTable.finalY + 10
+        : 40;
+
+      doc.setFontSize(13);
+      doc.setTextColor(20);
+      doc.text(
+        `${section.title} (${section.calories.toFixed(0)} kcal)`,
+        14,
+        nextY
+      );
+
+      autoTable(doc, {
+        startY: nextY + 4,
+        head: [
+          [
+            "Food",
+            "Portion",
+            "Calories",
+            "Protein",
+            "Carbs",
+            "Fat",
+          ],
+        ],
+        body: section.foods.map((food) => [
+          food.food_name,
+          `${food.portion_grams} g`,
+          `${food.calories.toFixed(0)} kcal`,
+          `${food.protein.toFixed(1)} g`,
+          `${food.carbs.toFixed(1)} g`,
+          `${food.fat.toFixed(1)} g`,
+        ]),
+        theme: "grid",
+        headStyles: { fillColor: [66, 66, 66] },
+        styles: { fontSize: 9 },
+      });
+    }
+
+    doc.save(
+      `meal-plan-${mealPlan.date}.pdf`
+    );
+  };
 
   /*
    * Loading state
@@ -241,15 +390,37 @@ export default function MealPlan() {
             </Typography>
           </Box>
 
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={
-              <DownloadOutlined />
-            }
+          <Box
+            sx={{
+              display: "flex",
+              gap: 1.5,
+            }}
           >
-            Generate Plan PDF
-          </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              startIcon={
+                refreshing ? (
+                  <CircularProgress size={16} />
+                ) : (
+                  <RefreshOutlined />
+                )
+              }
+              disabled={refreshing}
+              onClick={handleRefresh}
+            >
+              {refreshing ? "Refreshing..." : "Refresh"}
+            </Button>
+
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<DownloadOutlined />}
+              onClick={handleDownloadPdf}
+            >
+              Generate Plan PDF
+            </Button>
+          </Box>
         </Box>
 
         {/* Meal Plan Card */}

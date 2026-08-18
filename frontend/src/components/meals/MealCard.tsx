@@ -15,6 +15,7 @@ export interface Meal {
   protein: number;
   carbs: number;
   fat: number;
+  portion_grams?: number;
   image?: string;
 }
 
@@ -89,6 +90,8 @@ export default function MealCard({
           color="text.secondary"
         >
           {meal.calories} kcal
+          {meal.portion_grams !== undefined &&
+            ` · ${meal.portion_grams} g`}
         </Typography>
 
         <Typography
