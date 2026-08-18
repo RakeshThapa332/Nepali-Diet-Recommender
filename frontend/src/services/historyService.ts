@@ -1,11 +1,24 @@
 import api from "../api/axios";
 
+export interface RecommendationFood {
+  food_id: number;
+  food_name: string;
+  meal_type: string;
+  portion_grams: number;
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+}
+
 export interface RecommendationLog {
   id: number;
+  meal_plan_id?: number;
   target_calories: number;
   goal: string;
   cluster_id: number | null;
   generated_at: string | null;
+  foods?: RecommendationFood[];
 }
 
 export interface FoodIntakeLog {
@@ -14,6 +27,10 @@ export interface FoodIntakeLog {
   food_name: string | null;
   quantity_g: number;
   meal_type: string;
+  calories?: number;
+  protein?: number;
+  carbs?: number;
+  fat?: number;
   consumed_at: string | null;
 }
 

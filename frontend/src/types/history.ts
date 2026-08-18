@@ -9,15 +9,20 @@ export interface RecommendationLog {
 export interface FoodIntakeLog {
   id: number;
   food_id: number;
-  food_name: string;
+  food_name: string | null;
   quantity_g: number;
   meal_type: string;
-  consumed_at: string;
+  calories?: number;
+  protein?: number;
+  carbs?: number;
+  fat?: number;
+  consumed_at: string | null;
 }
 
 export interface ProgressSummary {
   target_calories: number;
   calories_consumed: number;
+  calories_remaining: number;
 
   protein_target?: number;
   protein_consumed?: number;

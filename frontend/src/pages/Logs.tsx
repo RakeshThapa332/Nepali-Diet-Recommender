@@ -100,6 +100,16 @@ export default function History() {
     );
   }
 
+  const totalCalories = intakeLogs.reduce(
+    (sum, log) => sum + (Number(log.calories) || 0),
+    0
+  );
+
+  const totalProtein = intakeLogs.reduce(
+    (sum, log) => sum + (Number(log.protein) || 0),
+    0
+  );
+
   return (
     <DashboardLayout>
       <Box>
@@ -111,19 +121,57 @@ export default function History() {
 
         <Typography
           variant="h4"
-          fontWeight={700}
-          mb={1}
+          sx={{ fontWeight: 700, mb: 1 }}
         >
           History
         </Typography>
 
         <Typography
           color="text.secondary"
-          mb={3}
+          sx={{ mb: 3 }}
         >
           View your previous recommendations and food
           intake records.
         </Typography>
+
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(3, minmax(0, 1fr))",
+            },
+            gap: 2,
+            mb: 3,
+          }}
+        >
+          <Paper sx={{ p: 2 }}>
+            <Typography variant="caption" color="text.secondary">
+              Total Recommendations
+            </Typography>
+            <Typography variant="h5" sx={{ fontWeight: 700 }}>
+              {recommendations.length}
+            </Typography>
+          </Paper>
+
+          <Paper sx={{ p: 2 }}>
+            <Typography variant="caption" color="text.secondary">
+              Intake Entries
+            </Typography>
+            <Typography variant="h5" fontWeight={700}>
+              {intakeLogs.length}
+            </Typography>
+          </Paper>
+
+          <Paper sx={{ p: 2 }}>
+            <Typography variant="caption" color="text.secondary">
+              Calories Logged
+            </Typography>
+            <Typography variant="h5" fontWeight={700}>
+              {totalCalories.toFixed(0)} kcal
+            </Typography>
+          </Paper>
+        </Box>
 
         <Paper>
           <Tabs
@@ -188,7 +236,7 @@ function RecommendationHistory({
             mb: 2,
           }}
         >
-          <Typography fontWeight={700}>
+          <Typography sx={{ fontWeight: 700 }}>
             Diet Recommendation
           </Typography>
 
@@ -218,7 +266,7 @@ function RecommendationHistory({
                 Target Calories
               </Typography>
 
-              <Typography fontWeight={600}>
+              <Typography sx={{ fontWeight: 600 }}>
                 {log.target_calories} kcal
               </Typography>
             </Box>
@@ -231,7 +279,7 @@ function RecommendationHistory({
                 Goal
               </Typography>
 
-              <Typography fontWeight={600}>
+              <Typography sx={{ fontWeight: 600 }}>
                 {formatGoal(log.goal)}
               </Typography>
             </Box>
@@ -244,7 +292,7 @@ function RecommendationHistory({
                 Cluster
               </Typography>
 
-              <Typography fontWeight={600}>
+              <Typography sx={{ fontWeight: 600 }}>
                 {log.cluster_id ?? "N/A"}
               </Typography>
             </Box>
@@ -285,7 +333,7 @@ function FoodIntakeHistory({
             mb: 2,
           }}
         >
-          <Typography fontWeight={700}>
+          <Typography sx={{ fontWeight: 700 }}>
             {log.food_name || "Unknown Food"}
           </Typography>
 
@@ -315,7 +363,7 @@ function FoodIntakeHistory({
                 Quantity
               </Typography>
 
-              <Typography fontWeight={600}>
+              <Typography sx={{ fontWeight: 600 }}>
                 {log.quantity_g} g
               </Typography>
             </Box>
@@ -328,7 +376,7 @@ function FoodIntakeHistory({
                 Meal
               </Typography>
 
-              <Typography fontWeight={600}>
+              <Typography sx={{ fontWeight: 600 }}>
                 {formatMealType(log.meal_type)}
               </Typography>
             </Box>

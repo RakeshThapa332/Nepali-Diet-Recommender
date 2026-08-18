@@ -3,7 +3,8 @@ from datetime import date, datetime, timedelta, timezone
 from flask import Blueprint, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from app.models import UserProfile, MealPlan, MealPlanItem, FoodIntakeLog
+from app.extensions import db
+from app.models import UserProfile, MealPlan, MealPlanItem, FoodIntakeLog, RecommendationLog
 
 from app.services.bmi import calculate_bmi
 from app.services.bmr import calculate_bmr
@@ -141,6 +142,16 @@ def daily_recommendation():
             user_id=user_id,
             recommendation=recommendation,
         )
+
+        recommendation_log = RecommendationLog(
+            user_id=user_id,
+            target_calories=target_calories,
+            goal=profile.goal,
+            cluster_id=None,
+        )
+
+        db.session.add(recommendation_log)
+        db.session.commit()
         
         return jsonify({
             "success": True,
@@ -238,6 +249,16 @@ def regenerate_recommendation():
             user_id=user_id,
             recommendation=recommendation,
         )
+
+        recommendation_log = RecommendationLog(
+            user_id=user_id,
+            target_calories=target_calories,
+            goal=profile.goal,
+            cluster_id=None,
+        )
+
+        db.session.add(recommendation_log)
+        db.session.commit()
 
         return jsonify({
             "success": True,

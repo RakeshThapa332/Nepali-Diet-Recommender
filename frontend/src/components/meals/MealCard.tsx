@@ -16,6 +16,8 @@ import {
 } from "@mui/material";
 import { useMemo, useState } from "react";
 
+import { addFoodIntake } from "../../services/historyService";
+
 export interface Meal {
   id: number;
   name: string;
@@ -29,12 +31,16 @@ export interface Meal {
 
 interface MealCardProps {
   meal: Meal;
+  mealType: string;
 }
 
 export default function MealCard({
   meal,
+  mealType,
 }: MealCardProps) {
   const [open, setOpen] = useState(false);
+  const [logging, setLogging] = useState(false);
+  const [logStatus, setLogStatus] = useState("");
 
   const portionGrams = meal.portion_grams ?? 100;
 
@@ -69,6 +75,32 @@ export default function MealCard({
       sx: { bgcolor: "error.light", color: "error.contrastText" },
     },
   ];
+
+  const handleLogIntake = async () => {
+    try {
+      setLogging(true);
+      setLogStatus("");
+
+      const response = await addFoodIntake({
+        food_id: Number(meal.id),
+        quantity_g: Number(portionGrams),
+        meal_type: mealType,
+      });
+
+      const message = response?.message || "Logged to your intake history.";
+
+      setLogStatus(message);
+    } catch (error: any) {
+      console.error("Failed to log food intake:", error);
+      const serverMessage =
+        error?.response?.data?.message ||
+        "Failed to log this food. Please try again.";
+
+      setLogStatus(serverMessage);
+    } finally {
+      setLogging(false);
+    }
+  };
 
   return (
     <>
@@ -325,11 +357,27 @@ export default function MealCard({
           </Box>
         </DialogContent>
 
-        <DialogActions>
-          <Button onClick={() => setOpen(false)}>
-            Close
+        <DialogActions sx={{ px: 3, pb: 2, gap: 1 }}>
+          <Button onClick={() => setOpen(false)}>Close</Button>
+
+          <Button
+            variant="contained"
+            onClick={handleLogIntake}
+            disabled={logging}
+          >
+            {logging ? "Logging..." : "Log intake"}
           </Button>
         </DialogActions>
+
+        {logStatus && (
+          <Typography
+            variant="caption"
+            color={logStatus.includes("Failed") ? "error" : "success"}
+            sx={{ px: 3, pb: 2, display: "block" }}
+          >
+            {logStatus}
+          </Typography>
+        )}
       </Dialog>
     </>
   );

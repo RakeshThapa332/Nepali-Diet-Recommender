@@ -1,3 +1,6 @@
+import threading
+import time
+
 from flask import Flask
 
 from app.config.config import Config
@@ -10,6 +13,32 @@ from app.routes.notifications import notifications_bp
 from app.routes.recommendation import recommendation_bp
 from app.routes.meal_plans import meal_plan_bp
 from app.routes.food import food_bp
+
+
+def start_notification_worker(app):
+    """Checks saved meal times every minute and creates notifications when due."""
+
+    worker = threading.Thread(
+        target=_notification_worker_loop,
+        args=(app,),
+        daemon=True,
+        name="meal-notification-worker",
+    )
+    worker.start()
+
+
+def _notification_worker_loop(app):
+    while True:
+        try:
+            with app.app_context():
+                from app.services.notification_scheduler import send_due_meal_notifications
+
+                send_due_meal_notifications()
+        except Exception:
+            pass
+
+        time.sleep(60)
+
 
 def create_app():
     app = Flask(__name__)
@@ -49,5 +78,11 @@ def create_app():
     app.register_blueprint(recommendation_bp)
     app.register_blueprint(meal_plan_bp)
     app.register_blueprint(food_bp)
+
+    if not app.config.get("TESTING"):
+        app.config.setdefault("_meal_notification_worker_started", False)
+        if not app.config["_meal_notification_worker_started"]:
+            start_notification_worker(app)
+            app.config["_meal_notification_worker_started"] = True
 
     return app
