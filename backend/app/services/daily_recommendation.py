@@ -25,6 +25,7 @@ def recommend_meal(
     fat: float,
     carbs: float,
     number_of_foods: int = 3,
+    recent_food_ids=None,
 ):
     """
     Generate one meal recommendation.
@@ -115,6 +116,7 @@ def recommend_meal(
         target_fat=fat,
         target_carbs=carbs,
         number_of_foods=number_of_foods,
+        recent_food_ids=recent_food_ids,
     )
 
     selected_foods = combination["foods"]
@@ -277,6 +279,7 @@ def generate_daily_recommendation(
     target_calories: float,
     body_type: str,
     number_of_foods: int = 3,
+    recent_food_ids=None,
 ):
     """
     Generate a complete daily diet recommendation.
@@ -344,6 +347,7 @@ def generate_daily_recommendation(
             carbs=current_meal_macros["carbs"],
 
             number_of_foods=number_of_foods,
+            recent_food_ids=recent_food_ids,
         )
 
 

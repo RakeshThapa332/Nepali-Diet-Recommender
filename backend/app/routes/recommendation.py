@@ -1,7 +1,9 @@
+from datetime import date, datetime, timedelta, timezone
+
 from flask import Blueprint, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from app.models import UserProfile
+from app.models import UserProfile, MealPlan, MealPlanItem, FoodIntakeLog
 
 from app.services.bmi import calculate_bmi
 from app.services.bmr import calculate_bmr
@@ -25,6 +27,37 @@ recommendation_bp = Blueprint(
     __name__,
     url_prefix="/api/recommendation",
 )
+
+
+def get_recent_food_ids(user_id: int, days: int = 7):
+    """
+    Return previously used food ids from the last N days so the
+    recommender can avoid repeating the same foods too often.
+    """
+
+    recent_ids = set()
+    cutoff_date = date.today() - timedelta(days=days)
+
+    intake_ids = (
+        FoodIntakeLog.query
+        .filter_by(user_id=user_id)
+        .filter(FoodIntakeLog.consumed_at >= datetime.now(timezone.utc) - timedelta(days=days))
+        .with_entities(FoodIntakeLog.food_id)
+        .all()
+    )
+    recent_ids.update(food_id for (food_id,) in intake_ids)
+
+    plan_ids = (
+        MealPlanItem.query
+        .join(MealPlan)
+        .filter(MealPlan.user_id == user_id)
+        .filter(MealPlan.date >= cutoff_date)
+        .with_entities(MealPlanItem.food_id)
+        .all()
+    )
+    recent_ids.update(food_id for (food_id,) in plan_ids)
+
+    return recent_ids
 
 
 @recommendation_bp.route(
@@ -94,12 +127,14 @@ def daily_recommendation():
             target_calories
         )
 
+        recent_food_ids = get_recent_food_ids(user_id=user_id)
 
         recommendation = generate_daily_recommendation(
             meal_calories=meal_calories,
             target_calories=target_calories,
             body_type=profile.body_type,
             number_of_foods=3,
+            recent_food_ids=recent_food_ids,
         )
 
         meal_plan = save_meal_plan(
@@ -189,11 +224,14 @@ def regenerate_recommendation():
             target_calories
         )
 
+        recent_food_ids = get_recent_food_ids(user_id=user_id)
+
         recommendation = generate_daily_recommendation(
             meal_calories=meal_calories,
             target_calories=target_calories,
             body_type=profile.body_type,
             number_of_foods=3,
+            recent_food_ids=recent_food_ids,
         )
 
         meal_plan = save_meal_plan(
