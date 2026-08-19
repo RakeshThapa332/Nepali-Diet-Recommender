@@ -2,7 +2,9 @@ import api from "../api/axios";
 import type { Notification } from "../types/notification";
 
 export async function getNotifications(): Promise<Notification[]> {
-  const response = await api.get("/notifications/");
+  const response = await api.get("/notifications/", {
+    params: { page: 1, per_page: 100 },
+  });
   return response.data.notifications;
 }
 

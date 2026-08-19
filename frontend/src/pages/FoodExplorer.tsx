@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Box,
+  Pagination,
   Typography,
 } from "@mui/material";
 
@@ -18,14 +19,20 @@ export default function FoodExplorer() {
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     let isMounted = true;
+    const meal = category === "all" ? undefined : category.toLowerCase();
 
     setLoading(true);
-    getFoods()
-      .then((data) => {
-        if (isMounted) setFoods(data);
+    getFoods(search.trim() || undefined, meal, page)
+      .then(({ foods: loadedFoods, pagination }) => {
+        if (isMounted) {
+          setFoods(loadedFoods);
+          setTotalPages(pagination.pages);
+        }
       })
       .catch(() => {
         if (isMounted) setError("Failed to load foods.");
@@ -37,26 +44,9 @@ export default function FoodExplorer() {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [search, category, page]);
 
   const categories = ["Breakfast", "Lunch", "Dinner"];
-
-  const filteredFoods = useMemo(() => {
-    const searchValue = search.trim().toLowerCase();
-
-    return foods.filter((food) => {
-      const matchesSearch = 
-      food.name.toLowerCase().includes(searchValue);
-
-      const matchesCategory =
-        category === "all" || food.mealTypes.includes(category);
-
-      return (
-        matchesSearch && 
-        matchesCategory
-      );
-    });
-  }, [foods, search, category]);
 
   if (loading) {
     return <Typography>Loading foods...</Typography>;
@@ -73,11 +63,31 @@ export default function FoodExplorer() {
                 search={search}
                 category={category}
                 categories={categories}
-                onSearchChange={setSearch}
-                onCategoryChange={setCategory}
+                onSearchChange={(value) => {
+                  setSearch(value);
+                  setPage(1);
+                }}
+                onCategoryChange={(value) => {
+                  setCategory(value);
+                  setPage(1);
+                }}
             />
 
-            <FoodGrid foods={filteredFoods} />
+            <FoodGrid foods={foods} />
+
+            {totalPages > 1 && (
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+                <Pagination
+                  count={totalPages}
+                  page={page}
+                  onChange={(_, selectedPage) => setPage(selectedPage)}
+                  color="primary"
+                  showFirstButton
+                  showLastButton
+                  aria-label="Food pages"
+                />
+              </Box>
+            )}
         </Box>
   );
 }

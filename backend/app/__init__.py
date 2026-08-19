@@ -4,7 +4,7 @@ import time
 from flask import Flask
 
 from app.config.config import Config
-from app.extensions import db, migrate, jwt, cors
+from app.extensions import db, migrate, jwt, cors, limiter
 from app.routes.auth import auth_bp
 from app.routes.profile import profile_bp
 from app.routes.settings import settings_bp
@@ -51,6 +51,7 @@ def create_app():
     migrate.init_app(app, db)
     jwt.init_app(app)
     cors.init_app(app)
+    limiter.init_app(app)
 
     #Import models to SQLAlchemy
     from app.models import (

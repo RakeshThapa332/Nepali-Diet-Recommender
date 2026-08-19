@@ -14,6 +14,13 @@ interface BackendFood {
   dinner: boolean;
 }
 
+export interface FoodPagination {
+  page: number;
+  per_page: number;
+  total: number;
+  pages: number;
+}
+
 function getMealTypes(food: BackendFood): string[] {
   const mealTypes: string[] = [];
 
@@ -41,14 +48,23 @@ function toFoodCardData(food: BackendFood): FoodCardData {
 
 export const getFoods = async (
   search?: string,
-  meal?: string
-): Promise<FoodCardData[]> => {
-  const response = await api.get<{ success: boolean; foods: BackendFood[] }>(
+  meal?: string,
+  page = 1,
+  perPage = 24
+): Promise<{ foods: FoodCardData[]; pagination: FoodPagination }> => {
+  const response = await api.get<{
+    success: boolean;
+    foods: BackendFood[];
+    pagination: FoodPagination;
+  }>(
     "/food/",
-    { params: { search, meal } }
+    { params: { search, meal, page, per_page: perPage } }
   );
 
-  return response.data.foods.map(toFoodCardData);
+  return {
+    foods: response.data.foods.map(toFoodCardData),
+    pagination: response.data.pagination,
+  };
 };
 
 export const getFoodById = async (id: number): Promise<FoodCardData> => {
