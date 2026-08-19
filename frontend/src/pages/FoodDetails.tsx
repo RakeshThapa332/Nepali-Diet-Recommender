@@ -73,8 +73,7 @@ export default function FoodDetails() {
 
                 <Typography
                     variant="h5"
-                    fontWeight={700}
-                    sx={{ mt: 4 }}
+                    sx={{ fontWeight: 700, mt: 4 }}
                 >
                     Food not found
                 </Typography>
@@ -136,8 +135,8 @@ export default function FoodDetails() {
                         <Box>
                             <Typography
                                 variant="h4"
-                                fontWeight={700}
                                 gutterBottom
+                                sx={{ fontWeight: 700 }}
                             >
                                 {food.name}
                             </Typography>
@@ -155,8 +154,8 @@ export default function FoodDetails() {
 
                         <Typography
                             variant="h5"
-                            fontWeight={700}
                             color="primary"
+                            sx={{ fontWeight: 700 }}
                         >
                             {food.calories} kcal
                         </Typography>
@@ -166,8 +165,8 @@ export default function FoodDetails() {
 
                     <Typography
                         variant="h6"
-                        fontWeight={700}
                         gutterBottom
+                        sx={{ fontWeight: 700 }}
                     >
                         Nutritional Information
                     </Typography>
@@ -233,8 +232,7 @@ function NutritionItem({
 
             <Typography
                 variant="h6"
-                fontWeight={700}
-                sx={{ mt: 0.5 }}
+                sx={{ fontWeight:700,mt: 0.5 }}
             >
                 {value}
             </Typography>

@@ -72,7 +72,7 @@ export default function Navbar({
                 <Box>
                     <Typography
                         variant="subtitle1"
-                        fontWeight={700}
+                        sx={{fontWeight:700}}
                     >
                         {title}
                     </Typography>

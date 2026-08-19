@@ -34,7 +34,7 @@ export default function CalorieDistribution({
     >
       <Typography
         variant="subtitle2"
-        fontWeight={700}
+        sx={{fontWeight:700}}
       >
         Calorie Distribution
       </Typography>

@@ -84,7 +84,7 @@ export default function FoodCard({ food, }: FoodCardProps) {
                 >
                     <Typography
                         variant="h6"
-                        fontWeight={700}
+                        sx={{fontWeight:700}}
                     >
                         {food.name}
                     </Typography>
@@ -109,7 +109,7 @@ export default function FoodCard({ food, }: FoodCardProps) {
                 <Typography
                     variant="body2"
                     color="text.secondary"
-                    mb={2}
+                    sx={{mb:2}}
                 >
                     {food.calories} kcal
                 </Typography>
@@ -131,7 +131,7 @@ export default function FoodCard({ food, }: FoodCardProps) {
 
                         <Typography
                             variant="body2"
-                            fontWeight={600}
+                            sx={{fontWeight:600}}
                         >
                             {food.protein}g
                         </Typography>
@@ -146,7 +146,7 @@ export default function FoodCard({ food, }: FoodCardProps) {
 
                         <Typography
                             variant="body2"
-                            fontWeight={600}
+                            sx={{fontWeight:600}}
                         >
                             {food.carbs}g
                         </Typography>
@@ -161,7 +161,7 @@ export default function FoodCard({ food, }: FoodCardProps) {
 
                         <Typography
                             variant="body2"
-                            fontWeight={600}
+                            sx={{fontWeight:600}}
                         >
                             {food.fat}g
                         </Typography>

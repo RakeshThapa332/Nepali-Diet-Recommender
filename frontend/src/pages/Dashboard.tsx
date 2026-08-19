@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AddOutlined,
   RestaurantOutlined,
@@ -403,7 +403,6 @@ export default function Dashboard() {
 
   const displayName =
     user?.username || 
-    user?.name ||
     "User";
 
   return (
@@ -584,8 +583,7 @@ export default function Dashboard() {
         >
           <Typography
             variant="subtitle2"
-            fontWeight={700}
-            sx={{ mb: 1.5 }}
+            sx={{ fontWeight:700, mb: 1.5 }}
           >
             Nutrition Summary
           </Typography>
@@ -689,8 +687,8 @@ function SummaryItem({
 
       <Typography
         variant="body1"
-        fontWeight={700}
         sx={{
+          fontWeight:700,
           mt: 0.25,
           textTransform:
             label === "Goal"

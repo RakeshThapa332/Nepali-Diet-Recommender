@@ -20,13 +20,13 @@ export default function Settings() {
   return (
     <DashboardLayout>
       <Box sx={{ maxWidth: 900, mx: "auto" }}>
-        <Typography variant="h4" fontWeight={700} mb={1}>
+        <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
           Settings
         </Typography>
 
         <Typography
           color="text.secondary"
-          mb={4}
+          sx={{mb:4}}
         >
           Manage your application preferences and notifications.
         </Typography>
@@ -36,8 +36,8 @@ export default function Settings() {
           <CardContent sx={{ p: 3 }}>
             <Typography
               variant="h6"
-              fontWeight={700}
-              mb={0.5}
+              sx={{ fontWeight:700,
+              mb:0.5}}
             >
               Appearance
             </Typography>
@@ -45,7 +45,7 @@ export default function Settings() {
             <Typography
               variant="body2"
               color="text.secondary"
-              mb={3}
+              sx={{ mb:3}}
             >
               Customize how Nepali Diet looks on your device.
             </Typography>
@@ -61,7 +61,7 @@ export default function Settings() {
               }
               label={
                 <Stack>
-                  <Typography fontWeight={600}>
+<Typography sx={{ fontWeight: 600 }}>
                     Dark mode
                   </Typography>
 
@@ -84,10 +84,12 @@ export default function Settings() {
 
         <Card sx={{ mt: 3 }}>
           <CardContent sx={{ p: 3 }}>
-            <Typography variant="h6" fontWeight={700} mb={1}>
+            <Typography variant="h6" 
+            sx={{fontWeight:700, mb:1}}>
               Account data
             </Typography>
-            <Typography variant="body2" color="text.secondary" mb={2}>
+            <Typography variant="body2" color="text.secondary" 
+            sx={{mb:2}}>
               Permanently remove your account and all associated data.
             </Typography>
             <DeleteAccount />

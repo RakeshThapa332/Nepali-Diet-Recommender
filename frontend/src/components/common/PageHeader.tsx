@@ -32,9 +32,9 @@ export default function PageHeader({
       <Box>
         <Typography
           variant="h5"
-          fontWeight={700}
           sx={{
             lineHeight: 1.2,
+            fontWeight:700
           }}
         >
           {title}

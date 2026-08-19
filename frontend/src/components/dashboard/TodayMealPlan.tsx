@@ -44,7 +44,7 @@ export default function TodayMealPlan({
         <Box>
           <Typography
             variant="h6"
-            fontWeight={700}
+            sx={{fontWeight:700}}
           >
             Today's Meal Plan
           </Typography>

@@ -143,8 +143,8 @@ export default function NotificationSettings() {
       <CardContent sx={{ p: 3 }}>
         <Typography
           variant="h6"
-          fontWeight={700}
-          mb={0.5}
+          sx={{fontWeight:700,
+          mb:0.5}}
         >
           Notifications
         </Typography>
@@ -152,7 +152,7 @@ export default function NotificationSettings() {
         <Typography
           variant="body2"
           color="text.secondary"
-          mb={3}
+          sx={{mb:3}}
         >
           Control meal reminders and other nutrition notifications.
         </Typography>
@@ -182,7 +182,7 @@ export default function NotificationSettings() {
           }
           label={
             <Stack>
-              <Typography fontWeight={600}>
+<Typography sx={{ fontWeight: 600 }}>
                 Enable notifications
               </Typography>
 
@@ -201,8 +201,8 @@ export default function NotificationSettings() {
         {/* Meal reminders */}
         <Typography
           variant="subtitle1"
-          fontWeight={700}
-          mb={2}
+          sx={{fontWeight:700,
+          mb:2}}
         >
           Meal reminders
         </Typography>
@@ -231,7 +231,7 @@ export default function NotificationSettings() {
                 />
               }
               label={
-                <Typography fontWeight={600}>
+                <Typography sx={{ fontWeight: 600 }}>
                   Breakfast
                 </Typography>
               }
@@ -283,7 +283,7 @@ export default function NotificationSettings() {
                 />
               }
               label={
-                <Typography fontWeight={600}>
+                <Typography sx={{ fontWeight: 600 }}>
                   Lunch
                 </Typography>
               }
@@ -335,7 +335,7 @@ export default function NotificationSettings() {
                 />
               }
               label={
-                <Typography fontWeight={600}>
+                <Typography sx={{ fontWeight: 600 }}>
                   Dinner
                 </Typography>
               }
@@ -370,8 +370,8 @@ export default function NotificationSettings() {
         {/* Other notifications */}
         <Typography
           variant="subtitle1"
-          fontWeight={700}
-          mb={2}
+          sx={{fontWeight:700,
+          mb:2}}
         >
           Other notifications
         </Typography>
@@ -392,7 +392,7 @@ export default function NotificationSettings() {
             }
             label={
               <Stack>
-                <Typography fontWeight={600}>
+                <Typography sx={{fontWeight:600}}>
                   Weekly progress
                 </Typography>
 
@@ -421,7 +421,7 @@ export default function NotificationSettings() {
             }
             label={
               <Stack>
-                <Typography fontWeight={600}>
+                <Typography sx={{fontWeight:600}}>
                   Diet recommendations
                 </Typography>
 

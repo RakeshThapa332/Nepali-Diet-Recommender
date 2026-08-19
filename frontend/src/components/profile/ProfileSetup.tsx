@@ -94,15 +94,15 @@ export default function ProfileSetup({
     <Box>
       <Typography
         variant="h4"
-        fontWeight={700}
-        mb={1}
+        sx={{fontWeight:700,
+        mb:1}}
       >
         Complete Your Profile
       </Typography>
 
       <Typography
         color="text.secondary"
-        mb={3}
+        sx={{mb:3}}
       >
         Tell us about yourself so we can create
         personalized nutrition recommendations.

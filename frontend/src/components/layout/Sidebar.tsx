@@ -137,7 +137,7 @@ export default function Sidebar({
           <Box>
             <Typography
               variant="subtitle2"
-              fontWeight={700}
+              sx={{fontWeight:700}}
               noWrap
             >
               Nepali Diet
@@ -201,11 +201,15 @@ export default function Sidebar({
               </ListItemIcon>
 
               <ListItemText
-                primary={item.label}
-                primaryTypographyProps={{
-                  fontSize: 13,
-                  fontWeight: 500,
-                }}
+                 primary={item.label}
+                 slotProps={{
+                    primary: {
+                     sx: {
+                       fontSize: 13,
+                        fontWeight: 500,
+                      },
+                    },
+                 }}
               />
             </ListItemButton>
           ))}
@@ -240,9 +244,13 @@ export default function Sidebar({
 
             <ListItemText
               primary="Logout"
-              primaryTypographyProps={{
-                fontSize: 13,
-              }}
+             slotProps={{
+              primary:{
+                sx: {
+                  fontsize: 13,
+                },
+              },
+             }}
             />
           </ListItemButton>
         </List>

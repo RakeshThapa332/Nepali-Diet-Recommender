@@ -316,7 +316,7 @@ export default function GenerateDiet() {
         >
           <Typography
             variant="h5"
-            fontWeight={700}
+            sx={{ fontWeight: 700 }}
           >
             Generate Your Diet
           </Typography>
@@ -336,8 +336,7 @@ export default function GenerateDiet() {
           {/* Current Profile */}
           <Typography
             variant="subtitle2"
-            fontWeight={700}
-            sx={{ mb: 1.5 }}
+            sx={{ fontWeight: 700, mb: 1.5 }}
           >
             Your Current Profile
           </Typography>
@@ -403,8 +402,7 @@ export default function GenerateDiet() {
           {/* Goal */}
           <Typography
             variant="subtitle2"
-            fontWeight={700}
-            sx={{ mb: 1.5 }}
+            sx={{ fontWeight: 700, mb: 1.5 }}
           >
             Your Goal
           </Typography>
@@ -446,8 +444,7 @@ export default function GenerateDiet() {
           {/* Food Preference */}
           <Typography
             variant="subtitle2"
-            fontWeight={700}
-            sx={{ mb: 1.5 }}
+            sx={{ fontWeight: 700, mb: 1.5 }}
           >
             Food Preferences
           </Typography>
@@ -536,15 +533,14 @@ function ProfileValue({
       <Typography
         variant="caption"
         color="text.secondary"
-        display="block"
+        sx={{ display: "block" }}
       >
         {label}
       </Typography>
 
       <Typography
         variant="body1"
-        fontWeight={600}
-        sx={{ mt: 0.5 }}
+        sx={{ fontWeight: 600, mt: 0.5 }}
       >
         {value}
       </Typography>

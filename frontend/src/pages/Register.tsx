@@ -64,7 +64,7 @@ export default function Register() {
       }}
     >
       <Paper sx={{ p: 4, width: 400 }}>
-        <Typography variant="h4" mb={3} fontWeight={700}>
+        <Typography variant="h4" sx={{ mb: 3, fontWeight: 700 }}>
           Create Account
         </Typography>
 
@@ -129,7 +129,7 @@ export default function Register() {
           </Button>
         </Box>
 
-        <Typography mt={3} textAlign="center">
+        <Typography sx={{ mt: 3, textAlign: "center" }}>
           Already have an account?{" "}
           <Link to="/login">Login</Link>
         </Typography>

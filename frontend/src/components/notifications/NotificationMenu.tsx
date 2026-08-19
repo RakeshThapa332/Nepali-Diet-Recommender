@@ -201,7 +201,7 @@ export default function NotificationMenu() {
         <Box sx={{ px: 2, py: 1.5 }}>
           <Typography
             variant="h6"
-            fontWeight={700}
+            sx={{fontWeight:700}}
           >
             Notifications
           </Typography>
@@ -295,11 +295,11 @@ export default function NotificationMenu() {
                 <ListItemText
                   primary={
                     <Typography
-                      fontWeight={
+                    sx={{fontWeight:
                         notification.is_read
                           ? 500
                           : 700
-                      }
+                      }}
                     >
                       {notification.title}
                     </Typography>

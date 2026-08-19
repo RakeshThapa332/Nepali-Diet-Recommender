@@ -374,7 +374,7 @@ export default function MealPlan() {
           <Box>
             <Typography
               variant="h5"
-              fontWeight={700}
+              sx={{ fontWeight: 700 }}
             >
               Meal Plan Details
             </Typography>
@@ -538,8 +538,8 @@ function Summary({
 
       <Typography
         variant="body1"
-        fontWeight={700}
         sx={{
+          fontWeight: 700,
           mt: 0.25,
         }}
       >

@@ -24,7 +24,7 @@ export default function FoodGRid({
             >
                 <Typography
                     variant="h6"
-                    fontWeight={600}
+                    sx={{fontWeight:600}}
                     gutterBottom
                 >
                     No foods found

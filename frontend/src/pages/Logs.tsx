@@ -139,7 +139,7 @@ export default function History() {
             display: "grid",
             gridTemplateColumns: {
               xs: "1fr",
-              sm: "repeat(3, minmax(0, 1fr))",
+              sm: "repeat(4, minmax(0, 1fr))",
             },
             gap: 2,
             mb: 3,
@@ -158,7 +158,7 @@ export default function History() {
             <Typography variant="caption" color="text.secondary">
               Intake Entries
             </Typography>
-            <Typography variant="h5" fontWeight={700}>
+            <Typography variant="h5" sx={{ fontWeight: 700 }}>
               {intakeLogs.length}
             </Typography>
           </Paper>
@@ -167,8 +167,17 @@ export default function History() {
             <Typography variant="caption" color="text.secondary">
               Calories Logged
             </Typography>
-            <Typography variant="h5" fontWeight={700}>
+            <Typography variant="h5" sx={{ fontWeight: 700 }}>
               {totalCalories.toFixed(0)} kcal
+            </Typography>
+          </Paper>
+          <Paper sx={{ p: 2 }}>
+            <Typography variant="caption" color="text.secondary">
+              Protein Logged
+            </Typography>
+                  
+            <Typography variant="h5" sx={{ fontWeight: 700 }}>
+              {totalProtein.toFixed(1)} g
             </Typography>
           </Paper>
         </Box>
@@ -217,8 +226,10 @@ function RecommendationHistory({
     return (
       <Typography
         color="text.secondary"
-        textAlign="center"
-        py={5}
+        sx={{
+          textAlign: "center",
+          py: 5,
+        }}
       >
         No recommendation history yet.
       </Typography>
@@ -236,7 +247,7 @@ function RecommendationHistory({
             mb: 2,
           }}
         >
-          <Typography sx={{ fontWeight: 700 }}>
+          <Typography sx={{ fontWeight: 700, mb: 1 }}>
             Diet Recommendation
           </Typography>
 
@@ -314,8 +325,10 @@ function FoodIntakeHistory({
     return (
       <Typography
         color="text.secondary"
-        textAlign="center"
-        py={5}
+        sx={{
+          textAlign: "center",
+          py: 5,
+        }}
       >
         No food intake records yet.
       </Typography>

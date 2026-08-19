@@ -29,7 +29,7 @@ export default function ProfileDetails({
         }}
       >
         <Box>
-          <Typography variant="h4" fontWeight={700}>
+<Typography variant="h4" sx={{ fontWeight: 700 }}>
             Your Profile
           </Typography>
 
@@ -113,8 +113,7 @@ export default function ProfileDetails({
         <>
           <Typography
             variant="h6"
-            fontWeight={700}
-            sx={{ mt: 4, mb: 2 }}
+            sx={{fontWeight:700, mt: 4, mb: 2 }}
           >
             Your Nutrition Overview
           </Typography>
@@ -177,8 +176,8 @@ function ProfileItem({
 
         <Typography
           variant="h6"
-          fontWeight={600}
-          mt={0.5}
+          sx={{fontWeight:600,
+          mt:0.5}}
         >
           {value}
         </Typography>

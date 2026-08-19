@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Card,
   Typography,
 } from "@mui/material";
@@ -51,7 +50,7 @@ export default function EmptyState({
 
       <Typography
         variant="h6"
-        fontWeight={700}
+        sx={{ fontWeight: 700 }}
       >
         {title}
       </Typography>

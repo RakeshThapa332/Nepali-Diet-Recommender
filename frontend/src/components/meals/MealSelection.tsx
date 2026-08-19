@@ -79,7 +79,7 @@ export default function MealSelection({
         <Box>
           <Typography
             variant="subtitle1"
-            fontWeight={700}
+            sx={{fontWeight:700}}
           >
             {name}
           </Typography>
@@ -155,8 +155,7 @@ export default function MealSelection({
           >
             <Typography
               variant="subtitle2"
-              fontWeight={700}
-              sx={{ mb: 1 }}
+              sx={{ fontWeight:700, mb: 1 }}
             >
               {name} Nutrition
             </Typography>
@@ -218,7 +217,7 @@ function NutritionItem({
 
       <Typography
         variant="body2"
-        fontWeight={700}
+        sx={{fontWeight:700}}
       >
         {value}
       </Typography>

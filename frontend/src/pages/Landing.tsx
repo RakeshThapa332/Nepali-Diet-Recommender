@@ -90,8 +90,10 @@ export default function Landing(){
 
                         <Box>
                             <Typography
-                                fontWeight={700}
-                                lineHeight={1.1}
+                                sx={{
+                                    fontWeight: 700,
+                                    lineHeight: 1.1,
+                                }}
                             >
                                 Nepali Diet
                             </Typography>
@@ -175,7 +177,9 @@ export default function Landing(){
                     <Grid
                         container
                         spacing={6}
-                        alignItems="center"
+                        sx={{
+                            alignItems: "center",
+                        }}
                     >
                         <Grid
                             size={{
@@ -186,16 +190,18 @@ export default function Landing(){
                             <Typography
                                 variant="overline"
                                 color="primary"
-                                fontWeight={700}
-                                letterSpacing={1.5}
+                                sx={{
+                                    fontWeight: 700,
+                                    letterSpacing: 1.5,
+                                }}
                             >
                                 SMART NUTRITION FOR EVERYDAY LIFE
                             </Typography>
 
                             <Typography
                                 variant="h1"
-                                fontWeight={800}
                                 sx={{
+                                    fontWeight: 800,
                                     fontSize: {
                                         xs: "2.5rem",
                                         sm: "3.5rem",
@@ -309,7 +315,9 @@ export default function Landing(){
 
                                         <Typography
                                             variant="h6"
-                                            fontWeight={700}
+                                            sx={{
+                                                fontWeight: 700,
+                                            }}
                                         >
                                             Personalized for you
                                         </Typography>
@@ -338,8 +346,10 @@ export default function Landing(){
                     >
                         <Typography
                             variant="h3"
-                            fontWeight={700}
                             gutterBottom
+                            sx={{
+                                fontWeight: 700,
+                            }}
                         >
                             Everything you need to eat better
                         </Typography>
@@ -394,7 +404,9 @@ export default function Landing(){
 
                                         <Typography
                                             variant="h6"
-                                            fontWeight={700}
+                                            sx={{
+                                                fontWeight: 700,
+                                            }}
                                             gutterBottom
                                         >
                                             {feature.title}
@@ -402,7 +414,9 @@ export default function Landing(){
 
                                         <Typography
                                             color="text.secondary"
-                                            lineHeight={1.7}
+                                            sx={{
+                                                lineHeight: 1.7,
+                                            }}
                                         >
                                             {feature.description}
                                         </Typography>
@@ -431,8 +445,10 @@ export default function Landing(){
                     >
                         <Typography
                             variant="h3"
-                            fontWeight={700}
                             gutterBottom
+                            sx={{
+                                fontWeight: 700,
+                            }}
                         >
                             How it works
                         </Typography>
@@ -472,15 +488,19 @@ export default function Landing(){
                                     <Typography
                                         variant="h3"
                                         color="primary"
-                                        fontWeight={800}
+                                        sx={{
+                                            fontWeight: 800,
+                                        }}
                                     >
                                         {step.number}
                                     </Typography>
 
                                     <Typography
                                         variant="h6"
-                                        fontWeight={700}
-                                        sx={{ mt: 1 }}
+                                        sx={{
+                                            fontWeight: 700,
+                                            mt: 1,
+                                        }}
                                     >
                                         {step.title}
                                     </Typography>
@@ -518,8 +538,10 @@ export default function Landing(){
                     >
                         <Typography
                             variant="h3"
-                            fontWeight={700}
                             gutterBottom
+                            sx={{
+                                fontWeight: 700,
+                            }}
                         >
                             Ready to build a healthier routine?
                         </Typography>
@@ -570,7 +592,9 @@ export default function Landing(){
                     <Typography
                         variant="body2"
                         color="text.secondary"
-                        textAlign="center"
+                        sx={{
+                            textAlign: "center",
+                        }}
                     >
                         © 2026 Nepali Diet Recommender. Eat well,
                         live well.

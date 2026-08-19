@@ -27,7 +27,7 @@ export default function StatisticsCard({
       <Typography
         variant="caption"
         color="text.secondary"
-        fontWeight={500}
+        sx={{fontWeight:500}}
       >
         {label}
       </Typography>
@@ -42,7 +42,7 @@ export default function StatisticsCard({
       >
         <Typography
           variant="h5"
-          fontWeight={700}
+          sx={{fontWeight:700}}
           color="primary.main"
         >
           {value}
