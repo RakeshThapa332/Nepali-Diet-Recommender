@@ -37,7 +37,9 @@ export interface FoodIntakeLog {
 export async function getRecommendationHistory(): Promise<
   RecommendationLog[]
 > {
-  const response = await api.get("/history/recommendations");
+  const response = await api.get("/history/recommendations", {
+    params: { page: 1, per_page: 100 },
+  });
 
   return response.data.recommendations;
 }
@@ -45,7 +47,9 @@ export async function getRecommendationHistory(): Promise<
 export async function getFoodIntakeHistory(): Promise<
   FoodIntakeLog[]
 > {
-  const response = await api.get("/history/intake");
+  const response = await api.get("/history/intake", {
+    params: { page: 1, per_page: 100 },
+  });
 
   return response.data.intake_logs;
 }

@@ -18,13 +18,16 @@ history_bp = Blueprint(
 def get_recommendation_history():
 
     user_id = int(get_jwt_identity())
+    page = max(request.args.get("page", 1, type=int), 1)
+    per_page = min(max(request.args.get("per_page", 20, type=int), 1), 100)
 
-    meal_plans = (
+    pagination = (
         MealPlan.query
         .filter_by(user_id=user_id)
         .order_by(MealPlan.date.desc(), MealPlan.created_at.desc())
-        .all()
+        .paginate(page=page, per_page=per_page, error_out=False)
     )
+    meal_plans = pagination.items
 
     profile = UserProfile.query.filter_by(user_id=user_id).first()
 
@@ -65,6 +68,12 @@ def get_recommendation_history():
     return jsonify({
         "success": True,
         "recommendations": recommendations,
+        "pagination": {
+            "page": pagination.page,
+            "per_page": pagination.per_page,
+            "total": pagination.total,
+            "pages": pagination.pages,
+        },
     }), 200
 
 
@@ -75,13 +84,16 @@ def get_recommendation_history():
 def get_food_intake_history():
 
     user_id = int(get_jwt_identity())
+    page = max(request.args.get("page", 1, type=int), 1)
+    per_page = min(max(request.args.get("per_page", 20, type=int), 1), 100)
 
-    logs = (
+    pagination = (
         FoodIntakeLog.query
         .filter_by(user_id=user_id)
         .order_by(FoodIntakeLog.consumed_at.desc())
-        .all()
+        .paginate(page=page, per_page=per_page, error_out=False)
     )
+    logs = pagination.items
 
     intake_logs = []
 
@@ -122,6 +134,12 @@ def get_food_intake_history():
     return jsonify({
         "success": True,
         "intake_logs": intake_logs,
+        "pagination": {
+            "page": pagination.page,
+            "per_page": pagination.per_page,
+            "total": pagination.total,
+            "pages": pagination.pages,
+        },
     }), 200
 
 #record food eaten

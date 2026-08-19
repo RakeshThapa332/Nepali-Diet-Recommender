@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app.models import Notification
@@ -17,12 +17,14 @@ notifications_bp = Blueprint(
 def get_notifications():
 
     user_id = int(get_jwt_identity())
+    page = max(request.args.get("page", 1, type=int), 1)
+    per_page = min(max(request.args.get("per_page", 20, type=int), 1), 100)
 
-    notifications = (
+    pagination = (
         Notification.query
         .filter_by(user_id=user_id)
         .order_by(Notification.created_at.desc())
-        .all()
+        .paginate(page=page, per_page=per_page, error_out=False)
     )
 
     return jsonify({
@@ -40,8 +42,14 @@ def get_notifications():
                     else None
                 ),
             }
-            for notification in notifications
-        ]
+            for notification in pagination.items
+        ],
+        "pagination": {
+            "page": pagination.page,
+            "per_page": pagination.per_page,
+            "total": pagination.total,
+            "pages": pagination.pages,
+        },
     }), 200
 
 #add mark as read

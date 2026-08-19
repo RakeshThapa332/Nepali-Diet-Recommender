@@ -3,8 +3,17 @@ from sqlalchemy.exc import SQLAlchemyError
 from flask_jwt_extended import create_access_token, create_refresh_token
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from app.extensions import db
-from app.models import User
+from app.extensions import db, limiter
+from app.models import (
+    FoodIntakeLog,
+    MealPlan,
+    MealPlanItem,
+    Notification,
+    RecommendationLog,
+    User,
+    UserProfile,
+    UserSettings,
+)
 from app.utils.security import hash_password, verify_password
 
 import re
@@ -15,6 +24,7 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 EMAIL_REGEX = r"^[\w\.-]+@[\w\.-]+\.\w+$"
 
 @auth_bp.route("/register", methods=["POST"])
+@limiter.limit("20 per hour")
 def register():
     data = request.get_json()
 
@@ -134,6 +144,7 @@ def register():
 
 #Login
 @auth_bp.route("/login", methods=["POST"])
+@limiter.limit("10 per minute")
 def login():
     data = request.get_json()
     if not data:
@@ -196,6 +207,56 @@ def refresh_access_token():
         "success": True,
         "access_token": create_access_token(identity=str(get_jwt_identity())),
         "token_type": "Bearer",
+    }), 200
+
+
+@auth_bp.route("/account", methods=["DELETE"])
+@jwt_required()
+def delete_account():
+    data = request.get_json(silent=True) or {}
+    password = data.get("password", "")
+    user = db.session.get(User, int(get_jwt_identity()))
+
+    if not user or not verify_password(password, user.password_hash):
+        return jsonify({
+            "success": False,
+            "message": "Password confirmation is required.",
+        }), 400
+
+    try:
+        user_id = user.id
+        for model in (
+            FoodIntakeLog,
+            Notification,
+            RecommendationLog,
+            UserSettings,
+            UserProfile,
+        ):
+            model.query.filter_by(user_id=user_id).delete(
+                synchronize_session=False
+            )
+
+        MealPlanItem.query.filter(
+            MealPlanItem.meal_plan_id.in_(
+                db.select(MealPlan.id).filter_by(user_id=user_id)
+            )
+        ).delete(synchronize_session=False)
+        MealPlan.query.filter_by(user_id=user_id).delete(
+            synchronize_session=False
+        )
+
+        db.session.delete(user)
+        db.session.commit()
+    except SQLAlchemyError:
+        db.session.rollback()
+        return jsonify({
+            "success": False,
+            "message": "Unable to delete account.",
+        }), 500
+
+    return jsonify({
+        "success": True,
+        "message": "Account and associated data deleted successfully.",
     }), 200
 
 #Protected Routes

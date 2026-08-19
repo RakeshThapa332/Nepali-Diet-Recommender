@@ -12,6 +12,7 @@ import {
 import DashboardLayout from "../components/layout/DashboardLayout";
 import { useThemeMode } from "../context/ThemeContext";
 import NotificationSettings from "../components/settings/NotificationSettings";
+import DeleteAccount from "../components/settings/DeleteAccount";
 
 export default function Settings() {
   const { darkMode, toggleDarkMode } = useThemeMode();
@@ -80,6 +81,18 @@ export default function Settings() {
 
         {/* Notifications */}
         <NotificationSettings />
+
+        <Card sx={{ mt: 3 }}>
+          <CardContent sx={{ p: 3 }}>
+            <Typography variant="h6" fontWeight={700} mb={1}>
+              Account data
+            </Typography>
+            <Typography variant="body2" color="text.secondary" mb={2}>
+              Permanently remove your account and all associated data.
+            </Typography>
+            <DeleteAccount />
+          </CardContent>
+        </Card>
       </Box>
     </DashboardLayout>
   );

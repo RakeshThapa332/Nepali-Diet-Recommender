@@ -37,6 +37,8 @@ def list_foods():
 
     search = request.args.get("search")
     meal = request.args.get("meal")  # breakfast | lunch | dinner
+    page = max(request.args.get("page", 1, type=int), 1)
+    per_page = min(max(request.args.get("per_page", 24, type=int), 1), 100)
 
     if search:
         query = query.filter(
@@ -48,11 +50,21 @@ def list_foods():
             getattr(Food, meal).is_(True)
         )
 
-    foods = query.order_by(Food.food_name.asc()).all()
+    pagination = query.order_by(Food.food_name.asc()).paginate(
+        page=page,
+        per_page=per_page,
+        error_out=False,
+    )
 
     return jsonify({
         "success": True,
-        "foods": [food_to_dict(food) for food in foods],
+        "foods": [food_to_dict(food) for food in pagination.items],
+        "pagination": {
+            "page": pagination.page,
+            "per_page": pagination.per_page,
+            "total": pagination.total,
+            "pages": pagination.pages,
+        },
     }), 200
 
 
