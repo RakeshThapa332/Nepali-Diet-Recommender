@@ -26,6 +26,9 @@ export default function Login() {
                 password,
             });
 
+            if (data.refresh_token) {
+              localStorage.setItem("refresh_token", data.refresh_token);
+            }
             login(data.access_token, data.user);
             setSuccess(true);
 

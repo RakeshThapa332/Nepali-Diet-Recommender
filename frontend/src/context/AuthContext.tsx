@@ -52,6 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = () => {
     localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
     localStorage.removeItem("user");
 
     setToken(null);
@@ -59,6 +60,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    const handleAuthenticationExpired = () => {
+      setToken(null);
+      setUser(null);
+    };
+
+    window.addEventListener("auth:expired", handleAuthenticationExpired);
+
     const verifyAuthentication = async () => {
       const storedToken = localStorage.getItem("access_token");
 
@@ -75,6 +83,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } catch (error: any) {
       if(error.response?.status === 401) {
         localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
         localStorage.removeItem("user");
 
         setToken(null);
@@ -85,6 +94,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     };
     verifyAuthentication();
+
+    return () => {
+      window.removeEventListener(
+        "auth:expired",
+        handleAuthenticationExpired
+      );
+    };
   }, []);
 
   return (

@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from sqlalchemy.exc import SQLAlchemyError
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, create_refresh_token
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app.extensions import db
@@ -173,11 +173,13 @@ def login():
             "name": user.name
         }
     )
+    refresh_token = create_refresh_token(identity=str(user.id))
 
     return jsonify({
         "success": True,
         "message": "Login successful",
         "access_token": access_token,
+        "refresh_token": refresh_token,
         "token_type": "Bearer",
         "user": {
             "id": user.id,
@@ -185,6 +187,16 @@ def login():
             "email": user.email
         }
     }),200
+
+
+@auth_bp.route("/refresh", methods=["POST"])
+@jwt_required(refresh=True)
+def refresh_access_token():
+    return jsonify({
+        "success": True,
+        "access_token": create_access_token(identity=str(get_jwt_identity())),
+        "token_type": "Bearer",
+    }), 200
 
 #Protected Routes
 @auth_bp.route("/me", methods=["GET"])
