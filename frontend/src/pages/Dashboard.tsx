@@ -402,7 +402,7 @@ export default function Dashboard() {
 
 
   const displayName =
-    user?.username || 
+    user?.name || user?.username || 
     "User";
 
   return (
